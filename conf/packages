@@ -1,0 +1,9 @@
+python-django
+postgis
+libgdal1-1.5.0
+python-httplib2
+python-dateutil
+python-simplejson
+libapache2-mod-wsgi
+python-django-south
+python-psycopg2

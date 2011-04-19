@@ -1,0 +1,14 @@
+config = dict(
+    UFI_DB_NAME = 'ufi',         # Name of your postgres database
+    UFI_DB_USER = 'me',          # Postgres user to connect with
+    UFI_DB_PASS = 'very_secret', # Password for postgres
+    UFI_DB_HOST = 'localhost',   # host for postgres
+    UFI_DB_PORT = 5432,          # port for postgres
+    
+    # Probably doesn't need changing.
+    MAPIT_URL = 'http://mapit.mysociety.org/',
+    STAGING = True,
+    
+    # Set this to some random stuff yourself
+    DJANGO_SECRET_KEY = 'xonkxcxuekhtoekoeuoekeuoiuoioui',
+)
