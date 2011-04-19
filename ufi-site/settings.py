@@ -36,7 +36,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE   = 'django.contrib.gis.db.backends.postgis'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+# TODO - should we use 'django.contrib.gis.db.backends.postgis'?
+DATABASE_ENGINE   = 'postgresql_psycopg2'
 DATABASE_NAME     = config.get('UFI_DB_NAME')
 DATABASE_USER     = config.get('UFI_DB_USER')
 DATABASE_PASSWORD = config.get('UFI_DB_PASS')
@@ -95,7 +96,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
-ROOT_URLCONF = 'ufi.urls'
+ROOT_URLCONF = 'ufi-site.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
