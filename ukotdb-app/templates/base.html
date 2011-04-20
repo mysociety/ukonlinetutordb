@@ -4,8 +4,34 @@
         <title>{% block title %}{% endblock %} :: UK Online Centres</title>
     </head>
     <body>
-        {% block content %}
-            Replace this with proper content.
-        {% endblock %}
+
+        <div id="menu">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>
+                        {{ user.email }}
+                        (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)
+                    </li>
+                {% else %}
+                    <li><a href="{% url django.contrib.auth.views.login %}">login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <hr />
+
+        <div id="content">
+            {% block content %}
+                Replace this with proper content.
+            {% endblock %}    
+        </div>
+
+        <hr />
+
+        <div id="footer">
+            <p>footer</p>
+        </div>
+
+
     </body>
 </html>
