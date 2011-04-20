@@ -18,11 +18,11 @@
  * 
  */
 
-define('OPTION_UFI_DB_NAME', '');
-define('OPTION_UFI_DB_USER', '');
-define('OPTION_UFI_DB_PASS', '');
-define('OPTION_UFI_DB_HOST', null);
-define('OPTION_UFI_DB_PORT', null); 
+define('OPTION_UKONLINETUTORDB_DB_NAME', '');
+define('OPTION_UKONLINETUTORDB_DB_USER', '');
+define('OPTION_UKONLINETUTORDB_DB_PASS', '');
+define('OPTION_UKONLINETUTORDB_DB_HOST', null);
+define('OPTION_UKONLINETUTORDB_DB_PORT', null); 
 
 define('OPTION_MAPIT_URL', '');
 

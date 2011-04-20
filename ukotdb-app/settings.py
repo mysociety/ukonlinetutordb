@@ -1,4 +1,4 @@
-# Django settings for ufi project.
+# Django settings for ukonlinetutordb project.
 
 # Some special mysociety preamble in order to get hold of our config
 # file conf/general
@@ -38,11 +38,11 @@ MANAGERS = ADMINS
 
 # TODO - should we use 'django.contrib.gis.db.backends.postgis'?
 DATABASE_ENGINE   = 'postgresql_psycopg2'
-DATABASE_NAME     = config.get('UFI_DB_NAME')
-DATABASE_USER     = config.get('UFI_DB_USER')
-DATABASE_PASSWORD = config.get('UFI_DB_PASS')
-DATABASE_HOST     = config.get('UFI_DB_HOST')
-DATABASE_PORT     = config.get('UFI_DB_PORT')
+DATABASE_NAME     = config.get('UKONLINETUTORDB_DB_NAME')
+DATABASE_USER     = config.get('UKONLINETUTORDB_DB_USER')
+DATABASE_PASSWORD = config.get('UKONLINETUTORDB_DB_PASS')
+DATABASE_HOST     = config.get('UKONLINETUTORDB_DB_HOST')
+DATABASE_PORT     = config.get('UKONLINETUTORDB_DB_PORT')
 
 MAPIT_URL = config.get('MAPIT_URL')
 
@@ -96,7 +96,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
-ROOT_URLCONF = 'ufi-site.urls'
+ROOT_URLCONF = 'ukotdb-app.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".

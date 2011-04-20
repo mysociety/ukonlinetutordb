@@ -8,7 +8,7 @@
 <Location />
     AuthType Basic
     AuthName "Private beta I'm afraid."
-    AuthUserFile ufi-htpasswd
+    AuthUserFile ukonlinetutordb-htpasswd
     Require valid-user
     Order deny,allow
     Deny from all
@@ -16,12 +16,12 @@
 </Location>
 
 Alias /media /var/lib/python-support/python2.5/django/contrib/admin/media
-Alias /static /data/vhost/example.ufi.mysociety.org/docs/static
+Alias /static /data/vhost/example.ukonlinetutordb.mysociety.org/docs/static
 
-WSGIDaemonProcess example.ufi.mysociety.org user=exampleuser group=examplegroup processes=5 threads=1 display-name=example.ufi.mysociety.org
-WSGIProcessGroup example.ufi.mysociety.org
+WSGIDaemonProcess example.ukonlinetutordb.mysociety.org user=exampleuser group=examplegroup processes=5 threads=1 display-name=example.ukonlinetutordb.mysociety.org
+WSGIProcessGroup example.ukonlinetutordb.mysociety.org
 
-WSGIScriptAlias / /data/vhost/example.ufi.mysociety.org/ufi/wsgi/django.wsgi
+WSGIScriptAlias / /data/vhost/example.ukonlinetutordb.mysociety.org/ukonlinetutordb/wsgi/django.wsgi
 
 
 
