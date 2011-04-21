@@ -11,6 +11,11 @@ urlpatterns = patterns('',
     (r'^accounts/login/$',  'django.contrib.auth.views.login'),
     (r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
 
+    # tutors
+    (r'^tutors/create/$', 'addressbook.views.create_tutor'),
+    (r'^tutors/add_centres/$', 'addressbook.views.add_centres'),
+    
+
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
 

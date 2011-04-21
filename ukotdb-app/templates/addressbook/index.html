@@ -3,8 +3,14 @@
 
 {% block title %}Home{% endblock %}
 
+
 {% block content %}
 
-test
+<h1>UK Online Tutor Database</h1>
+
+<p>
+    Please <a href="{% url django.contrib.auth.views.login %}">log in</a> or
+    <a href="{% url addressbook.views.create_tutor %}">create an account</a>.
+</p>
 
 {% endblock %}
