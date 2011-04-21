@@ -11,4 +11,7 @@ config = dict(
     
     # Set this to some random stuff yourself
     DJANGO_SECRET_KEY = 'xonkxcxuekhtoekoeuoekeuoiuoioui',
+
+    # get a key from http://www.ukonlinecentres.com/services/
+    UKONLINE_SERVICES_API_KEY = '',
 )

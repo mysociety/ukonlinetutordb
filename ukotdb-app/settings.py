@@ -125,3 +125,7 @@ INSTALLED_APPS = (
 
 # registration relateh settings
 LOGIN_REDIRECT_URL = '/my'
+
+
+
+UKONLINE_SERVICES_API_KEY = config.get('UKONLINE_SERVICES_API_KEY')
