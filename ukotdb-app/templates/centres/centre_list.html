@@ -8,7 +8,7 @@
 
 <h1>UK Online Centres</h1>
 
-<form action="{% url addressbook.views.centre_list %}" method="get">
+<form action="{% url centres.views.centre_list %}" method="get">
     <label for="form_postcode">Postcode:</label>
     <input type="text" name="postcode" id="form_postcode" value="{{ postcode }}" />
     <input type="submit" value="Search" />
@@ -18,7 +18,7 @@
 <ul>
 {% for centre in object_list %}
 
-    <li><a href="{% url addressbook.views.centre_detail centre_id=centre.id %}">{{ centre.name }} ({{ centre.distance }})</a></li>
+    <li><a href="{% url centres.views.centre_detail centre_id=centre.id %}">{{ centre.name }} ({{ centre.distance }})</a></li>
 
 {% empty %}
 

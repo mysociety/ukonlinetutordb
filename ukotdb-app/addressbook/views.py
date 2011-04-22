@@ -1,5 +1,4 @@
 from addressbook.forms      import CreateTutorForm
-from addressbook.models     import Centre
 
 from django.contrib.auth                import authenticate, login
 from django.contrib.auth.models         import User, UserManager
@@ -7,7 +6,6 @@ from django.core.urlresolvers           import reverse
 from django.http                        import HttpResponse, HttpResponseRedirect
 from django.shortcuts                   import render_to_response
 from django.template                    import RequestContext
-from django.views.generic.list_detail   import object_list, object_detail
 from django.views.generic.simple        import direct_to_template
 
 def index(request):
@@ -16,37 +14,6 @@ def index(request):
         request,
         template = 'addressbook/index.html',
     )
-
-def centre_list(request):
-    """Show list of centres near a postcode"""
-    
-    postcode = request.GET.get('postcode')    
-
-    if postcode:
-        queryset = Centre.objects.all().near_postcode(postcode)
-        # queryset = Centre.near_postcode(postcode)
-    else:
-        queryset = Centre.objects.none()
-    
-    return object_list(
-        request,
-        paginate_by = 20,
-        allow_empty = True,
-        queryset    = queryset,
-        extra_context = { 'postcode': postcode },
-    );
-    
-
-def centre_detail(request, centre_id):
-    """Show details of one centre"""
-    
-    return object_detail(
-        request,
-        queryset             = Centre.objects.all(),
-        object_id            = centre_id,
-        template_object_name = 'centre',
-    );
-    
 
 def create_tutor(request):
     """Let someone sign up as a new tutor"""

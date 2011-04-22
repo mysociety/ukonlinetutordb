@@ -120,7 +120,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.gis',
     
-    'addressbook'
+    'addressbook',
+    'centres',
 )
 
 # registration relateh settings
@@ -129,3 +130,7 @@ LOGIN_REDIRECT_URL = '/my'
 
 
 UKONLINE_SERVICES_API_KEY = config.get('UKONLINE_SERVICES_API_KEY')
+
+SRID = 4326      # WGS84, the coordinate system used by the geodjango calculations 
+
+
