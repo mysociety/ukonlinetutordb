@@ -1,7 +1,6 @@
 # Scrape centres from the API and insert them into the database. If the centre
 # already exists then update it.
 
-
 import simplejson
 import urllib
 import sys
@@ -14,8 +13,6 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 import settings
 from addressbook import models
 
-
-
 api_key = settings.UKONLINE_SERVICES_API_KEY
 
 # note that the API is tricky - it wants 'method' to be the first param
@@ -24,10 +21,10 @@ base_query = {
     "api_key":    api_key,
     "postcode":   "SW1A1AA", # no spaces - API can't handle '+' in params
     "format":     "json",
-    "numResults": 20,
+    "numResults": 20, # appears to be ignored - but we use it below
 }
 
-
+# fetch 1000 results
 for start in range( 1, 1001, base_query['numResults'] ):
     base_query['start'] = start
     url = base_url + '&' + urllib.urlencode( base_query )
@@ -43,6 +40,7 @@ for start in range( 1, 1001, base_query['numResults'] ):
     for e in entries:                
         print "Adding/updating %s (%s)" % (e['name'], e['id'])
         
+        # Find or create
         try:
             obj = models.Centre.objects.get(id=e['id'])
         except models.Centre.DoesNotExist:
