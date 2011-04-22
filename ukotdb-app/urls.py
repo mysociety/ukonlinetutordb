@@ -15,6 +15,9 @@ urlpatterns = patterns('',
     (r'^tutors/create/$', 'addressbook.views.create_tutor'),
     (r'^tutors/add_centres/$', 'addressbook.views.add_centres'),
     
+    # centres
+    (r'^centres/$', 'addressbook.views.centre_list'),
+
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),

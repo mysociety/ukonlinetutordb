@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+
+<h1>UK Online Centres</h1>
+
+<form action="{% url addressbook.views.centre_list %}" method="get">
+    <label for="form_postcode">Postcode:</label>
+    <input type="text" name="postcode" id="form_postcode" value="{{ postcode }}" />
+    <input type="submit" value="Search" />
+</form>
+
+
+<ul>
+{% for centre in object_list %}
+
+    <li>{{ centre.name }} ({{ centre.distance }})</li>
+
+{% empty %}
+
+    {% if postcode %}
+    <li>No centres found near {{ postcode }} - sorry.</li>
+    {% else %}
+    <li>Please search for a postcode</li>
+    {% endif %}
+
+{% endfor %}
+</ul>
+
+
+{% endblock %}
