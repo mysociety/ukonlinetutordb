@@ -1,4 +1,4 @@
 from django.contrib import admin
-import addressbook.models
+from addressbook import models
 
 admin.site.register(models.Tenure)

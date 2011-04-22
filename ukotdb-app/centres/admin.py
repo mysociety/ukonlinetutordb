@@ -1,4 +1,4 @@
 from django.contrib import admin
-import centres.models
+from centres import models
 
 admin.site.register(models.Centre)
