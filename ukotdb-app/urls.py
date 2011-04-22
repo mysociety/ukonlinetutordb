@@ -16,7 +16,8 @@ urlpatterns = patterns('',
     (r'^tutors/add_centres/$', 'addressbook.views.add_centres'),
     
     # centres
-    (r'^centres/$', 'addressbook.views.centre_list'),
+    (r'^centres/$',                    'addressbook.views.centre_list'   ),
+    (r'^centres/(?P<centre_id>\d+)/$', 'addressbook.views.centre_detail' ),
 
 
     # Uncomment the next line to enable the admin:

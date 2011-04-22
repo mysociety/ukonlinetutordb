@@ -18,7 +18,7 @@
 <ul>
 {% for centre in object_list %}
 
-    <li>{{ centre.name }} ({{ centre.distance }})</li>
+    <li><a href="{% url addressbook.views.centre_detail centre_id=centre.id %}">{{ centre.name }} ({{ centre.distance }})</a></li>
 
 {% empty %}
 
