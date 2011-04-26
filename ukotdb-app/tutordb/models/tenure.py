@@ -1,7 +1,7 @@
 from django.contrib.auth.models     import User
 from django.contrib.gis.db          import models
 
-from centres.models import Centre
+from tutordb.models import Centre
 
 import settings
 

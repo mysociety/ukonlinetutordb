@@ -11,7 +11,7 @@ sys.path.append(sys.path[0] + '/..')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 import settings
-from centres.models import Centre
+from tutordb.models import Centre
 from helpers import lat_lng_to_point
 
 # note that the API is tricky - it wants 'method' to be the first param
