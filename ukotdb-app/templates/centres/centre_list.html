@@ -10,7 +10,7 @@
 
 <form action="{% url centres.views.centre_list %}" method="get">
     <label for="form_postcode">Postcode:</label>
-    <input type="text" name="postcode" id="form_postcode" value="{{ postcode }}" />
+    <input type="text" name="postcode" id="form_postcode" value="{% firstof postcode %}" />
     <input type="submit" value="Search" />
 </form>
 
