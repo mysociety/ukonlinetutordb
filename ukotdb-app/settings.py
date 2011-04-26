@@ -120,7 +120,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.gis',
     
-    'addressbook',
+    'tutordb',
     'centres',
 )
 

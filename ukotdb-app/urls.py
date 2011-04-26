@@ -12,9 +12,9 @@ urlpatterns = patterns('',
     (r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
 
     # tutors
-    (r'^tutors/create/$', 'addressbook.views.create_tutor' ),
-    (r'^my/$',            'addressbook.views.my'           ),
-    (r'^my/add_centre$',  'addressbook.views.add_centre'   ),
+    (r'^tutors/create/$', 'tutordb.views.create_tutor' ),
+    (r'^my/$',            'tutordb.views.my'           ),
+    (r'^my/add_centre$',  'tutordb.views.add_centre'   ),
     
     # centres
     (r'^centres/', include('centres.urls') ),
@@ -23,6 +23,6 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
     # Homepage:
-    (r'^$', 'addressbook.views.index'),
+    (r'^$', 'tutordb.views.index'),
 
 )

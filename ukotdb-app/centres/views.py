@@ -1,6 +1,6 @@
 from django.views.generic.list_detail import object_list, object_detail
 
-from addressbook.models import Centre
+from tutordb.models import Centre
 
 def centre_list(request):
     """Show list of centres near a postcode"""

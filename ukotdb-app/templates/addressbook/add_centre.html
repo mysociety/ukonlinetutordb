@@ -14,7 +14,7 @@
     </div>
 {% endif %}
 
-<form action="{% url addressbook.views.add_centre %}" method="get">
+<form action="{% url tutordb.views.add_centre %}" method="get">
     <label for="form_postcode">Postcode:</label>
     <input type="text" name="postcode" id="form_postcode" value="{% firstof postcode %}" />
     <input type="submit" value="Search" />
@@ -25,7 +25,7 @@
 
     <li>
         {{ centre.name }}
-        <form style="display: inline;" action="{% url addressbook.views.add_centre %}" method="post">
+        <form style="display: inline;" action="{% url tutordb.views.add_centre %}" method="post">
             <input type="hidden" name="postcode"  value="{{ postcode }}"  />
             <input type="hidden" name="centre_id" value="{{ centre.id }}" />
             <input type="submit" value="Choose">

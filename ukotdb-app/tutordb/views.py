@@ -1,5 +1,5 @@
-from addressbook.forms      import CreateTutorForm
-from addressbook.models     import Centre, Tenure
+from tutordb.forms      import CreateTutorForm
+from tutordb.models     import Centre, Tenure
 
 from django.contrib.auth                import authenticate, login
 from django.contrib.auth.decorators     import login_required
@@ -16,7 +16,7 @@ def index(request):
     """show the homepage"""    
     return direct_to_template(
         request,
-        template = 'addressbook/index.html',
+        template = 'tutordb/index.html',
     )
 
 def create_tutor(request):
@@ -48,7 +48,7 @@ def create_tutor(request):
         form = CreateTutorForm()
 
     return render_to_response(
-        'addressbook/create_tutor.html',
+        'tutordb/create_tutor.html',
         {
             'form': form,
         },
@@ -65,7 +65,7 @@ def my(request):
     centres = [ t.centre for t in tenures ]
         
     return render_to_response(
-        'addressbook/my.html',
+        'tutordb/my.html',
         {
             'centres' : centres,
         },
@@ -103,7 +103,7 @@ def add_centre(request):
     
     return object_list(
         request,
-        template_name = 'addressbook/add_centre.html',
+        template_name = 'tutordb/add_centre.html',
         paginate_by   = 20,
         allow_empty   = True,
         queryset      = queryset,
