@@ -21,7 +21,7 @@
 <ul>
     {% for centre in centres %}
         <li>
-            <a href="{% url centres.views.centre_detail centre_id=centre.id %}">{{ centre.name }}</a>
+            <a href="{% url tutordb.views.centre.centre_detail centre_id=centre.id %}">{{ centre.name }}</a>
         </li>
     {% empty %}
         <li>No centres added yet</li>

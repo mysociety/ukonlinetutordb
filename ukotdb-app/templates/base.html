@@ -8,7 +8,7 @@
         <div id="menu">
             <ul>
                 <li><a href="{% url tutordb.views.tutor.index %}">Home</a></li>
-                <li><a href="{% url centres.views.centre_list %}">Centres</a></li>
+                <li><a href="{% url tutordb.views.centre.centre_list %}">Centres</a></li>
                 {% if user.is_authenticated %}
                     <li>
                         {{ user.email }}
