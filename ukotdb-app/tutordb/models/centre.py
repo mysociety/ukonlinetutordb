@@ -31,6 +31,7 @@ class Centre(models.Model):
     postcode  = models.CharField(max_length=10)
     location  = models.PointField(srid=settings.SRID)
 
-    objects   = CentreManager()    
+    objects   = CentreManager()
 
-
+    class Meta:
+        app_label = 'tutordb'

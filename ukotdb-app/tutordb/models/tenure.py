@@ -20,3 +20,4 @@ class Tenure(models.Model):
 
     class Meta:
         unique_together = ( "centre", "user" )
+        app_label = 'tutordb'

@@ -24,7 +24,7 @@ base_query = {
 }
 
 # fetch 1000 results
-for start in range( 2903, 100001, base_query['numResults'] ):
+for start in range( 1, 4000, base_query['numResults'] ):
     base_query['start'] = start
     url = base_url + '&' + urllib.urlencode( base_query )
     print "Looking at entries %s to %s: %s" % (start, start + base_query['numResults'], url)
