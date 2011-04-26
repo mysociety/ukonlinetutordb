@@ -20,7 +20,9 @@
 
 <ul>
     {% for centre in centres %}
-        <li>{{ centre.name }}</li>
+        <li>
+            <a href="{% url centres.views.centre_detail centre_id=centre.id %}">{{ centre.name }}</a>
+        </li>
     {% empty %}
         <li>No centres added yet</li>
     {% endfor %}
