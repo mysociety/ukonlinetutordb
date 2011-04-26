@@ -120,8 +120,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.gis',
     
+    'south',
+
     'tutordb',
-    'centres',
 )
 
 # registration relateh settings
