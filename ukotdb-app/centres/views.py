@@ -18,7 +18,7 @@ def centre_list(request):
         allow_empty = True,
         queryset    = queryset,
         extra_context = { 'postcode': postcode },
-    );
+    )
     
 
 def centre_detail(request, centre_id):
@@ -29,6 +29,6 @@ def centre_detail(request, centre_id):
         queryset             = Centre.objects.all(),
         object_id            = centre_id,
         template_object_name = 'centre',
-    );
+    )
     
 

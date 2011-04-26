@@ -20,11 +20,11 @@
 
 <ul>
     {% for centre in centres %}
-
+        <li>{{ centre.name }}</li>
     {% empty %}
-    <li>No centres added yet</li>
+        <li>No centres added yet</li>
     {% endfor %}
-    <li><a href="/my/add_centre">Add a centre</a></li>
+        <li><a href="/my/add_centre">Add a centre</a></li>
 </ul>
 
 

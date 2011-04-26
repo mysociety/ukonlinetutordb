@@ -17,3 +17,6 @@ class Tenure(models.Model):
         ('admin',          'Centre Administrator'),
     )
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
+
+    class Meta:
+        unique_together = ( "centre", "user" )
