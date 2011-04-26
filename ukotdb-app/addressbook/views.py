@@ -1,6 +1,7 @@
 from addressbook.forms      import CreateTutorForm
 
 from django.contrib.auth                import authenticate, login
+from django.contrib.auth.decorators     import login_required
 from django.contrib.auth.models         import User, UserManager
 from django.core.urlresolvers           import reverse
 from django.http                        import HttpResponse, HttpResponseRedirect
@@ -52,7 +53,19 @@ def create_tutor(request):
     )
 
 
-def add_centres(request):
-    """Add all the centres"""
+@login_required
+def my(request):
+    """Homepage for a user"""
+    
+    user = request.user
+    
+    
 
+    return render_to_response(
+        'addressbook/my.html',
+        {
+            # 'form': form,
+        },
+        context_instance=RequestContext(request)
+    )
     

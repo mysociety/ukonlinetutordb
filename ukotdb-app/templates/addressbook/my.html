@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Your details{% endblock %}
+
+
+{% block content %}
+
+<h1>You!</h1>
+
+
+<h2>Your Details</h2>
+
+<dl>
+    <dt>email:</dt>    <dd>{{ user.email }}</dd>
+    <dt>name:</dt>     <dd>{% firstof user.get_full_name 'none yet' %}</dd>
+</dl>
+
+<h2>Your centres</h2>
+
+<ul>
+    {% for centre in centres %}
+
+    {% empty %}
+    <li>No centres added yet</li>
+    {% endfor %}
+    <li><a href="/my/add_centre">Add a centre</a></li>
+</ul>
+
+
+{% endblock %}

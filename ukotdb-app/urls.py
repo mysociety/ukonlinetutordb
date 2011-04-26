@@ -13,7 +13,7 @@ urlpatterns = patterns('',
 
     # tutors
     (r'^tutors/create/$', 'addressbook.views.create_tutor'),
-    (r'^tutors/add_centres/$', 'addressbook.views.add_centres'),
+    (r'^my/$',            'addressbook.views.my'),
     
     # centres
     (r'^centres/', include('centres.urls') ),
