@@ -1,2 +1,3 @@
 Allow user to unlink centres from their accounts
 
+Add centre scraper to cron (and mute output)
