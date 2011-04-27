@@ -30,4 +30,6 @@ define('OPTION_STAGING', 1);
 
 define('OPTION_DJANGO_SECRET_KEY', '');
 
+define('OPTION_UKONLINE_SERVICES_API_KEY', '');
+
 ?>
