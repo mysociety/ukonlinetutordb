@@ -30,8 +30,8 @@ def create_tutor(request):
 
             # create the actual user and set the name
             user = User.objects.create_user( clean['username'], clean['email'] )
-            user.first_name = clean['first_name']
-            user.last_name  = clean['last_name']
+            # user.first_name = clean['first_name']
+            # user.last_name  = clean['last_name']
 
             # create a password so that we can log them in
             password = UserManager().make_random_password()
