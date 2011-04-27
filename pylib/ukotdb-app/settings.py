@@ -7,8 +7,8 @@ import sys
 package_dir = os.path.abspath(os.path.split(__file__)[0])
 
 paths = (
-    os.path.normpath(package_dir + "/../pylib"),
-    os.path.normpath(package_dir + "/../commonlib/pylib"),
+    os.path.normpath(package_dir + "/../../pylib"),
+    os.path.normpath(package_dir + "/../../commonlib/pylib"),
     )
 
 for path in paths:
@@ -21,7 +21,7 @@ try:
 except ImportError:
     SERVE_STATIC_FILES = False
     from mysociety import config
-    config.set_file(os.path.abspath(package_dir + "/../conf/general"))
+    config.set_file(os.path.abspath(package_dir + "/../../conf/general"))
 
 # Now follows the normal Django stuff.
 
@@ -68,7 +68,7 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(package_dir, "../web/static/")
+MEDIA_ROOT = os.path.join(package_dir, "../../web/static/")
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -133,5 +133,3 @@ LOGIN_REDIRECT_URL = '/my'
 UKONLINE_SERVICES_API_KEY = config.get('UKONLINE_SERVICES_API_KEY')
 
 SRID = 4326      # WGS84, the coordinate system used by the geodjango calculations 
-
-
