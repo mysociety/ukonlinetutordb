@@ -8,6 +8,7 @@ package_dir = os.path.abspath(os.path.split(__file__)[0])
 
 paths = (
     os.path.normpath(package_dir + "/../../pylib"),
+    os.path.normpath(package_dir + "/../../pylib/ukotdb-app"),
     os.path.normpath(package_dir + "/../../commonlib/pylib"),
     )
 
