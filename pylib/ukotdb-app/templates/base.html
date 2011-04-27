@@ -15,7 +15,11 @@
                         (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)
                     </li>
                 {% else %}
-                    <li><a href="{% url django.contrib.auth.views.login %}">login</a></li>
+                    <li>
+                        <a href="{% url django.contrib.auth.views.login %}">login</a>
+                        or
+                        <a href="{% url tutordb.views.tutor.create_tutor %}">create an account</a>                        
+                    </li>
                 {% endif %}
             </ul>
         </div>
