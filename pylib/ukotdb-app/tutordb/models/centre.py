@@ -33,5 +33,11 @@ class Centre(models.Model):
 
     objects   = CentreManager()
 
+    def latitude(self):
+        return self.location.y
+
+    def longitude(self):
+        return self.location.x
+        
     class Meta:
         app_label = 'tutordb'

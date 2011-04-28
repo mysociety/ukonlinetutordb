@@ -78,3 +78,9 @@ div.pagination {
   div.pagination .previous_buttons, div.pagination .next_buttons {
     display: inline-block;
     min-width: 40px; }
+
+img.centre_map {
+  float: right;
+  border: 1px solid #aaa;
+  height: 200px;
+  width: 200px; }
