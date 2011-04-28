@@ -1,3 +1,5 @@
+import re
+
 from tutordb.forms      import CreateTutorForm
 from tutordb.models     import Centre, Tenure
 
@@ -28,8 +30,12 @@ def create_tutor(request):
 
             clean = form.cleaned_data
 
+            # create a username from the email. In Django > 1.1 we could just
+            # use the email address here.
+            username = re.sub( '[^\w]+', '_', clean['email'] )
+
             # create the actual user and set the name
-            user = User.objects.create_user( clean['username'], clean['email'] )
+            user = User.objects.create_user( username, clean['email'] )
             # user.first_name = clean['first_name']
             # user.last_name  = clean['last_name']
 

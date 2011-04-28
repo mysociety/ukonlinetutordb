@@ -126,6 +126,11 @@ INSTALLED_APPS = (
     'tutordb',
 )
 
+AUTHENTICATION_BACKENDS = (
+    'ukotdb-app.backends.EmailModelBackend',
+)
+
+
 # registration relateh settings
 LOGIN_REDIRECT_URL = '/my'
 
