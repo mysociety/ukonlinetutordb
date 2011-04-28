@@ -48,3 +48,15 @@ body {
 #footer {
   text-align: right;
   border-top: 1px solid rgba(0, 0, 0, 0.2); }
+
+/* form related */
+label {
+  float: left;
+  width: 5em;
+  margin-right: 0.5em;
+  text-align: right; }
+
+form {
+  margin: 1em 0; }
+  form p {
+    margin: 0.5em 0; }

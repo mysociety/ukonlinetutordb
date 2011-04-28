@@ -10,7 +10,9 @@
 
 <form action="{% url tutordb.views.tutor.create_tutor %}" method="post">
     {{ form.as_p }}
-    <input type="submit" value="Create Account" />
+
+    <label for="form_submit">&nbsp;</label>
+    <input type="submit" id="form_submit" value="Create Account" />
 </form>
 
 {% endblock %}
