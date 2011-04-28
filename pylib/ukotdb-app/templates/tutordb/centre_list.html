@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load ukonline_extras %}
 
 {% block title %}Centre List{% endblock %}
 
@@ -18,7 +19,10 @@
 <ul>
 {% for centre in object_list %}
 
-    <li><a href="{% url tutordb.views.centre.centre_detail centre_id=centre.id %}">{{ centre.name }} ({{ centre.distance }})</a></li>
+    <li class="ukonline_centre">
+        <a href="{% url tutordb.views.centre.centre_detail centre_id=centre.id %}">{{ centre.name }}</a>
+        ({{ centre.distance|to_miles }})
+    </li>
 
 {% empty %}
 

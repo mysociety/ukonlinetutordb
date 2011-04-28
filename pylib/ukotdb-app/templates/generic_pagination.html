@@ -1,17 +1,42 @@
+<!-- FIXME - shouldn't have postcode hardcoded in - should use a uri_with like construct -->
+
 {% if is_paginated %}
 <div class="pagination">
     <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?postcode={{ postcode|urlencode }};page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
 
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        <span class="previous_buttons">
+        {% if page_obj.has_previous %}
+            <a
+                href="?postcode={{ postcode|urlencode }};page=1"
+                title="first"
+            ><img src="/static/resultset_first.png"></a>
+            <a
+                href="?postcode={{ postcode|urlencode }};page={{ page_obj.previous_page_number }}"
+                title="previous"
+            ><img src="/static/resultset_previous.png"></a>
+        {% else %}
+            &nbsp;
+        {% endif %}
         </span>
 
+        <span class="current">
+            {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+
+        <span class="next_buttons">
         {% if page_obj.has_next %}
-            <a href="?postcode={{ postcode|urlencode }};page={{ page_obj.next_page_number }}">next</a>
+            <a
+                href="?postcode={{ postcode|urlencode }};page={{ page_obj.next_page_number }}"
+                title="next"
+            ><img src="/static/resultset_next.png"></a>
+            <a
+                href="?postcode={{ postcode|urlencode }};page={{ page_obj.paginator.num_pages }}"
+                title="last"
+            ><img src="/static/resultset_last.png"></a>
         {% endif %}
+        </span>
+
     </span>
 </div>
 {% endif %}

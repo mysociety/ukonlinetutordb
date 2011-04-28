@@ -62,6 +62,10 @@ body {
     }
 }
 
+#content {
+    padding: 1em 0;
+}
+
 #footer {
     text-align: right;
     border-top: 1px solid rgba( 0,0,0, 0.2 );
@@ -84,3 +88,28 @@ form {
         margin: 0.5em 0;
     }
 }
+
+
+/* specific pages details */
+
+li.ukonline_centre {
+    list-style: url('/static/group.png');
+}
+
+div.pagination {
+    
+    text-align: center;
+    background-color: rgba( 255,255,255, 0.3);
+    border: 1px solid rgba( 255,255,255, 0.3);
+    border-width: 1px 0;
+
+    img {
+        vertical-align: middle;
+    }
+
+    .previous_buttons, .next_buttons {
+        display: inline-block;
+        min-width: 40px;
+    }
+}
+
