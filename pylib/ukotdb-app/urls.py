@@ -1,9 +1,10 @@
 from django.conf.urls.defaults import *
+from django.contrib            import admin
 
-# Uncomment the next two lines to enable the admin:
-from django.contrib import admin
+import settings
+
+# find all the admin setup
 admin.autodiscover()
-
 
 urlpatterns = patterns('',
 
@@ -24,6 +25,16 @@ urlpatterns += patterns('tutordb.views.centre',
     (r'^centres/$',                    'centre_list'   ),
     (r'^centres/(?P<centre_id>\d+)/$', 'centre_detail' ),
 )
+
+# server static files if needed
+if settings.SERVE_STATIC_FILES:
+    urlpatterns += patterns('',
+        (   r'^static/(?P<path>.*)$',
+            'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT }
+        ),
+    )
+    
 
 urlpatterns += patterns('',
     # Uncomment the next line to enable the admin:
