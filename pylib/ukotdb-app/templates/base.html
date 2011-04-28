@@ -3,34 +3,9 @@
     <head>
         <title>{% block title %}{% endblock %} :: UK Online Centres</title>
 
-        <style type="text/css">
+        <link rel="stylesheet" href="/static/css/main.css" type="text/css" media="screen" charset="utf-8">
+        
 
-            /* pushes the page to the full capacity of the viewing area */
-            html {height:100%;}
-            body {height:100%; margin:0; padding:0;}
-            
-            /* prepares the background image to full capacity of the viewing area */
-            #bg {position:fixed; top:0; left:0; width:100%; height:100%;}
-            #bg img {
-                width:  100%;
-                height: 100%;
-            }
-            
-            /* places the content ontop of the background image */
-            #outer_wrapper {
-                position:relative;
-                z-index:1;
-            }
-            
-            #inner_wrapper {
-                margin: 60px auto 0 auto;
-                max-width: 600px;
-                background-color: rgba( 256, 256, 256, 0.7);
-                border: 1px solid #fff;
-            }
-            
-
-        </style>
         <!--[if IE 6]>
         <style type="text/css">
         /* some css fixes for IE browsers */
@@ -50,9 +25,11 @@
             <div id="inner_wrapper">
         
                 <div id="menu">
+                    <a id="ukonline_logo" href="{% url tutordb.views.tutor.index %}">
+                        <img src="/static/ukoclogosmaller.png" alt="Home" />
+                    </a>
+
                     <ul>
-                        <li><a href="{% url tutordb.views.tutor.index %}">Home</a></li>
-                        <li><a href="{% url tutordb.views.centre.centre_list %}">Centres</a></li>
                         {% if user.is_authenticated %}
                             <li>
                                 {{ user.email }}
@@ -66,9 +43,13 @@
                             </li>
                         {% endif %}
                     </ul>
+
+                    <ul>
+                        <li><a href="{% url tutordb.views.centre.centre_list %}">Centres</a></li>
+                    </ul>
+                    
+                    <br clear="both" />
                 </div>
-                
-                <hr />
                 
                 <div id="content">
                     {% block content %}
@@ -76,12 +57,10 @@
                     {% endblock %}    
                 </div>
                 
-                <hr />
-                
                 <div id="footer">
-                    <p>footer</p>
-                
-                    <a href="http://www.flickr.com/photos/gsfc/4444869951/">background photo credit</a>
+                    <a id="mysociety_logo" href="http://www.mysociety.org">
+                        <img src="/static/mysociety_small.png" alt="mySociety" />
+                    </a>
                 </div>
             </div>
         </div>
