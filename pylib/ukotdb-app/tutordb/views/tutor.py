@@ -45,7 +45,7 @@ def create_tutor(request):
             user.save()
 
             # jump through the Django hoops to the login
-            login( request, authenticate( username=user.username, password=password ) )
+            login( request, authenticate( username=user.email, password=password ) )
 
             # FIXME - email the user their password
 

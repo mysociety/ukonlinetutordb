@@ -127,7 +127,8 @@ INSTALLED_APPS = (
 )
 
 AUTHENTICATION_BACKENDS = (
-    'ukotdb-app.backends.EmailModelBackend',
+    'ukotdb-app.backends.EmailModelBackend',        # login with an email
+    # 'django.contrib.auth.backends.ModelBackend',    # login using username (default)
 )
 
 
