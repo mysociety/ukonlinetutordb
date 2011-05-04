@@ -6,7 +6,8 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: Arial;
+  /*    font-family: 'Droid Sans', arial, serif;*/
+  font-family: 'Droid Serif', arial, serif;
   background-color: #233e11; }
 
 /* prepares the background image to full capacity of the viewing area */
@@ -53,16 +54,15 @@ body {
   border-top: 1px solid rgba(0, 0, 0, 0.2); }
 
 /* form related */
-label {
-  float: left;
-  width: 5em;
-  margin-right: 0.5em;
-  text-align: right; }
-
-form {
+form.standard {
   margin: 1em 0; }
-  form p {
+  form.standard p {
     margin: 0.5em 0; }
+  form.standard label {
+    float: left;
+    width: 5em;
+    margin-right: 0.5em;
+    text-align: right; }
 
 /* specific pages details */
 li.ukonline_centre {
@@ -84,3 +84,49 @@ img.centre_map {
   border: 1px solid #aaa;
   height: 200px;
   width: 200px; }
+
+/* home page */
+div.promo {
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 66%; }
+  div.promo div.inner {
+    font-family: 'Copse', arial, serif;
+    font-size: 48px;
+    text-align: center; }
+
+div.sign-up-form {
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 34%; }
+  div.sign-up-form div.inner {
+    padding: 1em;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid white; }
+    div.sign-up-form div.inner div.heading {
+      font-size: 150%;
+      text-align: center;
+      margin-bottom: 0.5em; }
+    div.sign-up-form div.inner form {
+      font-family: "Droid Sans", arial, sans-serif; }
+      div.sign-up-form div.inner form p {
+        margin: 0 0 0.5em 0;
+        padding: 0; }
+      div.sign-up-form div.inner form label {
+        display: block;
+        font-size: 80%; }
+      div.sign-up-form div.inner form input {
+        display: block;
+        font: inherit;
+        width: 98%;
+        box-shadow: 0px 0px 5px #000; }
+      div.sign-up-form div.inner form ul.errorlist {
+        margin: 0;
+        padding: 0;
+        float: right; }
+        div.sign-up-form div.inner form ul.errorlist li {
+          list-style: none;
+          font-size: 80%;
+          color: #c00; }

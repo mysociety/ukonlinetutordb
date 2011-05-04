@@ -14,8 +14,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('tutordb.views.tutor',
-    # tutors
-    (r'^tutors/create/$', 'create_tutor' ),
+    (r'^$',               'index'),
     (r'^my/$',            'my'           ),
     (r'^my/add_centre$',  'add_centre'   ),    
 )
@@ -39,8 +38,5 @@ if settings.SERVE_STATIC_FILES:
 urlpatterns += patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
-
-    # Homepage:
-    (r'^$', 'tutordb.views.tutor.index'),
 )
 

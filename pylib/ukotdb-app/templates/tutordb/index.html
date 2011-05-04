@@ -6,11 +6,30 @@
 
 {% block content %}
 
-<h1>UK Online Tutor Database</h1>
 
-<p>
-    Please <a href="{% url django.contrib.auth.views.login %}">log in</a> or
-    <a href="{% url tutordb.views.tutor.create_tutor %}">create an account</a>.
-</p>
+<div class="promo">
+    <div class="inner">
+        Register here<br>
+        to become a<br>
+        UKonline Tutor!
+    </div>
+</div>
+
+<div class="sign-up-form">
+    <div class="inner">
+        
+        <div class="heading">Create Account</div>
+
+        <form action="{% url tutordb.views.tutor.index %}" method="post">
+
+            {{ form.as_p }}
+
+            <label for="form_submit">&nbsp;</label>
+            <input type="submit" id="form_submit" value="Register" />
+        </form>
+
+    </div>
+</div>
+
 
 {% endblock %}

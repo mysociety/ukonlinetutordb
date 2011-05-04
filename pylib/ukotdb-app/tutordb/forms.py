@@ -7,8 +7,11 @@ from django.contrib.auth.models import User
 class CreateTutorForm(forms.Form):
     # username   = forms.CharField( min_length=4, max_length=30, required=True)
     email      = forms.EmailField( required=True )
-    # first_name = forms.CharField( required=True )
-    # last_name  = forms.CharField( required=True )
+    name = forms.CharField( required=True )
+    phone = forms.CharField( required=True )
+    password1 = forms.CharField( required=True, label="Password" )
+    password2 = forms.CharField( required=True, label="Password Confirm" )
+
     
     def clean_username(self):
         """Check that the username is correctly formatted and not already taken"""

@@ -16,13 +16,6 @@ from django.views.generic.simple        import direct_to_template
 
 def index(request):
     """show the homepage"""    
-    return direct_to_template(
-        request,
-        template = 'tutordb/index.html',
-    )
-
-def create_tutor(request):
-    """Let someone sign up as a new tutor"""
 
     if request.method == 'POST':
         form = CreateTutorForm(request.POST)
@@ -54,13 +47,12 @@ def create_tutor(request):
         form = CreateTutorForm()
 
     return render_to_response(
-        'tutordb/create_tutor.html',
+        'tutordb/index.html',
         {
             'form': form,
         },
         context_instance=RequestContext(request)
     )
-
 
 @login_required
 def my(request):

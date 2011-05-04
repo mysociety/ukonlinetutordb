@@ -5,6 +5,8 @@ create account flow
     layout homepage as suggested
 
     select centre from nearest 5
+    
+    If logged in redirect '/' to '/my'
 
 overall
 

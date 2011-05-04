@@ -8,7 +8,8 @@ body {
     margin:0; 
     padding:0;
     
-    font-family: Arial;
+/*    font-family: 'Droid Sans', arial, serif;*/
+    font-family: 'Droid Serif', arial, serif;
     
     background-color: #233e11;
 }
@@ -74,18 +75,17 @@ body {
 
 
 /* form related */
-label {
-    float: left;
-    width: 5em;
-    margin-right: 0.5em;
-    text-align: right;
-}
-
-form {
-    
+form.standard {
     margin: 1em 0;
     p {
         margin: 0.5em 0;
+    }
+
+    label {
+        float: left;
+        width: 5em;
+        margin-right: 0.5em;
+        text-align: right;
     }
 }
 
@@ -119,3 +119,73 @@ img.centre_map {
     height: 200px;
     width:  200px;
 }
+
+
+
+/* home page */
+
+div.promo {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 66%;
+
+    div.inner {
+        font-family: 'Copse', arial, serif;
+        font-size: 48px;
+        text-align: center;
+    }
+}
+
+div.sign-up-form {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 34%;
+
+    div.inner {
+        padding: 1em;
+        background-color: rgba( 255,255,255, 0.6);
+        border: 1px solid rgba( 255,255,255, 1);
+        
+        div.heading {
+            font-size: 150%;
+            text-align: center;
+            margin-bottom: 0.5em;
+        }
+
+        form {
+            font-family: "Droid Sans", arial, sans-serif;
+
+            p {
+                margin: 0 0 0.5em 0;
+                padding: 0;
+            }
+
+            label {
+                display: block;
+                font-size: 80%;
+            }
+            
+            input {
+                display: block;
+                font: inherit;
+                width: 98%;
+                box-shadow: 0px 0px 5px #000;
+            }
+            
+            ul.errorlist {
+                margin: 0;
+                padding: 0;
+                float: right;
+
+                li {
+                    list-style: none;
+                    font-size: 80%;
+                    color: #c00;
+                }
+            }
+        }
+    }    
+}
+
