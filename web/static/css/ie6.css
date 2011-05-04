@@ -1,0 +1,13 @@
+/* some css fixes for IE browsers */
+html {
+  overflow-y: hidden; }
+
+body {
+  overflow-y: auto; }
+
+#bg {
+  position: absolute;
+  z-index: -1; }
+
+#content {
+  position: static; }

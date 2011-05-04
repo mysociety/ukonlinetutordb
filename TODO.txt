@@ -1,3 +1,19 @@
+create account flow
+
+    name, email, password, phone to create account
+    
+    layout homepage as suggested
+
+    select centre from nearest 5
+
+overall
+
+    non-scaling background image (or maintain aspect ratio)
+
+
+
+
+
 Allow user to unlink centres from their accounts
 
 Add centre scraper to cron (and mute output)

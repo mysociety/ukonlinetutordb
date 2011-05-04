@@ -4,16 +4,8 @@
         <title>{% block title %}{% endblock %} :: UK Online Centres</title>
 
         <link rel="stylesheet" href="/static/css/main.css" type="text/css" media="screen" charset="utf-8">
-        
-
         <!--[if IE 6]>
-        <style type="text/css">
-        /* some css fixes for IE browsers */
-        html {overflow-y:hidden;}
-        body {overflow-y:auto;}
-        #bg {position:absolute; z-index:-1;}
-        #content {position:static;}
-        </style>
+            <link rel="stylesheet" href="/static/css/ie6.css" type="text/css" media="screen" charset="utf-8">
         <![endif]-->
         
     </head>
@@ -33,21 +25,15 @@
                         {% if user.is_authenticated %}
                             <li>
                                 {{ user.email }}
-                                (<a href="{% url django.contrib.auth.views.logout %}">logout</a>)
+                                (<a href="{% url django.contrib.auth.views.logout %}">Logout</a>)
                             </li>
                         {% else %}
                             <li>
-                                <a href="{% url django.contrib.auth.views.login %}">login</a>
-                                or
-                                <a href="{% url tutordb.views.tutor.create_tutor %}">create an account</a>                        
+                                <a href="{% url django.contrib.auth.views.login %}">Login</a>
                             </li>
                         {% endif %}
                     </ul>
 
-                    <ul>
-                        <li><a href="{% url tutordb.views.centre.centre_list %}">Centres</a></li>
-                    </ul>
-                    
                     <br clear="both" />
                 </div>
                 
