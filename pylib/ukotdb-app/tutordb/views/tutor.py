@@ -16,6 +16,11 @@ from django.views.generic.simple        import direct_to_template
 
 def index(request):
     """show the homepage"""    
+    
+    # if the user is logged in send them to 'my' straight away
+    if request.user.is_authenticated():
+        return HttpResponseRedirect( reverse( my ) )
+    
 
     if request.method == 'POST':
         form = CreateTutorForm(request.POST)
