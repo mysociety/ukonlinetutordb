@@ -1,7 +1,7 @@
 import re
 
 from tutordb.forms      import CreateTutorForm
-from tutordb.models     import Centre, Tenure
+from tutordb.models     import Centre, Tenure, UserProfile
 
 from django.contrib.auth                import authenticate, login
 from django.contrib.auth.decorators     import login_required
@@ -28,17 +28,22 @@ def index(request):
             username = re.sub( '[^\w]+', '_', clean['email'] )
 
             # create the actual user and set the name
-            user = User.objects.create_user( username, clean['email'] )
-            # user.first_name = clean['first_name']
-            # user.last_name  = clean['last_name']
+            user = User.objects.create_user( username, clean['email'], clean['password1'] )
 
-            # create a password so that we can log them in
-            password = UserManager().make_random_password()
-            user.set_password( password )
+            # put the whole name in the first_name field - better than trying
+            # to split it and getting it wrong.
+            user.first_name = clean['name']
+            user.last_name  = ''
+
+            # save the user.
             user.save()
+            
+            # create the user profile and store the phone number
+            profile = UserProfile.objects.create( user=user, phone=clean['phone'] )
+            profile.save()
 
             # jump through the Django hoops to the login
-            login( request, authenticate( username=user.email, password=password ) )
+            login( request, authenticate( username=user.email, password=clean['password1'] ) )
 
             # FIXME - email the user their password
 

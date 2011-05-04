@@ -14,6 +14,7 @@
 <dl>
     <dt>email:</dt>    <dd>{{ user.email }}</dd>
     <dt>name:</dt>     <dd>{% firstof user.get_full_name 'none yet' %}</dd>
+    <dt>phone:</dt>     <dd>{{ user.get_profile.phone }}</dd>
 </dl>
 
 <h2>Your Centres</h2>
