@@ -132,3 +132,27 @@ div.sign-up-form {
           list-style: none;
           font-size: 80%;
           color: #c00; }
+
+ul.select_centre {
+  padding: 0; }
+  ul.select_centre form {
+    text-align: center;
+    font-size: 150%; }
+    ul.select_centre form input {
+      font: inherit;
+      vertical-align: middle; }
+    ul.select_centre form input[type=text] {
+      width: 6em; }
+  ul.select_centre li {
+    list-style: none;
+    margin: 0;
+    padding: 0.2em;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 1em; }
+  ul.select_centre img.small_centre_map {
+    float: left;
+    border: 1px solid #aaa;
+    height: 80px;
+    width: 160px;
+    margin-right: 1em; }

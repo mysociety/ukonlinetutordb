@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 
+{% load ukonline_extras %}
 
-{% block title %}Centre List{% endblock %}
+{% block title %}Add a Centre{% endblock %}
 
 
 {% block content %}
 
-<h1>UK Online Centres</h1>
+<h1>Find your centre</h1>
 
 {% if error %}
     <div class="error">
@@ -14,22 +15,30 @@
     </div>
 {% endif %}
 
-<form action="{% url tutordb.views.tutor.add_centre %}" method="get">
-    <label for="form_postcode">Postcode:</label>
-    <input type="text" name="postcode" id="form_postcode" value="{% firstof postcode %}" />
-    <input type="submit" value="Search" />
-</form>
 
-<ul>
+<ul class="select_centre">
+
+    <li>
+        <form action="{% url tutordb.views.tutor.add_centre %}" method="get">
+            <label for="form_postcode">Postcode:</label>
+            <input type="text" name="postcode" id="form_postcode" value="{% firstof postcode %}" />
+            <input type="submit" value="Search" />
+        </form>
+    </li>
+    
 {% for centre in object_list %}
 
     <li>
-        {{ centre.name }}
+        <img class="small_centre_map" src="http://maps.google.com/maps/api/staticmap?zoom=13&amp;size=160x80&amp;maptype=roadmap&amp;markers={{ centre.latitude }},{{ centre.longitude }}&amp;sensor=false">
+        <strong>{{ centre.name }}</strong><br >
+        <small>{{ centre.address }}</small><br>
+        <small>({{ centre.distance|to_miles }} from '{{ postcode }}')</small><br>
         <form style="display: inline;" action="{% url tutordb.views.tutor.add_centre %}" method="post">
             <input type="hidden" name="postcode"  value="{{ postcode }}"  />
             <input type="hidden" name="centre_id" value="{{ centre.id }}" />
-            <input type="submit" value="Choose">
+            <input type="submit" value="Add “{{ centre.name }}” to your list">
         </form>
+        <br clear="both">
     </li>
 
 {% empty %}
@@ -42,7 +51,5 @@
 
 {% endfor %}
 </ul>
-
-{% include 'generic_pagination.html' %}
 
 {% endblock %}

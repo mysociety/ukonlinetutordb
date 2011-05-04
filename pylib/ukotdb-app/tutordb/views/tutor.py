@@ -47,7 +47,7 @@ def index(request):
 
             # FIXME - email the user their password
 
-            return HttpResponseRedirect( reverse( my ) )
+            return HttpResponseRedirect( reverse( add_centre ) )
     else:
         form = CreateTutorForm()
 
@@ -107,7 +107,7 @@ def add_centre(request):
     return object_list(
         request,
         template_name = 'tutordb/add_centre.html',
-        paginate_by   = 20,
+        paginate_by   = 5,
         allow_empty   = True,
         queryset      = queryset,
         extra_context = {
