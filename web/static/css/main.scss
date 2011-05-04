@@ -1,3 +1,9 @@
+$ukonline_blue: #003d76;
+$ukonline_red: #dd1a0b;
+
+
+
+
 /* pushes the page to the full capacity of the viewing area */
 html {
     height:100%;
@@ -131,8 +137,11 @@ div.promo {
     width: 66%;
 
     div.inner {
-        font-family: 'Copse', arial, serif;
+        font-family: Pacifico, Georgia, arial, serif;
         font-size: 48px;
+        color: $ukonline_blue;
+        text-shadow: rgba($ukonline_red, 0.6) 1px 1px 4px;
+        
         text-align: center;
     }
 }
