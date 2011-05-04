@@ -64,6 +64,11 @@ form.standard {
     margin-right: 0.5em;
     text-align: right; }
 
+ul.plain li {
+  list-style: none; }
+  ul.plain li img {
+    vertical-align: middle; }
+
 /* specific pages details */
 li.ukonline_centre {
   list-style: url("/static/group.png"); }
@@ -156,3 +161,16 @@ ul.select_centre {
     height: 80px;
     width: 160px;
     margin-right: 1em; }
+
+div.action_button {
+  float: right;
+  padding: 0.2em 0.5em;
+  font-size: 24px;
+  color: #003d76;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 3px solid #003d76;
+  box-shadow: 3px 3px 10px rgba(0, 61, 118, 0.5);
+  border-radius: 10px; }
+
+div.action_button:hover {
+  cursor: pointer; }

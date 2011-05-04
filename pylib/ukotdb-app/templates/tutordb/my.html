@@ -9,19 +9,34 @@
 <h1>You!</h1>
 
 
+<div class="action_button">
+    Create a certificate
+</div>
+
 <h2>Your Details</h2>
 
-<dl>
-    <dt>email:</dt>    <dd>{{ user.email }}</dd>
-    <dt>name:</dt>     <dd>{% firstof user.get_full_name 'none yet' %}</dd>
-    <dt>phone:</dt>     <dd>{{ user.get_profile.phone }}</dd>
-</dl>
+<ul class="plain">
+    <li>
+        <img src="/static/user.png" width="16" height="16" alt="Name">
+        {% firstof user.get_full_name 'none yet' %}
+    </li>
+
+    <li>
+        <img src="/static/email.png" width="16" height="16" alt="Email">
+        {{ user.email }}
+    </li>
+
+    <li>
+        <img src="/static/telephone.png" width="16" height="16" alt="Telephone">
+        {{ user.get_profile.phone }}
+    </li>
+</ul>
 
 <h2>Your Centres</h2>
 
 <ul>
     {% for centre in centres %}
-        <li>
+        <li class="ukonline_centre">
             <a href="{% url tutordb.views.centre.centre_detail centre_id=centre.id %}">{{ centre.name }}</a>
         </li>
     {% empty %}
