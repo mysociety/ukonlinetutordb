@@ -32,7 +32,6 @@ class CreateTutorForm(forms.Form):
             if p1 != p2:
                 msg = u"The two passwords do not match."
                 self._errors["password2"] = self.error_class([msg])
-                del cleaned_data["password2"]
     
             # Always return the full collection of cleaned data.
             return cleaned_data

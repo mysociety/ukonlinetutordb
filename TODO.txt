@@ -1,21 +1,9 @@
-create account flow
+Admin interface that lists all users
 
-    name, email, password, phone to create account
-    
-    layout homepage as suggested
-
-    select centre from nearest 5
-    
-    If logged in redirect '/' to '/my'
-
-overall
-
-    non-scaling background image (or maintain aspect ratio)
-
-
-
-
+Allow users to edit their details
 
 Allow user to unlink centres from their accounts
 
 Add centre scraper to cron (and mute output)
+
+Tests
