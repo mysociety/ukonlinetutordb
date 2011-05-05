@@ -39,5 +39,8 @@ class Centre(models.Model):
     def longitude(self):
         return self.location.x
         
+    def __unicode__(self):
+        return "%s (%s)" % (self.name, self.postcode)
+
     class Meta:
         app_label = 'tutordb'

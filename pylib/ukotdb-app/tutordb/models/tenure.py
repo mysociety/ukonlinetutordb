@@ -18,6 +18,9 @@ class Tenure(models.Model):
     )
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
 
+    def __unicode__(self):
+        return "%s - %s" % (self.user.email, self.centre.name)
+
     class Meta:
         unique_together = ( "centre", "user" )
         app_label = 'tutordb'
