@@ -45,8 +45,24 @@ body {
   padding: 1em 0; }
 
 #footer {
-  text-align: right;
-  border-top: 1px solid rgba(0, 0, 0, 0.2); }
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  font-family: "Droid Sans", arial, sans-serif;
+  font-size: 80%;
+  color: #444; }
+  #footer ul {
+    margin: 0;
+    padding: 0; }
+    #footer ul li {
+      display: block;
+      float: left;
+      list-style: none; }
+      #footer ul li a {
+        color: inherit; }
+      #footer ul li a:hover {
+        color: #00f; }
+
+#mysociety_logo {
+  float: right; }
 
 /* form related */
 form.standard {

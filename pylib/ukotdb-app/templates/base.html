@@ -54,6 +54,17 @@
                     <a id="mysociety_logo" href="http://www.mysociety.org" title="Built by mySociety">
                         <img src="/static/mysociety_small.png" alt="mySociety" />
                     </a>
+
+                    <ul>
+                        {% if user.is_staff %}
+                        <li>
+                            <a href="{% url tutordb.views.tutor.tutor_list %}">Tutors</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    
+                    <br clear="both">
+
                 </div>
             </div>
         </div>
