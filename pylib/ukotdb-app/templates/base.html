@@ -61,6 +61,11 @@
                             <a href="{% url tutordb.views.tutor.tutor_list %}">Tutors</a>
                         </li>
                         {% endif %}
+                        {% if user.is_superuser %}
+                        <li>
+                            <a href="/admin">Full Admin</a>
+                        </li>
+                        {% endif %}
                     </ul>
                     
                     <br clear="both">

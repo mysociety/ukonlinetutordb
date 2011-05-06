@@ -55,7 +55,8 @@ body {
     #footer ul li {
       display: block;
       float: left;
-      list-style: none; }
+      list-style: none;
+      padding-right: 1em; }
       #footer ul li a {
         color: inherit; }
       #footer ul li a:hover {
