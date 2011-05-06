@@ -102,7 +102,7 @@ def add_centre(request):
         if not error:
             return HttpResponseRedirect( reverse( my ) )
 
-    # FIXME - search for name as well?
+    # TODO - search for name as well?
     postcode = request.GET.get('postcode')    
     if postcode:
         queryset = Centre.objects.all().near_postcode(postcode)
@@ -121,3 +121,20 @@ def add_centre(request):
         },
     )
     
+@login_required
+def tutor_list(request):
+    """Show list of tutors"""
+
+    # unless the user is staff bail out
+    if not request.user.is_staff:
+        return direct_to_template( request, template='not_permitted.html')
+
+    queryset = User.objects.all()
+
+    return object_list(
+        request,
+        template_name = 'tutordb/user_list.html',
+        paginate_by   = 40,
+        allow_empty   = True,
+        queryset      = queryset,
+    )

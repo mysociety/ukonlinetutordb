@@ -14,9 +14,10 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('tutordb.views.tutor',
-    (r'^$',               'index'),
-    (r'^my/$',            'my'           ),
-    (r'^my/add_centre$',  'add_centre'   ),    
+    ( r'^$',              'index'      ),
+    ( r'^my/$',           'my'         ),
+    ( r'^my/add_centre$', 'add_centre' ),    
+    ( r'^tutors/',        'tutor_list' ),
 )
 
 urlpatterns += patterns('tutordb.views.centre',

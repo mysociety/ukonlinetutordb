@@ -85,6 +85,33 @@ li.ukonline_centre {
     list-style: url('/static/group.png');
 }
 
+ul.ukonline_tutors {
+    
+    padding: 0;
+
+    li.ukonline_tutor {
+        list-style: none;
+        margin: 0;
+        padding: 0.2em;
+        border: 1px solid rgba( 255,255,255, 0.7 );
+        background-color: rgba( 255,255,255, 0.5 );
+        margin-bottom: 1em;
+    }
+
+    li.tutor {
+        list-style: url('/static/user.png');
+    }
+
+    li.email {
+        list-style: url('/static/email.png');
+    }
+
+    li.telephone {
+        list-style: url('/static/telephone.png');
+    }
+}
+
+
 div.pagination {
     
     text-align: center;

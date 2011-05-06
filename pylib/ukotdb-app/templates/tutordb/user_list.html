@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load ukonline_extras %}
+
+{% block title %}Tutor List{% endblock %}
+
+
+{% block content %}
+
+<h1>UK Online Tutors</h1>
+
+<ul class="ukonline_tutors">
+{% for tutor in object_list %}
+
+    <li class="ukonline_tutor">
+        <ul>
+            <li class="tutor">{{ tutor.get_full_name }}</li>
+            <li class="email"><a href="mailto:{{ tutor.email }}">{{ tutor.email }}</a></li>
+            <li class="telephone">{% firstof tutor.get_profile.phone '-' %}</li>
+            
+            {% for tenure in tutor.tenure_set.all %}
+                <li class="ukonline_centre"><small>{{ tenure.centre.name }}</small></li>
+            {% endfor %}
+        </ul>
+    </li>
+
+{% empty %}
+
+    <li>No tutors were found - sorry.</li>
+
+{% endfor %}
+</ul>
+
+{% include 'generic_pagination.html' %}
+
+{% endblock %}

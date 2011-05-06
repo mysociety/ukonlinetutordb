@@ -1,4 +1,4 @@
-Admin interface that lists all users
+Add javascript to prevent the font flash
 
 Allow users to edit their details
 
@@ -7,3 +7,5 @@ Allow user to unlink centres from their accounts
 Add centre scraper to cron (and mute output)
 
 Tests
+
+fix double commas and ALL CAPS in the centre addresses
