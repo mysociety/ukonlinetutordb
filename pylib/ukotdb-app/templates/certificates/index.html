@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Certificates{% endblock %}
+
+
+{% block content %}
+
+
+<h1>Certificates</h1>
+
+<ul class="plain">
+    <li><a href="{% url certificates.views.create %}">Create a new certificate</a></li>
+</ul>
+
+{% endblock %}

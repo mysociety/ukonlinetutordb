@@ -124,6 +124,8 @@ INSTALLED_APPS = (
     'south',
 
     'tutordb',
+    'certificates',
+
 )
 
 AUTHENTICATION_BACKENDS = (

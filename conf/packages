@@ -7,3 +7,4 @@ python-simplejson
 libapache2-mod-wsgi
 python-django-south
 python-psycopg2
+python-reportlab

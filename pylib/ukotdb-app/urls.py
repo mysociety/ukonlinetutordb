@@ -26,6 +26,7 @@ urlpatterns += patterns('tutordb.views.centre',
     (r'^centres/(?P<centre_id>\d+)/$', 'centre_detail' ),
 )
 
+
 # server static files if needed
 if settings.SERVE_STATIC_FILES:
     urlpatterns += patterns('',
@@ -35,9 +36,9 @@ if settings.SERVE_STATIC_FILES:
         ),
     )
     
-
+# include other apps
 urlpatterns += patterns('',
-    # Uncomment the next line to enable the admin:
-    (r'^admin/', include(admin.site.urls)),
+    (r'^certificates/', include('certificates.urls') ),
+    (r'^admin/',        include(admin.site.urls)     ),
 )
 
