@@ -63,7 +63,7 @@
                         {% endif %}
                         {% if user.is_superuser %}
                         <li>
-                            <a href="/admin">Full Admin</a>
+                            <a href="{% url admin:index %}">Full Admin</a>
                         </li>
                         {% endif %}
                     </ul>
