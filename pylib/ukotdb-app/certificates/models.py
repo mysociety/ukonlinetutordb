@@ -6,6 +6,7 @@ from tutordb.models import Centre
 class Certificate(models.Model):
     tutor        = models.ForeignKey(User)
     centre       = models.ForeignKey(Centre)
+    template     = models.CharField(max_length=20, default='default')
     student_name = models.CharField(max_length=100)
     course_name  = models.CharField(max_length=100)
     date_awarded = models.DateField()
