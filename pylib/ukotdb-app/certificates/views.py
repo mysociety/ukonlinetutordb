@@ -9,7 +9,7 @@ from django.contrib.auth.decorators     import login_required
 from django.core.urlresolvers           import reverse
 # from django.db                          import IntegrityError
 from django.http                        import HttpResponse, HttpResponseRedirect
-from django.shortcuts                   import render_to_response
+from django.shortcuts                   import render_to_response, get_object_or_404
 from django.template                    import RequestContext
 from django.views.generic.list_detail   import object_list, object_detail
 from django.views.generic.simple        import direct_to_template
@@ -37,6 +37,21 @@ def display(request, certificate_id):
         object_id = certificate_id,
     )
     
+@login_required
+def display_as_pdf(request, certificate_id):
+    """Create a PDF for certificate"""
+
+    # get the certificate
+    certificate = get_object_or_404( Certificate, pk=certificate_id )
+    
+    # create the pdf
+    pdf = certificate.as_pdf
+
+    # set up the response for pdf
+    response = HttpResponse(mimetype='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=certificate_%s.pdf' % certificate_id
+    response.write(pdf)
+    return response
 
 @login_required
 def create(request):

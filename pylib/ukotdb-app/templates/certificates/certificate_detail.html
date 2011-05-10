@@ -9,6 +9,10 @@
 
 <h1>{{ object }}</h1>
 
+<div class="action_button">
+    <a href="{% url certificates.views.display_as_pdf certificate_id=object.id %}">PDF</a>
+</div>
+
 <dl>
     <dt>Student:</dt>
     <dd>{{ object.student_name }}</dd>
