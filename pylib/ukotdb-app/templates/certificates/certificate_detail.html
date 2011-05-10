@@ -9,5 +9,23 @@
 
 <h1>{{ object }}</h1>
 
+<dl>
+    <dt>Student:</dt>
+    <dd>{{ object.student_name }}</dd>
+
+    <dt>Tutor:</dt>
+    <dd>{{ object.tutor_name }}</dd>
+
+    <dt>Course:</dt>
+    <dd>{{ object.course_name }} ({{ object.course_blurb }})</dd>
+
+    <dt>Centre:</dt>
+    <dd>{{ object.centre.name }}</dd>
+
+    <dt>Date Awarded:</dt>
+    <dd>{{ object.date_awarded }}</dd>
+
+</dl>
+
 
 {% endblock %}
