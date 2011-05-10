@@ -45,11 +45,11 @@ def display_as_pdf(request, certificate_id):
     certificate = get_object_or_404( Certificate, pk=certificate_id )
     
     # create the pdf
-    pdf = certificate.as_pdf
+    pdf = certificate.as_pdf()
 
     # set up the response for pdf
     response = HttpResponse(mimetype='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=certificate_%s.pdf' % certificate_id
+    response['Content-Disposition'] = 'filename=certificate_%s.pdf' % certificate_id
     response.write(pdf)
     return response
 
