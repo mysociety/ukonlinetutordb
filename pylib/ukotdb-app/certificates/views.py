@@ -71,7 +71,12 @@ def create(request):
             certificate = form.save(commit=False)
             certificate.tutor = user
             certificate.save()
-            return HttpResponseRedirect( reverse( display ) )            
+            return HttpResponseRedirect(
+                reverse(
+                    display,
+                    kwargs={'certificate_id': certificate.id},
+                )
+            )            
 
     else:
         form = CertificateForm(user=user, initial=initial, )
