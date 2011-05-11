@@ -42,3 +42,9 @@ urlpatterns += patterns('',
     (r'^admin/',        include(admin.site.urls)     ),
 )
 
+# todo list - make it easier for all to see
+from django.views.generic.simple import direct_to_template
+
+urlpatterns += patterns('',
+    (r'^todo$', direct_to_template, {'template': 'todo.html'}),
+)
