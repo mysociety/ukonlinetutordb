@@ -30,6 +30,23 @@ body {
   border: 1px solid #fff;
   padding: 20px 20px 0 20px; }
 
+#dev-site-warning {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px;
+  background: rgba(255, 128, 128, 0.7); }
+  #dev-site-warning p {
+    color: #000;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 75%;
+    font-family: "Droid Sans"; }
+    #dev-site-warning p a {
+      color: inherit; }
+
 #menu {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
   #menu #ukonline_logo {
