@@ -35,6 +35,10 @@
 {% endfor %}
 </ul>
 
+{% load captureas %}
+
+{% captureas pagination_pagination_extra_query_params %}&amp;postcode={{ postcode|urlencode }}{% endcaptureas %}
+
 {% include 'generic_pagination.html' %}
 
 {% endblock %}
