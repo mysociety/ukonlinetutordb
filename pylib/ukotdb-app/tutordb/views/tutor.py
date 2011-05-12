@@ -69,13 +69,19 @@ def my(request):
     """Homepage for a user"""
     
     user = request.user
+
+    # get all the centres
     tenures = Tenure.objects.all().filter(user=user)
     centres = [ t.centre for t in tenures ]
+
+    # get recent certificates
+    certificates = user.certificate_set.order_by('-id').all()[:10]
         
     return render_to_response(
         'tutordb/my.html',
         {
-            'centres' : centres,
+            'centres':      centres,
+            'certificates': certificates,
         },
         context_instance=RequestContext(request)
     )
