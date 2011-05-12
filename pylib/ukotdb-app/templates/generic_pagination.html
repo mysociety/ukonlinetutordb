@@ -1,3 +1,4 @@
+{% load url_with %}
 
 {% if is_paginated %}
 <div class="pagination">
@@ -6,11 +7,11 @@
         <span class="previous_buttons">
         {% if page_obj.has_previous %}
             <a
-                href="?page=1{{ pagination_extra_query_params }}"
+                href="{% url_with page 1 %}"
                 title="first"
             ><img src="/static/resultset_first.png"></a>
             <a
-                href="?page={{ page_obj.previous_page_number }}{{ pagination_extra_query_params }}"
+                href="{% url_with page page_obj.previous_page_number %}"
                 title="previous"
             ><img src="/static/resultset_previous.png"></a>
         {% else %}
@@ -26,11 +27,11 @@
         <span class="next_buttons">
         {% if page_obj.has_next %}
             <a
-                href="?page={{ page_obj.next_page_number }}{{ pagination_extra_query_params }}"
+                href="{% url_with page page_obj.next_page_number %}"
                 title="next"
             ><img src="/static/resultset_next.png"></a>
             <a
-                href="?page={{ page_obj.paginator.num_pages }}{{ pagination_extra_query_params }}"
+                href="{% url_with page page_obj.paginator.num_pages %}"
                 title="last"
             ><img src="/static/resultset_last.png"></a>
         {% endif %}
