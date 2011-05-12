@@ -7,10 +7,22 @@
 {% block content %}
 
 
+<div class="action_button">
+    <a href="{% url certificates.views.create %}">New certificate</a>
+</div>
+
 <h1>Certificates</h1>
 
-<ul class="plain">
-    <li><a href="{% url certificates.views.create %}">Create a new certificate</a></li>
+<ul>
+    {% for certificate in object_list %}
+        <li class="certificate">
+            <a href="{% url certificates.views.display certificate_id=certificate.id %}">{{ certificate.student_name }} ({{ certificate.course_name}})</a>
+        </li>
+    {% empty %}
+        <li class="certificate">No certificates created yet</li>
+    {% endfor %}
 </ul>
+
+{% include 'generic_pagination.html' %}
 
 {% endblock %}

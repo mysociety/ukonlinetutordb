@@ -21,11 +21,16 @@ from certificates.forms  import CertificateForm
 @login_required
 def index(request):
     """show the certificates nav page"""    
-    
-    return direct_to_template(
+
+    return object_list(
         request,
-        template='certificates/index.html'
+        template_name = 'certificates/index.html',
+        paginate_by   = 40,
+        allow_empty   = True,
+        queryset      = request.user.certificate_set.order_by('-id'),
+        extra_context = {},
     )
+    
 
 @login_required
 def display(request, certificate_id):
@@ -37,6 +42,7 @@ def display(request, certificate_id):
         object_id = certificate_id,
     )
     
+
 @login_required
 def display_as_pdf(request, certificate_id):
     """Create a PDF for certificate"""
