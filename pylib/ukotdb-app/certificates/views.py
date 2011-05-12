@@ -36,6 +36,8 @@ def index(request):
 def display(request, certificate_id):
     """Display a certificate"""
     
+    # FIXME - add access controls
+
     return object_detail(
         request,
         queryset  = request.user.certificate_set,
@@ -48,6 +50,7 @@ def display_as_pdf(request, certificate_id):
     """Create a PDF for certificate"""
 
     # get the certificate
+    # FIXME - add access controls
     certificate = get_object_or_404( Certificate, pk=certificate_id )
     
     # create the pdf
@@ -59,6 +62,7 @@ def display_as_pdf(request, certificate_id):
     response.write(pdf)
     return response
 
+
 @login_required
 def create(request):
     """create a new certificate"""
@@ -66,9 +70,20 @@ def create(request):
     
     # we can't (easily) do this with generics as we need to pre-populate the
     # form if we are cloning an existing certificate.
-    
-    # set up the initial data
-    initial = {}
+
+    # If given a base_on try to load that certificate
+    if request.GET.get('base_on'):
+        # FIXME - add access controls
+        base_certificate = get_object_or_404( Certificate, pk=request.GET.get('base_on') )
+        initial = {
+            'centre':       base_certificate.centre,
+            'tutor_name':   base_certificate.tutor_name,
+            'course_name':  base_certificate.course_name,
+            'course_blurb': base_certificate.course_blurb,
+            'date_awarded': base_certificate.date_awarded,
+        }
+    else:
+        initial = {}
     
     if request.method == 'POST':
         form = CertificateForm(request.POST, user=user, initial=initial );

@@ -13,6 +13,10 @@
     <a href="{% url certificates.views.display_as_pdf certificate_id=object.id %}">View as PDF</a>
 </div>
 
+<div class="action_button">    
+    <a href="{% url certificates.views.create %}?base_on={{ object.id }}">Clone</a>
+</div>
+
 <dl>
     <dt>Student:</dt>
     <dd>{{ object.student_name }}</dd>
