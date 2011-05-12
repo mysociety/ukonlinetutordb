@@ -10,7 +10,7 @@
 
 
 <div class="action_button">
-    <a href="{% url certificates.views.index %}">Create a certificate</a>
+    <a href="{% url certificates.views.index %}">Certificates</a>
 </div>
 
 <h2>Your Details</h2>
@@ -40,9 +40,22 @@
             <a href="{% url tutordb.views.centre.centre_detail centre_id=centre.id %}">{{ centre.name }}</a>
         </li>
     {% empty %}
-        <li>No centres added yet</li>
+        <li class="ukonline_centre">No centres added yet</li>
     {% endfor %}
-        <li><a href="/my/add_centre">Add a centre</a></li>
+        <li class="ukonline_centre_add"><a href="/my/add_centre">Add a centre</a></li>
+</ul>
+
+<h2>Recent Certificates</h2>
+
+<ul>
+    {% for certificate in certificates %}
+        <li class="certificate">
+            <a href="{% url certificates.views.display certificate_id=certificate.id %}">{{ certificate.student_name }} ({{ certificate.course_name}})</a>
+        </li>
+    {% empty %}
+        <li class="certificate">No certificates created yet</li>
+    {% endfor %}
+        <li class="certificate_add"><a href="{% url certificates.views.create %}">Create a certificate</a></li>
 </ul>
 
 

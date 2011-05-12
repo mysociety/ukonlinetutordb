@@ -128,6 +128,18 @@ li.ukonline_centre {
     list-style: url('/static/group.png');
 }
 
+li.ukonline_centre_add {
+    list-style: url('/static/group_add.png');
+}
+
+li.certificate {
+    list-style: url('/static/script.png');
+}
+
+li.certificate_add {
+    list-style: url('/static/script_add.png');
+}
+
 ul.ukonline_tutors {
     
     padding: 0;
@@ -303,6 +315,11 @@ div.action_button {
     border: 3px solid $ukonline_blue;
     box-shadow: 3px 3px 10px rgba($ukonline_blue, 0.5);
     border-radius: 10px;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 }
 
 div.action_button:hover {
