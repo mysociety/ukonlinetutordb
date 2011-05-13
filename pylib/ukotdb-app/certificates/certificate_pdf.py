@@ -17,49 +17,66 @@ class CertificatePDF:
     
     def __init__(self, certificate):
         self.certificate = certificate
+
+        # create the buffer and canvas to work on
+        self.buffer = StringIO()
+        self.canvas = canvas.Canvas( self.buffer, pagesize=(a4_width,a4_height) )
+    
+
+    def render(self):
+        self.render_background()
+        self.render_student_name()
+        self.render_course_details()
+        self.render_tutor_details()
         
-    def finish(self):
-        # create the pdf canvas to work on
-        pdf_buffer = StringIO()
-        pdf_canvas = canvas.Canvas( pdf_buffer, pagesize=(a4_width,a4_height) )
-        
+
+    def render_background(self):
         # add the background image
         background_image_filename = assets_dir + '/ukonline_cert.jpg'
-        pdf_canvas.drawImage(
+        self.canvas.drawImage(
             background_image_filename,
             0, 0,                             # x,y, anchor bottom left
             height=a4_height, width=a4_width, # fill the page
         )
         
+
+    def render_student_name(self):
         # put on the candidate details
-        pdf_canvas.setFont( 'Courier-Bold', 40 )
-        pdf_canvas.drawCentredString(
+        self.canvas.setFont( 'Courier-Bold', 40 )
+        self.canvas.drawCentredString(
             a4_width/2, 600, self.certificate.student_name
         )
-        
-        pdf_canvas.setFont( 'Courier-Bold', 30 )
-        pdf_canvas.drawCentredString(
+
+
+    def render_course_details(self):
+        self.canvas.setFont( 'Courier-Bold', 30 )
+        self.canvas.drawCentredString(
             a4_width/2, 470, self.certificate.course_name
         )
         
-        pdf_canvas.setFont( 'Courier-Bold', 20 )
-        pdf_canvas.drawCentredString(
+        self.canvas.setFont( 'Courier-Bold', 20 )
+        self.canvas.drawCentredString(
             a4_width/2, 440, self.certificate.course_blurb
         )
         
-        pdf_canvas.setFont( 'Courier-Bold', 18 )
-        pdf_canvas.drawCentredString(
+
+    def render_tutor_details(self):
+        self.canvas.setFont( 'Courier-Bold', 18 )
+        self.canvas.drawCentredString(
             a4_width/2, 90, self.certificate.tutor_name + ' - ' + str(self.certificate.date_awarded)
         )
-        pdf_canvas.drawCentredString(
+        self.canvas.drawCentredString(
             a4_width/2, 70, self.certificate.centre.name
         )
         
+
+    def finish(self):
         # finish and cleanup
-        pdf_canvas.showPage()
-        pdf_canvas.save()
+        self.canvas.showPage()
+        self.canvas.save()
         
         # Get the value of the StringIO buffer and write it to the response.
-        pdf = pdf_buffer.getvalue()
-        pdf_buffer.close()
+        pdf = self.buffer.getvalue()
+        self.buffer.close()
         return pdf
+

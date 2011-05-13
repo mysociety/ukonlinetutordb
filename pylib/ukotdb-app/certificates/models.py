@@ -23,4 +23,5 @@ class Certificate(models.Model):
         """Render a PDF for this certificate and return it"""
 
         pdf = CertificatePDF( self )
+        pdf.render()
         return pdf.finish()
