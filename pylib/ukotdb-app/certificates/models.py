@@ -1,3 +1,5 @@
+from os import path
+
 from django.contrib.auth.models     import User
 from django.contrib.gis.db          import models
 
@@ -5,6 +7,13 @@ from cStringIO import StringIO
 from reportlab.pdfgen import canvas
 
 from tutordb.models import Centre
+
+# location of the certificate related assets - like backgrounds etc
+assets_dir = path.join(path.dirname(__file__), 'assets')
+
+# convenient variables
+a4_height = 842
+a4_width  = 595
 
 class Certificate(models.Model):
     tutor        = models.ForeignKey(User)
@@ -15,17 +24,26 @@ class Certificate(models.Model):
     course_name  = models.CharField(max_length=100)
     course_blurb = models.CharField(max_length=1000, default='')
     date_awarded = models.DateField()
+
     
     def __unicode__(self):
         return "%s - %s" % (self.student_name, self.course_name)
 
 
     def as_pdf(self):
-        """Render a PDF for this cortificate and renurn it"""
+        """Render a PDF for this certificate and return it"""
 
         # create the pdf canvas to work on
         pdf_buffer = StringIO()
-        pdf_canvas = canvas.Canvas(pdf_buffer)
+        pdf_canvas = canvas.Canvas( pdf_buffer, pagesize=(a4_width,a4_height) )
+        
+        # add the background image
+        background_image_filename = assets_dir + '/ukonline_cert.jpg'
+        pdf_canvas.drawImage(
+            background_image_filename,
+            0, 0,                             # x,y, anchor bottom left
+            height=a4_height, width=a4_width, # fill the page
+        )
         
         # put on the candidate details
         pdf_canvas.drawString(100, 800, str(self.student_name) )
