@@ -10,6 +10,17 @@ assets_dir = path.join(path.dirname(__file__), 'assets')
 a4_height = 842
 a4_width  = 595
 
+configs = {
+    'default': {
+        'background': {
+            'image': 'ukonline_cert.jpg',
+        },
+        # 'student_name': {
+        #     'font-family': 'Corier-Bold',
+        # },
+    },
+}
+
 class CertificatePDF:
     # TODO: format date nicely
     # TODO: wrap the course_blurb
@@ -22,7 +33,18 @@ class CertificatePDF:
         self.buffer = StringIO()
         self.canvas = canvas.Canvas( self.buffer, pagesize=(a4_width,a4_height) )
     
+        # choose the config
+        self.config = self.load_config( certificate.template )
 
+    
+    def load_config(self, name):
+        """Load the named config or raise exception if not found"""
+        config = configs.get(name)
+        if not config:
+            raise Exception("Can't find a config entry for '%s'" % name)
+        return config
+
+        
     def render(self):
         self.render_background()
         self.render_student_name()
@@ -32,7 +54,7 @@ class CertificatePDF:
 
     def render_background(self):
         # add the background image
-        background_image_filename = assets_dir + '/ukonline_cert.jpg'
+        background_image_filename = assets_dir + '/' + self.config['background']['image']
         self.canvas.drawImage(
             background_image_filename,
             0, 0,                             # x,y, anchor bottom left
