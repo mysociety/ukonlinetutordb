@@ -1,7 +1,9 @@
 from os import path
+import inspect
 
 from cStringIO import StringIO
 from reportlab.pdfgen import canvas
+from reportlab.lib.colors import Color
 
 # location of the certificate related assets - like backgrounds etc
 assets_dir = path.join(path.dirname(__file__), 'assets')
@@ -15,9 +17,17 @@ configs = {
         'background': {
             'image': 'ukonline_cert.jpg',
         },
-        # 'student_name': {
-        #     'font-family': 'Corier-Bold',
-        # },
+        'student_name': {
+
+            'method':      'centre_text',
+            'font-family': 'Courier-Bold',
+            'font-size':   40,
+            'x': 70,
+            'y': 580,
+            'h': 50,
+            'w': a4_width - 70 * 2,
+            'debug': True,
+        },
     },
 }
 
@@ -47,7 +57,8 @@ class CertificatePDF:
         
     def render(self):
         self.render_background()
-        self.render_student_name()
+        for detail in ['student_name']:
+            self.render_using_config( detail )
         self.render_course_details()
         self.render_tutor_details()
         
@@ -62,11 +73,57 @@ class CertificatePDF:
         )
         
 
-    def render_student_name(self):
-        # put on the candidate details
-        self.canvas.setFont( 'Courier-Bold', 40 )
+    def render_using_config(self, detail_name):
+
+        # setup method and arguments
+        config = self.config[detail_name]
+        method = getattr( self, config['method'] )
+        text   = getattr(self.certificate, detail_name)
+
+        # draw outline if in debug
+        if config.get('debug'):
+            self.draw_debug_outline( config, detail_name )
+
+        # render
+        method( text, config )
+    
+    
+    def draw_debug_outline(self, config, name):
+        """draw an outline around the box"""
+        canvas = self.canvas
+
+        # don't muck up the external state
+        canvas.saveState()
+
+        # discreet - but visible
+        canvas.setStrokeColorRGB( 0.9, 0.7, 0.7 )
+        canvas.setFillColorRGB(   0.6, 0.6, 0.6 )
+        canvas.setFont( 'Helvetica', 8 )
+
+        # draw a box to show the extent
+        canvas.rect(
+            config['x'], config['y'], config['w'], config['h'], 
+            stroke=1, fill=0,
+        )
+        
+        # put in some debug info
+        canvas.drawRightString(
+            config['x'] + config['w'],
+            config['y'] + 4,
+            name
+        )
+        
+        # restore state
+        canvas.restoreState()
+    
+    
+    def centre_text(self, text, config):
+        """docstring for centre_text"""
+        self.canvas.setFont( config['font-family'], config['font-size'] )
         self.canvas.drawCentredString(
-            a4_width/2, 600, self.certificate.student_name
+            config['x'] + config['w'] / 2,
+            config['y'] + config['h'] - config['font-size'],
+            text
         )
 
 
@@ -101,4 +158,5 @@ class CertificatePDF:
         pdf = self.buffer.getvalue()
         self.buffer.close()
         return pdf
+
 
