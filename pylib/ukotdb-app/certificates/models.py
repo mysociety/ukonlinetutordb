@@ -33,6 +33,10 @@ class Certificate(models.Model):
     def as_pdf(self):
         """Render a PDF for this certificate and return it"""
 
+        # TODO: format date nicely
+        # TODO: wrap the course_blurb
+        # TODO: detect overflow and cope using font scaling or wrapping
+
         # create the pdf canvas to work on
         pdf_buffer = StringIO()
         pdf_canvas = canvas.Canvas( pdf_buffer, pagesize=(a4_width,a4_height) )
@@ -46,12 +50,34 @@ class Certificate(models.Model):
         )
         
         # put on the candidate details
-        pdf_canvas.drawString(100, 800, str(self.student_name) )
-        pdf_canvas.drawString(100, 750, str(self.tutor_name)   )
-        pdf_canvas.drawString(100, 700, str(self.course_name)  )
-        pdf_canvas.drawString(100, 650, str(self.course_blurb) )
-        pdf_canvas.drawString(100, 600, str(self.date_awarded) )
-        pdf_canvas.drawString(100, 550, str(self.centre.name)  )
+        pdf_canvas.setFont( 'Courier-Bold', 40 )
+        pdf_canvas.drawCentredString(
+            a4_width/2, 600, self.student_name
+        )
+
+        # pdf_canvas.drawString(100, 650, str(self.course_blurb) )
+        pdf_canvas.setFont( 'Courier-Bold', 30 )
+        pdf_canvas.drawCentredString(
+            a4_width/2, 470, self.course_name
+        )
+
+        pdf_canvas.setFont( 'Courier-Bold', 20 )
+        pdf_canvas.drawCentredString(
+            a4_width/2, 440, self.course_blurb
+        )
+
+        pdf_canvas.setFont( 'Courier-Bold', 18 )
+        pdf_canvas.drawCentredString(
+            a4_width/2, 90, self.tutor_name + ' - ' + str(self.date_awarded)
+        )
+        # pdf_canvas.drawString(100, 600, str(self.date_awarded) )
+        pdf_canvas.drawCentredString(
+            a4_width/2, 70, self.centre.name
+        )
+        # pdf_canvas.drawString(100, 550, str(self.centre.name)  )
+        # pdf_canvas.drawCentredString(
+        #     a4_width/2, 470, self.course_name
+        # )
         
         # finish and cleanup
         pdf_canvas.showPage()
