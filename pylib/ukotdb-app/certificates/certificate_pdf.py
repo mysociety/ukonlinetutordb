@@ -49,6 +49,28 @@ configs = {
                 'h': 200,
                 'w': a4_width - 90 * 2, 
             },            
+            {
+                'content': ['tutor_name', 'date_awarded'],
+                'joiner': ' - ',
+                'method':'centre_text',
+                'font-family': 'Courier-Bold',
+                'font-size': 18,
+                'x': 90,
+                'y': 90,
+                'h': 20,
+                'w': a4_width - 90 * 2, 
+            },            
+            {
+                'content': ['centre_name'],
+                'joiner': ' - ',
+                'method':'centre_text',
+                'font-family': 'Courier-Bold',
+                'font-size': 18,
+                'x': 90,
+                'y': 70,
+                'h': 20,
+                'w': a4_width - 90 * 2, 
+            },            
         ]
         
     },
@@ -83,9 +105,6 @@ class CertificatePDF:
         self.render_background()
         for config in self.config['text_sections']:
             self.render_using_config( config )
-
-        # FIXME - convert these pronto!
-        self.render_tutor_details()
         
 
     def render_background(self):
@@ -115,8 +134,15 @@ class CertificatePDF:
     def extract_content(self, config):
         """extract text from certificate and return it"""
         joiner = config.get( 'joiner', ' ' )
-        text = joiner.join( [ getattr(self.certificate, k) for k in config['content'] ] )
-        return text
+        texts = []
+        
+        for k in config['content']:
+            attr = getattr( self.certificate, k )
+            if callable( attr ): attr = attr()
+            attr = str( attr )
+            texts.append( attr )
+
+        return joiner.join( texts )
     
     
     def draw_debug_outline(self, config ):
@@ -157,16 +183,6 @@ class CertificatePDF:
             text
         )
 
-
-    def render_tutor_details(self):
-        self.canvas.setFont( 'Courier-Bold', 18 )
-        self.canvas.drawCentredString(
-            a4_width/2, 90, self.certificate.tutor_name + ' - ' + str(self.certificate.date_awarded)
-        )
-        self.canvas.drawCentredString(
-            a4_width/2, 70, self.certificate.centre.name
-        )
-        
 
     def finish(self):
         # finish and cleanup

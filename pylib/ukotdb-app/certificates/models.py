@@ -19,9 +19,16 @@ class Certificate(models.Model):
         return "%s - %s" % (self.student_name, self.course_name)
 
 
+    def centre_name(self):
+        """Return the centre name"""
+        return self.centre.name
+
+
     def as_pdf(self):
         """Render a PDF for this certificate and return it"""
 
         pdf = CertificatePDF( self )
         pdf.render()
         return pdf.finish()
+
+
