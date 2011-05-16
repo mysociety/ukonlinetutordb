@@ -39,6 +39,16 @@ configs = {
                 'h': 40,
                 'w': a4_width - 80 * 2, 
             },
+            {
+                'content': ['course_blurb'],
+                'method':'centre_text',
+                'font-family': 'Courier-Bold',
+                'font-size': 20,
+                'x': 90,
+                'y': 250,
+                'h': 200,
+                'w': a4_width - 90 * 2, 
+            },            
         ]
         
     },
@@ -75,7 +85,6 @@ class CertificatePDF:
             self.render_using_config( config )
 
         # FIXME - convert these pronto!
-        # self.render_course_details()
         self.render_tutor_details()
         
 
@@ -148,13 +157,6 @@ class CertificatePDF:
             text
         )
 
-
-    def render_course_details(self):
-        self.canvas.setFont( 'Courier-Bold', 20 )
-        self.canvas.drawCentredString(
-            a4_width/2, 440, self.certificate.course_blurb
-        )
-        
 
     def render_tutor_details(self):
         self.canvas.setFont( 'Courier-Bold', 18 )
