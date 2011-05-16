@@ -18,24 +18,28 @@ configs = {
         'background': {
             'image': 'ukonline_cert.jpg',
         },
-        'student_name': {
-            'method':      'centre_text',
-            'font-family': 'Courier-Bold',
-            'font-size':   40,
-            'x': 70,
-            'y': 580,
-            'h': 50,
-            'w': a4_width - 70 * 2,
-        },
-        'course_name': {
-            'method':'centre_text',
-            'font-family': 'Courier-Bold',
-            'font-size': 30,
-            'x': 80,
-            'y': 460,
-            'h': 40,
-            'w': a4_width - 80 * 2, 
-        },
+        'text_sections': [
+            {
+                'content': ['student_name'],
+                'method':      'centre_text',
+                'font-family': 'Courier-Bold',
+                'font-size':   40,
+                'x': 70,
+                'y': 580,
+                'h': 50,
+                'w': a4_width - 70 * 2,
+            },
+            {
+                'content': ['course_name'],
+                'method':'centre_text',
+                'font-family': 'Courier-Bold',
+                'font-size': 30,
+                'x': 80,
+                'y': 460,
+                'h': 40,
+                'w': a4_width - 80 * 2, 
+            },
+        ]
         
     },
 }
@@ -67,8 +71,10 @@ class CertificatePDF:
         
     def render(self):
         self.render_background()
-        for detail in ['student_name', 'course_name']:
-            self.render_using_config( detail )
+        for config in self.config['text_sections']:
+            self.render_using_config( config )
+
+        # FIXME - convert these pronto!
         # self.render_course_details()
         self.render_tutor_details()
         
@@ -83,22 +89,28 @@ class CertificatePDF:
         )
         
 
-    def render_using_config(self, detail_name):
+    def render_using_config(self, config):
 
         # setup method and arguments
-        config = self.config[detail_name]
         method = getattr( self, config['method'] )
-        text   = getattr(self.certificate, detail_name)
+        text   = self.extract_content(config)
 
         # draw outline if in debug
         if self.debug or config.get('debug'):
-            self.draw_debug_outline( config, detail_name )
+            self.draw_debug_outline( config )
 
         # render
         method( text, config )
+
+
+    def extract_content(self, config):
+        """extract text from certificate and return it"""
+        joiner = config.get( 'joiner', ' ' )
+        text = joiner.join( [ getattr(self.certificate, k) for k in config['content'] ] )
+        return text
     
     
-    def draw_debug_outline(self, config, name):
+    def draw_debug_outline(self, config ):
         """draw an outline around the box"""
         canvas = self.canvas
 
@@ -120,7 +132,7 @@ class CertificatePDF:
         canvas.drawRightString(
             config['x'] + config['w'],
             config['y'] + 4,
-            name
+            ', '.join(config['content'])
         )
         
         # restore state
