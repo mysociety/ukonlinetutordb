@@ -27,6 +27,16 @@ configs = {
             'h': 50,
             'w': a4_width - 70 * 2,
         },
+        'course_name': {
+            'method':'centre_text',
+            'font-family': 'Courier-Bold',
+            'font-size': 30,
+            'x': 80,
+            'y': 460,
+            'h': 40,
+            'w': a4_width - 80 * 2, 
+        },
+        
     },
 }
 
@@ -57,9 +67,9 @@ class CertificatePDF:
         
     def render(self):
         self.render_background()
-        for detail in ['student_name']:
+        for detail in ['student_name', 'course_name']:
             self.render_using_config( detail )
-        self.render_course_details()
+        # self.render_course_details()
         self.render_tutor_details()
         
 
@@ -128,11 +138,6 @@ class CertificatePDF:
 
 
     def render_course_details(self):
-        self.canvas.setFont( 'Courier-Bold', 30 )
-        self.canvas.drawCentredString(
-            a4_width/2, 470, self.certificate.course_name
-        )
-        
         self.canvas.setFont( 'Courier-Bold', 20 )
         self.canvas.drawCentredString(
             a4_width/2, 440, self.certificate.course_blurb
