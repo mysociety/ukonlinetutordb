@@ -14,11 +14,11 @@ a4_width  = 595
 
 configs = {
     'default': {
+        'debug': True,
         'background': {
             'image': 'ukonline_cert.jpg',
         },
         'student_name': {
-
             'method':      'centre_text',
             'font-family': 'Courier-Bold',
             'font-size':   40,
@@ -26,7 +26,6 @@ configs = {
             'y': 580,
             'h': 50,
             'w': a4_width - 70 * 2,
-            'debug': True,
         },
     },
 }
@@ -45,6 +44,7 @@ class CertificatePDF:
     
         # choose the config
         self.config = self.load_config( certificate.template )
+        self.debug  = self.config.get('debug', False)
 
     
     def load_config(self, name):
@@ -81,7 +81,7 @@ class CertificatePDF:
         text   = getattr(self.certificate, detail_name)
 
         # draw outline if in debug
-        if config.get('debug'):
+        if self.debug or config.get('debug'):
             self.draw_debug_outline( config, detail_name )
 
         # render
@@ -158,5 +158,7 @@ class CertificatePDF:
         pdf = self.buffer.getvalue()
         self.buffer.close()
         return pdf
+
+
 
 
