@@ -21,7 +21,7 @@ a4_width  = 595
 
 configs = {
     'default': {
-        'debug': True,
+        # 'debug': True,
         'background': {
             'image': 'pcb_green.jpg',
         },
