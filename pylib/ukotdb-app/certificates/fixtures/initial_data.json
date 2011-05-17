@@ -1,0 +1,22 @@
+[
+    {
+        "pk": 1, 
+        "model": "certificates.certificatetemplate", 
+        "fields": {
+            "active": true, 
+            "name": "Green PCB", 
+            "filename": "pcb_green.jpg",
+            "slug": "pcb_green"
+        }
+    },
+    {
+        "pk": 2, 
+        "model": "certificates.certificatetemplate", 
+        "fields": {
+            "active": true, 
+            "name": "Red PCB", 
+            "filename": "pcb_red.jpg",
+            "slug": "pcb_red"
+        }
+    }
+]

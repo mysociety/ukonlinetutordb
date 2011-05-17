@@ -97,7 +97,7 @@ class CertificatePDF:
         self.canvas = canvas.Canvas( self.buffer, pagesize=(a4_width,a4_height) )
     
         # choose the config
-        self.config = self.load_config( certificate.template )
+        self.config = self.load_config( certificate.template.slug )
         self.debug  = self.config.get('debug', False)
         
         # extract the text section configs and apply defaults

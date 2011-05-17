@@ -27,6 +27,7 @@ class CertificateForm(forms.ModelForm):
     class Meta:
         model = Certificate
         fields = (
+            'template',
             'student_name',
             'date_awarded',
             'tutor_name',
