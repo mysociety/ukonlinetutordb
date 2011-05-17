@@ -12,6 +12,8 @@ assets_dir = path.join(path.dirname(__file__), 'assets')
 a4_height = 842
 a4_width  = 595
 
+# TODO - change the 'content' list to be a function?
+
 configs = {
     'default': {
         'debug': True,
@@ -21,7 +23,7 @@ configs = {
         'text_sections': [
             {
                 'content': ['student_name'],
-                'method':      'centre_text',
+                'text-align':      'centre',
                 'font-family': 'Courier-Bold',
                 'font-size':   40,
                 'x': 70,
@@ -31,7 +33,7 @@ configs = {
             },
             {
                 'content': ['course_name'],
-                'method':'centre_text',
+                'text-align':      'centre',
                 'font-family': 'Courier-Bold',
                 'font-size': 30,
                 'x': 80,
@@ -41,7 +43,7 @@ configs = {
             },
             {
                 'content': ['course_blurb'],
-                'method':'centre_text',
+                'text-align':      'centre',
                 'font-family': 'Courier-Bold',
                 'font-size': 20,
                 'x': 90,
@@ -52,7 +54,7 @@ configs = {
             {
                 'content': ['tutor_name', 'date_awarded'],
                 'joiner': ' - ',
-                'method':'centre_text',
+                'text-align':      'centre',
                 'font-family': 'Courier-Bold',
                 'font-size': 18,
                 'x': 90,
@@ -63,7 +65,7 @@ configs = {
             {
                 'content': ['centre_name'],
                 'joiner': ' - ',
-                'method':'centre_text',
+                'text-align':      'centre',
                 'font-family': 'Courier-Bold',
                 'font-size': 18,
                 'x': 90,
@@ -119,16 +121,24 @@ class CertificatePDF:
 
     def render_using_config(self, config):
 
-        # setup method and arguments
-        method = getattr( self, config['method'] )
-        text   = self.extract_content(config)
-
         # draw outline if in debug
         if self.debug or config.get('debug'):
             self.draw_debug_outline( config )
+            
+        # get the text to render
+        text   = self.extract_content(config)
 
-        # render
-        method( text, config )
+        # choose the method to draw the string
+        text_align = config['text-align']
+        if text_align == 'centre':
+            self.canvas.setFont( config['font-family'], config['font-size'] )
+            self.canvas.drawCentredString(
+                config['x'] + config['w'] / 2,
+                config['y'] + config['h'] - config['font-size'],
+                text
+            )
+        else:
+            raise Exception( "Unhandled value for 'text-align': '%s'" % text_align )
 
 
     def extract_content(self, config):
@@ -174,16 +184,6 @@ class CertificatePDF:
         canvas.restoreState()
     
     
-    def centre_text(self, text, config):
-        """docstring for centre_text"""
-        self.canvas.setFont( config['font-family'], config['font-size'] )
-        self.canvas.drawCentredString(
-            config['x'] + config['w'] / 2,
-            config['y'] + config['h'] - config['font-size'],
-            text
-        )
-
-
     def finish(self):
         # finish and cleanup
         self.canvas.showPage()
