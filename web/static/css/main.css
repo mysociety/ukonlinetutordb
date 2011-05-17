@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Droid Serif', arial, serif;
+  font-family: "Palatino", "Palatino Linotype", serif;
   background-color: #233e11; }
 
 #bg {
@@ -43,7 +43,7 @@ body {
     padding: 0;
     text-align: center;
     font-size: 75%;
-    font-family: "Droid Sans"; }
+    font-family: "Arial", sans-serif; }
     #dev-site-warning p a {
       color: inherit; }
 
@@ -63,7 +63,7 @@ body {
 
 #footer {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
-  font-family: "Droid Sans", arial, sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 80%;
   color: #444; }
   #footer ul {
@@ -84,14 +84,14 @@ body {
 
 /* form related */
 form.standard {
-  margin: 1em 0; }
+  margin: 1em 0;
+  font-family: "Arial", sans-serif label;
+    font-family-float: left;
+    font-family-min-width: 10em;
+    font-family-margin-right: 0.5em;
+    font-family-text-align: right; }
   form.standard p {
     margin: 0.5em 0; }
-  form.standard label {
-    float: left;
-    width: 5em;
-    margin-right: 0.5em;
-    text-align: right; }
 
 ul.plain li {
   list-style: none; }
@@ -177,7 +177,7 @@ div.sign-up-form {
       text-align: center;
       margin-bottom: 0.5em; }
     div.sign-up-form div.inner form {
-      font-family: "Droid Sans", arial, sans-serif; }
+      font-family: "Arial", sans-serif; }
       div.sign-up-form div.inner form p {
         margin: 0 0 0.5em 0;
         padding: 0; }
