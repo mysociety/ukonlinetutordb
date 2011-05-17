@@ -20,11 +20,13 @@ configs = {
         'background': {
             'image': 'ukonline_cert.jpg',
         },
+        'text_section_defaults': {
+            'text-align':  'centre',
+            'font-family': 'Courier-Bold',
+        },
         'text_sections': [
             {
                 'content': ['student_name'],
-                'text-align':      'centre',
-                'font-family': 'Courier-Bold',
                 'font-size':   40,
                 'x': 70,
                 'y': 580,
@@ -33,8 +35,6 @@ configs = {
             },
             {
                 'content': ['course_name'],
-                'text-align':      'centre',
-                'font-family': 'Courier-Bold',
                 'font-size': 30,
                 'x': 80,
                 'y': 460,
@@ -43,8 +43,6 @@ configs = {
             },
             {
                 'content': ['course_blurb'],
-                'text-align':      'centre',
-                'font-family': 'Courier-Bold',
                 'font-size': 20,
                 'x': 90,
                 'y': 250,
@@ -54,8 +52,6 @@ configs = {
             {
                 'content': ['tutor_name', 'date_awarded'],
                 'joiner': ' - ',
-                'text-align':      'centre',
-                'font-family': 'Courier-Bold',
                 'font-size': 18,
                 'x': 90,
                 'y': 90,
@@ -65,8 +61,6 @@ configs = {
             {
                 'content': ['centre_name'],
                 'joiner': ' - ',
-                'text-align':      'centre',
-                'font-family': 'Courier-Bold',
                 'font-size': 18,
                 'x': 90,
                 'y': 70,
@@ -93,7 +87,16 @@ class CertificatePDF:
         # choose the config
         self.config = self.load_config( certificate.template )
         self.debug  = self.config.get('debug', False)
-
+        
+        # extract the text section configs and apply defaults
+        self.text_section_configs = []
+        defaults = self.config['text_section_defaults']
+        
+        for c in self.config['text_sections']:
+            for k in defaults:
+                if k not in c:
+                    c[k] = defaults[k]
+            self.text_section_configs.append(c)
     
     def load_config(self, name):
         """Load the named config or raise exception if not found"""
@@ -105,7 +108,7 @@ class CertificatePDF:
         
     def render(self):
         self.render_background()
-        for config in self.config['text_sections']:
+        for config in self.text_section_configs:
             self.render_using_config( config )
         
 
