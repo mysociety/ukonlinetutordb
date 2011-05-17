@@ -1,7 +1,7 @@
 from django   import forms
 from datetime import datetime
 
-from certificates.models import Certificate
+from certificates.models import Certificate, CertificateTemplate
 from tutordb.models      import Centre
 
 class CertificateForm(forms.ModelForm):
@@ -21,8 +21,10 @@ class CertificateForm(forms.ModelForm):
         self.fields['centre'] = forms.ModelChoiceField(queryset=centre_qs, empty_label=None)
 
         # limit templates to those that are active
-        # TODO - code this
-        # self.fields['template'] = forms.ModelChoiceField(queryset=...., empty_label=None)
+        self.fields['template'] = forms.ModelChoiceField(
+            queryset=CertificateTemplate.objects.filter( active=True ),
+            empty_label=None
+        )
 
         # set some initial values
         self.fields['tutor_name'].initial   = user.get_full_name()
