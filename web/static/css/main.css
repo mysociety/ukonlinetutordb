@@ -98,6 +98,12 @@ ul.plain li {
   ul.plain li img {
     vertical-align: middle; }
 
+ul.certificate_previews {
+  float: right; }
+  ul.certificate_previews li {
+    margin: 2px;
+    list-style: none; }
+
 /* specific pages details */
 li.ukonline_centre {
   list-style: url("/static/group.png"); }
