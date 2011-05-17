@@ -1,9 +1,13 @@
 from os import path
 import inspect
 
-from cStringIO import StringIO
-from reportlab.pdfgen import canvas
+from cStringIO            import StringIO
+                          
+from reportlab.pdfgen     import canvas
 from reportlab.lib.colors import Color
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus   import Paragraph, Frame
+from reportlab.lib.enums  import TA_CENTER, TA_JUSTIFY
 
 # location of the certificate related assets - like backgrounds etc
 assets_dir = path.join(path.dirname(__file__), 'assets')
@@ -23,6 +27,7 @@ configs = {
         'text_section_defaults': {
             'text-align':  'centre',
             'font-family': 'Courier-Bold',
+            'overflow':    'none',
         },
         'text_sections': [
             {
@@ -44,6 +49,7 @@ configs = {
             {
                 'content':   ['course_blurb'],
                 'font-size': 20,
+                'overflow':  'wrap',
                 'x':         90,
                 'y':         250,
                 'h':         200,
@@ -133,12 +139,25 @@ class CertificatePDF:
         # choose the method to draw the string
         text_align = config['text-align']
         if text_align == 'centre':
-            self.canvas.setFont( config['font-family'], config['font-size'] )
-            self.canvas.drawCentredString(
-                config['x'] + config['w'] / 2,
-                config['y'] + config['h'] - config['font-size'],
-                text
-            )
+            if config['overflow'] == 'wrap':
+                frame = Frame( config['x'], config['y'], config['w'], config['h'], )
+
+                # create a paragraph style
+                style = ParagraphStyle( name='test' )
+                style.fontName  = config['font-family']
+                style.fontSize  = config['font-size']
+                style.leading   = int( config['font-size'] * 0.9 )
+                style.alignment = TA_CENTER
+
+                para = Paragraph( text, style )
+                frame.addFromList( [para], self.canvas )
+            else:
+                self.canvas.setFont( config['font-family'], config['font-size'] )
+                self.canvas.drawCentredString(
+                    config['x'] + config['w'] / 2,
+                    config['y'] + config['h'] - config['font-size'],
+                    text
+                )
         else:
             raise Exception( "Unhandled value for 'text-align': '%s'" % text_align )
 
