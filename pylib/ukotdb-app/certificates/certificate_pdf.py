@@ -16,6 +16,7 @@ assets_dir = path.join(path.dirname(__file__), 'assets')
 # convenient variables
 a4_height = 842
 a4_width  = 595
+minimum_font_size = 6
 
 # TODO - change the 'content' list to be a function?
 
@@ -28,7 +29,7 @@ configs = {
         'text_section_defaults': {
             'text-align':  'centre',
             'font-family': 'Courier-Bold',
-            'overflow':    'none',
+            'overflow':    'shrink',
         },
         'text_sections': [
             {
@@ -158,13 +159,22 @@ class CertificatePDF:
 
                 para = Paragraph( text, style )
                 frame.addFromList( [para], self.canvas )
-            else:
-                self.canvas.setFont( config['font-family'], config['font-size'] )
+            elif config['overflow'] == 'shrink':
+                
+                font_size = config['font-size']                
+                self.canvas.setFont( config['font-family'], font_size )
+
+                while font_size > minimum_font_size and self.canvas.stringWidth(text) > config['w']:
+                    font_size -= 1
+                    self.canvas.setFontSize( font_size )
+                    
                 self.canvas.drawCentredString(
                     config['x'] + config['w'] / 2,
                     config['y'] + config['h'] - config['font-size'],
                     text
                 )
+            else:
+                raise Exception( "Unhandled value of 'overflow': '%s'" % config['overflow'])
         else:
             raise Exception( "Unhandled value for 'text-align': '%s'" % text_align )
 
