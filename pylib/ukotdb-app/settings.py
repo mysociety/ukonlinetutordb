@@ -1,5 +1,11 @@
 # Django settings for ukonlinetutordb project.
 
+import logging
+logging.basicConfig(
+    level = logging.DEBUG,
+    format = '%(asctime)s %(levelname)s %(message)s',
+)
+
 # Some special mysociety preamble in order to get hold of our config
 # file conf/general
 import os
