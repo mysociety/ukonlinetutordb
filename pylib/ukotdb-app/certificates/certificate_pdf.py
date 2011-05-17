@@ -1,5 +1,6 @@
 from os import path
 import inspect
+import copy
 
 from cStringIO            import StringIO
                           
@@ -22,7 +23,7 @@ configs = {
     'default': {
         'debug': True,
         'background': {
-            'image': 'ukonline_cert.jpg',
+            'image': 'pcb_green.jpg',
         },
         'text_section_defaults': {
             'text-align':  'centre',
@@ -76,6 +77,12 @@ configs = {
         
     },
 }
+
+# alter the default design for the different backgrounds
+configs['pcb_green'] = copy.deepcopy( configs['default'] )
+configs['pcb_red']   = copy.deepcopy( configs['default'] )
+configs['pcb_red']['background']['image'] = 'pcb_red.jpg'
+
 
 class CertificatePDF:
     # TODO: format date nicely
