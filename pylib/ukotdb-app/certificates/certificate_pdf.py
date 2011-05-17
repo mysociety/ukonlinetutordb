@@ -1,6 +1,7 @@
 from os import path
 import inspect
 import copy
+import logging
 
 from cStringIO            import StringIO
                           
@@ -36,7 +37,7 @@ configs = {
                 'content':   ['student_name'],
                 'font-size': 40,
                 'x':         70,
-                'y':         580,
+                'y':         585,
                 'h':         50,
                 'w':         a4_width - 70 * 2,
             },
@@ -142,31 +143,45 @@ class CertificatePDF:
             self.draw_debug_outline( config )
             
         # get the text to render
-        text   = self.extract_content(config)
+        text = self.extract_content(config)
 
         # choose the method to draw the string
         text_align = config['text-align']
+
         if text_align == 'centre':
             if config['overflow'] == 'wrap':
                 frame = Frame( config['x'], config['y'], config['w'], config['h'], )
 
                 # create a paragraph style
+                font_size = config['font-size']                
                 style = ParagraphStyle( name='test' )
                 style.fontName  = config['font-family']
-                style.fontSize  = config['font-size']
-                style.leading   = int( config['font-size'] * 0.9 )
                 style.alignment = TA_CENTER
 
-                para = Paragraph( text, style )
-                frame.addFromList( [para], self.canvas )
+                logging.debug("font_size: %s" % font_size)
+
+                while font_size > minimum_font_size:
+                    style.fontSize = font_size
+                    style.leading  = font_size
+
+                    para =  Paragraph( text, style )
+
+                    if frame.add( para, self.canvas ):
+                        break
+
+                    # Paragraph was too big - shrink the font size
+                    font_size -= 1
+                    
+
             elif config['overflow'] == 'shrink':
                 
                 font_size = config['font-size']                
-                self.canvas.setFont( config['font-family'], font_size )
 
-                while font_size > minimum_font_size and self.canvas.stringWidth(text) > config['w']:
+                while font_size > minimum_font_size:
+                    self.canvas.setFont( config['font-family'], font_size )
+                    if self.canvas.stringWidth(text) <= config['w']:
+                        break
                     font_size -= 1
-                    self.canvas.setFontSize( font_size )
                     
                 self.canvas.drawCentredString(
                     config['x'] + config['w'] / 2,
