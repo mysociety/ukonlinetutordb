@@ -85,6 +85,13 @@ def my(request):
         },
         context_instance=RequestContext(request)
     )
+
+
+@login_required
+def edit_details(request):
+    """Allow user to edit their own details"""
+    pass
+
     
 @login_required
 def add_centre(request):

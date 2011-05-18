@@ -13,7 +13,6 @@
     <a href="{% url certificates.views.index %}">Certificates</a>
 </div>
 
-<h2>Your Details</h2>
 
 <ul class="plain">
     <li>
@@ -30,6 +29,13 @@
         <img src="/static/telephone.png" width="16" height="16" alt="Telephone">
         {{ user.get_profile.phone }}
     </li>
+
+    <li>
+        <a href="{% url tutordb.views.tutor.edit_details %}">
+            <img src="/static/pencil.png" width="16" height="16" alt="Edit">
+            Edit details
+        </a>
+    </li>
 </ul>
 
 <h2>Your Centres</h2>
@@ -42,7 +48,7 @@
     {% empty %}
         <li class="ukonline_centre">No centres added yet</li>
     {% endfor %}
-        <li class="ukonline_centre_add"><a href="/my/add_centre">Add a centre</a></li>
+        <li class="ukonline_centre_add"><a href="{% url tutordb.views.tutor.add_centre %}">Add a centre</a></li>
 </ul>
 
 <h2>Recent Certificates</h2>
