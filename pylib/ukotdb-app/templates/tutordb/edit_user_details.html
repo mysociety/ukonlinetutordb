@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block extra_head_tags %}
+{% endblock %}
+
+{% block title %}Edit your details{% endblock %}
+
+
+{% block content %}
+
+
+<h1>Edit your details</h1>
+
+<p>To change your <strong>email address</strong> please contact your centre
+manager who will change it through their admin interface.</p>
+
+<form action="{% url tutordb.views.tutor.edit_user_details %}" method="post">
+
+    {{ form.as_p }}
+
+    <label for="form_submit">&nbsp;</label>
+    <input type="submit" id="form_submit" value="Update details" />
+</form>
+
+
+{% endblock %}

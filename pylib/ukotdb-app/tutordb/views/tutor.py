@@ -1,6 +1,6 @@
 import re
 
-from tutordb.forms      import CreateTutorForm
+from tutordb.forms      import CreateTutorForm, EditUserForm
 from tutordb.models     import Centre, Tenure, UserProfile
 
 from django.contrib.auth                import authenticate, login
@@ -88,9 +88,41 @@ def my(request):
 
 
 @login_required
-def edit_details(request):
+def edit_user_details(request):
     """Allow user to edit their own details"""
-    pass
+
+    user = request.user
+    
+    # we can't (easily) do this with generics as some details are in the user
+    # objects, and some in the profile.
+
+    if request.method == 'POST':
+
+        form = EditUserForm(request.POST, user=user);
+        
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            profile = user.get_profile()
+
+            user.first_name = cleaned_data['name']
+            user.last_name  = ''
+            profile.phone   = cleaned_data['phone']
+
+            user.save()
+            profile.save()
+
+            return HttpResponseRedirect( reverse( my ) )
+
+    else:
+        form = EditUserForm(user=user)
+
+    return render_to_response(
+        'tutordb/edit_user_details.html',
+        {
+            'form': form,
+        },
+        context_instance=RequestContext(request)
+    )
 
     
 @login_required
