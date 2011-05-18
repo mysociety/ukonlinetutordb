@@ -1,3 +1,5 @@
+import logging
+
 from django   import forms
 from datetime import datetime
 
@@ -9,7 +11,8 @@ class CertificateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         """setup the tutor and the centre"""
 
-        user = kwargs.pop('user')
+        user             = kwargs.pop('user')
+        base_certificate = kwargs.pop('base_certificate')
 
         # create the form as normal
         super( CertificateForm, self ).__init__(*args, **kwargs)
@@ -27,8 +30,19 @@ class CertificateForm(forms.ModelForm):
         )
 
         # set some initial values
-        self.fields['tutor_name'].initial   = user.get_full_name()
-        self.fields['date_awarded'].initial = datetime.now
+        if base_certificate:
+            self.fields['template'].initial     = base_certificate.template.id
+            # student name deliberately left out
+            self.fields['date_awarded'].initial = base_certificate.date_awarded
+            self.fields['tutor_name'].initial   = base_certificate.tutor_name
+            self.fields['centre'].initial       = base_certificate.centre.id
+            self.fields['course_name'].initial  = base_certificate.course_name
+            self.fields['course_blurb'].initial = base_certificate.course_blurb
+        else:
+            self.fields['date_awarded'].initial = datetime.now
+            self.fields['tutor_name'].initial   = user.get_full_name()
+
+        
 
     class Meta:
         model = Certificate

@@ -75,18 +75,11 @@ def create(request):
     if request.GET.get('base_on'):
         # FIXME - add access controls
         base_certificate = get_object_or_404( Certificate, pk=request.GET.get('base_on') )
-        initial = {
-            'centre':       base_certificate.centre,
-            'tutor_name':   base_certificate.tutor_name,
-            'course_name':  base_certificate.course_name,
-            'course_blurb': base_certificate.course_blurb,
-            'date_awarded': base_certificate.date_awarded,
-        }
     else:
-        initial = {}
+        base_certificate=None
     
     if request.method == 'POST':
-        form = CertificateForm(request.POST, user=user, initial=initial );
+        form = CertificateForm(request.POST, user=user, base_certificate=base_certificate );
         
         if form.is_valid():
             certificate = form.save(commit=False)
@@ -100,7 +93,7 @@ def create(request):
             )            
 
     else:
-        form = CertificateForm(user=user, initial=initial, )
+        form = CertificateForm(user=user, base_certificate=base_certificate )
 
     return render_to_response(
         'certificates/edit_certificate.html',
