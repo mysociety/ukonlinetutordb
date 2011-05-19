@@ -101,6 +101,8 @@ body {
     float: right;
 }
 
+$label_width: 8em;
+
 /* form related */
 form.standard {
     margin: 1em 0;
@@ -108,13 +110,27 @@ form.standard {
         margin: 0.5em 0;
     }
     
-    font-family: $sans
+    font-family: $sans;
 
     label {
-        float: left;
-        min-width: 10em;
+        display: inline-block;
+        width: $label_width;
         margin-right: 0.5em;
         text-align: right;
+    }
+}
+
+ul.errorlist {
+    color: #f00;
+    margin: 0;
+    padding: 0;
+    padding-left: $label_width + 1em;
+
+    li {
+        list-style: none;
+        font-size: 90%;
+        position: relative;
+        top: 7px;   /* nasty hack to put the error closer to the related field */
     }
 }
 

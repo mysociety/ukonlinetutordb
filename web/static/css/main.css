@@ -85,13 +85,26 @@ body {
 /* form related */
 form.standard {
   margin: 1em 0;
-  font-family: "Arial", sans-serif label;
-    font-family-float: left;
-    font-family-min-width: 10em;
-    font-family-margin-right: 0.5em;
-    font-family-text-align: right; }
+  font-family: "Arial", sans-serif; }
   form.standard p {
     margin: 0.5em 0; }
+  form.standard label {
+    display: inline-block;
+    width: 8em;
+    margin-right: 0.5em;
+    text-align: right; }
+
+ul.errorlist {
+  color: #f00;
+  margin: 0;
+  padding: 0;
+  padding-left: 9em; }
+  ul.errorlist li {
+    list-style: none;
+    font-size: 90%;
+    position: relative;
+    top: 7px;
+    /* nasty hack to put the error closer to the related field */ }
 
 ul.plain li {
   list-style: none; }
