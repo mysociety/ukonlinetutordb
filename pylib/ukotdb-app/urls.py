@@ -15,6 +15,10 @@ urlpatterns = patterns('django.contrib.auth.views',
     ( r'^accounts/reset_done/$',     'password_reset_done'     ),
     ( r'^accounts/reset_confirm/(?P<uidb36>\d+)/(?P<token>[\d\w-]+)$','password_reset_confirm'  ),
     ( r'^accounts/reset_complete/$', 'password_reset_complete' ),
+
+    ( r'^accounts/password_change/$',      'password_change'      ),
+    ( r'^accounts/password_change_done/$', 'password_change_done' ),
+
 )
 
 urlpatterns += patterns('tutordb.views.tutor',
