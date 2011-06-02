@@ -51,6 +51,9 @@ DATABASE_PASSWORD = config.get('UKONLINETUTORDB_DB_PASS')
 DATABASE_HOST     = config.get('UKONLINETUTORDB_DB_HOST')
 DATABASE_PORT     = config.get('UKONLINETUTORDB_DB_PORT')
 
+# use this so that the test database is gis enabled
+TEST_RUNNER='django.contrib.gis.tests.run_tests'
+
 MAPIT_URL = config.get('MAPIT_URL')
 
 # a postGIS template, e.g.: http://docs.djangoproject.com/en/dev/ref/contrib/gis/install/#creating-a-spatial-database-template-for-postgis
