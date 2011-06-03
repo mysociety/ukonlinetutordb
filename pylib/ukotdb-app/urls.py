@@ -26,7 +26,8 @@ urlpatterns += patterns('tutordb.views.tutor',
     ( r'^my/$',             'my'           ),
     ( r'^my/add_centre$',   'add_centre'   ),    
     ( r'^my/edit_user_details$', 'edit_user_details' ),    
-    ( r'^tutors/',          'tutor_list'   ),
+    ( r'^tutors/$',                   'tutor_list' ),
+    ( r'^tutors/(?P<centre_id>\d+)$', 'tutor_list' ),
 )
 
 # centres
