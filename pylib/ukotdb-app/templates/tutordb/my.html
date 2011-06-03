@@ -31,7 +31,7 @@
     </li>
 
     <li>
-        <a href="{% url tutordb.views.tutor.edit_user_details %}">
+        <a href="{% url tutordb.views.my.edit_user_details %}">
             <img src="/static/pencil.png" width="16" height="16" alt="Edit">
             Edit details
         </a>
@@ -48,7 +48,7 @@
     {% empty %}
         <li class="ukonline_centre">No centres added yet</li>
     {% endfor %}
-        <li class="ukonline_centre_add"><a href="{% url tutordb.views.tutor.add_centre %}">Add a centre</a></li>
+        <li class="ukonline_centre_add"><a href="{% url tutordb.views.my.add_centre %}">Add a centre</a></li>
 </ul>
 
 <h2>Recent Certificates</h2>

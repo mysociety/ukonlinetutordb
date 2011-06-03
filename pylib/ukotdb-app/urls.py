@@ -21,16 +21,21 @@ urlpatterns = patterns('django.contrib.auth.views',
 
 )
 
-urlpatterns += patterns('tutordb.views.tutor',
+urlpatterns += patterns('tutordb.views.index',
     ( r'^$',                'index'        ),
-    ( r'^my/$',             'my'           ),
-    ( r'^my/add_centre$',   'add_centre'   ),    
-    ( r'^my/edit_user_details$', 'edit_user_details' ),    
+)
+
+urlpatterns += patterns('tutordb.views.my',
+    ( r'^my/$',                  'my'                ),
+    ( r'^my/add_centre$',        'add_centre'        ),
+    ( r'^my/edit_user_details$', 'edit_user_details' ),
+)
+
+urlpatterns += patterns('tutordb.views.tutor',
     ( r'^tutors/$',                   'tutor_list' ),
     ( r'^tutors/(?P<centre_id>\d+)$', 'tutor_list' ),
 )
 
-# centres
 urlpatterns += patterns('tutordb.views.centre',
     ( r'^centres/$',                    'centre_list'   ),
     ( r'^centres/(?P<centre_id>\d+)/$', 'centre_detail' ),

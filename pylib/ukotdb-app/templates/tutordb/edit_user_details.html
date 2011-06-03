@@ -20,7 +20,7 @@ manager who will change it through their admin interface.</p>
     <a href="{% url django.contrib.auth.views.password_change %}">change your password</a>
 </p>
 
-<form class="standard" action="{% url tutordb.views.tutor.edit_user_details %}" method="post">
+<form class="standard" action="{% url tutordb.views.my.edit_user_details %}" method="post">
 
     {{ form.as_p }}
 
