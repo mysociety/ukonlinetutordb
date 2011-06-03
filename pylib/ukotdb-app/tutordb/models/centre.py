@@ -38,6 +38,19 @@ class Centre(models.Model):
 
     def longitude(self):
         return self.location.x
+    
+    def is_user_admin(self, user):
+        """
+        Return true if the user is an admin for this centre
+        """
+        
+        if self.tenure_set.filter( user=user, role='admin' ).count():
+            return True
+        else:
+            return False
+
+
+
         
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.postcode)

@@ -60,12 +60,10 @@
                     </a>
 
                     <ul>
-                        {% if user.is_staff %}
                         <li>
                             <a href="{% url tutordb.views.tutor.tutor_list %}">Tutors</a>
                         </li>
-                        {% endif %}
-                        {% if user.is_superuser %}
+                        {% if user.is_superuser %} <!-- FIXME - should check to see if in HO group -->
                         <li>
                             <a href="{% url admin:index %}">Full Admin</a>
                         </li>

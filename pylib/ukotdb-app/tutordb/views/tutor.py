@@ -178,11 +178,13 @@ def tutor_list(request, centre_id=None ):
         centre = get_object_or_404( Centre, pk=centre_id )
 
         # check that we are either in the HO group or that we are an admin for the centre
-        if ho_group in user.groups.all() or user.is_admin_for( centre ):
+        if ho_group in user.groups.all() or centre.is_user_admin( user ):
             centre_tutor_ids = [ i.user.id for i in centre.tenure_set.all() ]
             queryset = User.objects.filter( id__in=centre_tutor_ids )
         else:
             queryset = User.objects.none()
+            
+        queryset = queryset.order_by('first_name')
         
         return object_list(
             request,
@@ -196,10 +198,11 @@ def tutor_list(request, centre_id=None ):
         if ho_group in user.groups.all():
             queryset = Centre.objects.all()
         else:
-            user_admin_centres = user.tenure_set.filter( role='admin' )
-            admin_ids = [ i.id for i in user_admin_centres ]
+            user_admin_centres = user.tenure_set.filter( role='admin' ).all()
+            admin_ids = [ i.centre.id for i in user_admin_centres ]
             queryset = Centre.objects.filter( id__in=admin_ids )
         
+        queryset = queryset.order_by('name')
         
         return object_list(
             request,
