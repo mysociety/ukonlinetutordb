@@ -83,22 +83,18 @@ class AccessControls(TestCase):
         """
         Check that tutor can only see their own details
         """
-        
-        # test that no centres shown to view tutors for
-        # test that no tutors shown when going to centre direct
+        c = Client()
+        tutor = self.tutor
 
+        # login to the site
+        self.assertTrue( c.login( username=tutor.email, password='secret' ) )
 
-# test that the various access controls are correctly set
+        # check that they only see one centre listed for tutors
+        res = c.get('/tutors/')
+        self.assertEqual( res.status_code, 200 )
+        self.assertEqual( len(res.context['object_list']), 0 )
 
-# head office (group):
-# see all tutors and their certificates
-# they can edit things through the admin interface (not tested here)
-
-
-# centre managers (state in tenure):
-#   can see all tutors in their centres
-#   certificates
-#   cannot edit
-
-
-# tutors:
+        # check that they see the tutors for their centre
+        res = c.get('/tutors/' + str(self.victoria_library.id) )
+        self.assertEqual( res.status_code, 200 )
+        self.assertEqual( len(res.context['object_list']), 0 )
