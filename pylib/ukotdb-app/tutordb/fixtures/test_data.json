@@ -1,0 +1,124 @@
+[
+    {
+        "pk": 2, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "headoffice", 
+            "first_name": "Head Office", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": true, 
+            "last_login": "2011-06-03 09:52:53", 
+            "groups": [
+                1
+            ], 
+            "user_permissions": [], 
+            "password": "sha1$afd09$c16d79dde6a4266143bfc9e6107e1aff8ca01e14", 
+            "email": "head.office@example.com", 
+            "date_joined": "2011-06-03 09:52:53"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "centremanager", 
+            "first_name": "Centre Manager", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2011-06-03 09:53:45", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$dd746$26d0a8f570f0fa49814a8f0222464d2b0a67b7f9", 
+            "email": "centre.manager@example.com", 
+            "date_joined": "2011-06-03 09:53:45"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "tutor", 
+            "first_name": "Normal Tutor", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2011-06-03 09:54:25", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$b422a$edc4f7472663ca29a298bb7c3262ac04c404aaf9", 
+            "email": "tutor@example.com", 
+            "date_joined": "2011-06-03 09:54:25"
+        }
+    },
+    {
+        "pk": 2291, 
+        "model": "tutordb.centre", 
+        "fields": {
+            "name": "Victoria Library", 
+            "url": "http://www.westminster.gov.uk/services/libraries/findalibrary/victoria/", 
+            "telephone": "0207 641 1300", 
+            "postcode": "SW1W 9UD", 
+            "address": "160 Buckingham Palace Road, , WESTMINSTER, ", 
+            "email": "victorialibrary@westminster.gov.uk", 
+            "location": "POINT (-0.1462630000000000 51.4924000000000035)"
+        }
+    }, 
+    {
+        "pk": 1986, 
+        "model": "tutordb.centre", 
+        "fields": {
+            "name": "Mayfair Library", 
+            "url": "", 
+            "telephone": "0207 641 1300", 
+            "postcode": "W1K 2PB", 
+            "address": "25 South Audley Street, , LONDON, London", 
+            "email": "", 
+            "location": "POINT (-0.1495440000000000 51.5088999999999970)"
+        }
+    }, 
+    {
+        "pk": 3450664, 
+        "model": "tutordb.centre", 
+        "fields": {
+            "name": "The Spring Centre", 
+            "url": "http://", 
+            "telephone": "02077 356685", 
+            "postcode": "SE11 5JP", 
+            "address": "20 Newburn Street, Vauxhall, London, London", 
+            "email": "thespringcentre@gmail.com", 
+            "location": "POINT (-0.1193660000000000 51.4902999999999977)"
+        }
+    },
+    {
+        "pk": 2, 
+        "model": "tutordb.tenure", 
+        "fields": {
+            "role": "admin", 
+            "user": 3, 
+            "centre": 2291
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "tutordb.tenure", 
+        "fields": {
+            "role": "tutor", 
+            "user": 4, 
+            "centre": 2291
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "tutordb.tenure", 
+        "fields": {
+            "role": "tutor", 
+            "user": 4, 
+            "centre": 1986
+        }
+    }
+]
