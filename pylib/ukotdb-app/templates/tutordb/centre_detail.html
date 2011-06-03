@@ -10,5 +10,5 @@
 
 <h1>{{ centre.name }}</h1>
 
-
+<a href="{% url tutordb.views.centre.centre_tutors centre_id=centre.id %}">View tutors</a>
 {% endblock %}

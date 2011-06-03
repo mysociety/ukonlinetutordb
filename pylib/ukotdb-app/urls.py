@@ -32,13 +32,14 @@ urlpatterns += patterns('tutordb.views.my',
 )
 
 urlpatterns += patterns('tutordb.views.tutor',
-    ( r'^tutors/$',                   'tutor_list' ),
-    ( r'^tutors/(?P<centre_id>\d+)$', 'tutor_list' ),
+    # ( r'^tutors/$',                   'tutor_list' ),
+    # ( r'^tutors/(?P<centre_id>\d+)$', 'tutor_list' ),
 )
 
 urlpatterns += patterns('tutordb.views.centre',
-    ( r'^centres/$',                    'centre_list'   ),
-    ( r'^centres/(?P<centre_id>\d+)/$', 'centre_detail' ),
+    ( r'^centres/$',                          'centre_list'   ),
+    ( r'^centres/(?P<centre_id>\d+)/$',       'centre_detail' ),
+    ( r'^centres/(?P<centre_id>\d+)/tutors$', 'centre_tutors' ),
 )
 
 

@@ -2,12 +2,14 @@
 
 {% load ukonline_extras %}
 
-{% block title %}Tutor List{% endblock %}
+{% block title %}{{ centre.name }} Tutors{% endblock %}
 
 
 {% block content %}
 
-<h1>UK Online Tutors</h1>
+<h1>{{ centre.name }} Tutors</h1>
+
+<a href="{% url tutordb.views.centre.centre_detail centre_id=centre.id %}">Back to centre overview</a>
 
 <ul class="ukonline_tutors">
 {% for tutor in object_list %}

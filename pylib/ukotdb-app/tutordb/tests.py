@@ -33,21 +33,18 @@ class AccessControls(TestCase):
         # login to the site
         self.assertTrue( c.login( username=ho.email, password='secret' ) )
 
-        # check that HO user can see all the centres
-        res = c.get('/tutors/')
-        self.assertEqual( res.status_code, 200 )
-        self.assertEqual( len(res.context['object_list']), 3 )
+        # # check that HO user can see all the centres
+        # res = c.get('/tutors/')
+        # self.assertEqual( res.status_code, 200 )
+        # self.assertEqual( len(res.context['object_list']), 3 )
         
         # check that can see details for a centre
-        res = c.get('/tutors/' + str(self.victoria_library.id) )
+        res = c.get('/centres/' + str(self.victoria_library.id) + '/tutors')
         self.assertEqual( res.status_code, 200 )
         self.assertEqual( len(res.context['object_list']), 2 )
         self.assertEqual( res.context['object_list'][0].first_name, 'Centre Manager' )
         
         # not tested here - that HO user can view/edit details in the admin
-        # we do check that they can access it though
-        res = c.get('/admin/')
-        self.assertEqual( res.status_code, 200 )
 
 
     def test_centre_manager(self):
@@ -61,20 +58,20 @@ class AccessControls(TestCase):
         # login to the site
         self.assertTrue( c.login( username=cm.email, password='secret' ) )
 
-        # check that they only see one centre listed for tutors
-        res = c.get('/tutors/')
-        self.assertEqual( res.status_code, 200 )
-        self.assertEqual( len(res.context['object_list']), 1 )
-        self.assertEqual( res.context['object_list'][0].name, 'Victoria Library' )
+        # # check that they only see one centre listed for tutors
+        # res = c.get('/tutors/')
+        # self.assertEqual( res.status_code, 200 )
+        # self.assertEqual( len(res.context['object_list']), 1 )
+        # self.assertEqual( res.context['object_list'][0].name, 'Victoria Library' )
 
         # check that they see the tutors for their centre
-        res = c.get('/tutors/' + str(self.victoria_library.id) )
+        res = c.get('/centres/' + str(self.victoria_library.id) + '/tutors' )
         self.assertEqual( res.status_code, 200 )
         self.assertEqual( len(res.context['object_list']), 2 )
         self.assertEqual( res.context['object_list'][0].first_name, 'Centre Manager' )
         
         # check that the can't see users for other centres
-        res = c.get('/tutors/' + str(self.mayfair_library.id) )
+        res = c.get('/centres/' + str(self.mayfair_library.id) + '/tutors' )
         self.assertEqual( res.status_code, 200 )
         self.assertEqual( len(res.context['object_list']), 0 )
 
@@ -89,12 +86,12 @@ class AccessControls(TestCase):
         # login to the site
         self.assertTrue( c.login( username=tutor.email, password='secret' ) )
 
-        # check that they only see one centre listed for tutors
-        res = c.get('/tutors/')
-        self.assertEqual( res.status_code, 200 )
-        self.assertEqual( len(res.context['object_list']), 0 )
+        # # check that they only see one centre listed for tutors
+        # res = c.get('/tutors/')
+        # self.assertEqual( res.status_code, 200 )
+        # self.assertEqual( len(res.context['object_list']), 0 )
 
         # check that they see the tutors for their centre
-        res = c.get('/tutors/' + str(self.victoria_library.id) )
+        res = c.get('/centres/' + str(self.victoria_library.id) + '/tutors')
         self.assertEqual( res.status_code, 200 )
         self.assertEqual( len(res.context['object_list']), 0 )
