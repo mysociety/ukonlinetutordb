@@ -1,27 +1,27 @@
 [
     {
         "pk": 2, 
-        "model": "tutordb.tutor", 
+        "model": "auth.user", 
         "fields": {
             "username": "headoffice", 
             "first_name": "Head Office", 
             "last_name": "", 
             "is_active": true, 
             "is_superuser": false, 
-            "is_staff": true, 
-            "last_login": "2011-06-03 09:52:53", 
+            "is_staff": false, 
+            "last_login": "2011-06-06 14:04:38", 
             "groups": [
                 1
             ], 
             "user_permissions": [], 
             "password": "sha1$afd09$c16d79dde6a4266143bfc9e6107e1aff8ca01e14", 
             "email": "head.office@example.com", 
-            "date_joined": "2011-06-03 09:52:53"
+            "date_joined": "2011-06-06 14:04:38"
         }
     }, 
     {
         "pk": 3, 
-        "model": "tutordb.tutor", 
+        "model": "auth.user", 
         "fields": {
             "username": "centremanager", 
             "first_name": "Centre Manager", 
@@ -29,17 +29,17 @@
             "is_active": true, 
             "is_superuser": false, 
             "is_staff": false, 
-            "last_login": "2011-06-03 09:53:45", 
+            "last_login": "2011-06-06 14:08:03", 
             "groups": [], 
             "user_permissions": [], 
-            "password": "sha1$dd746$26d0a8f570f0fa49814a8f0222464d2b0a67b7f9", 
+            "password": "sha1$afd09$c16d79dde6a4266143bfc9e6107e1aff8ca01e14", 
             "email": "centre.manager@example.com", 
-            "date_joined": "2011-06-03 09:53:45"
+            "date_joined": "2011-06-06 14:08:03"
         }
     }, 
     {
         "pk": 4, 
-        "model": "tutordb.tutor", 
+        "model": "auth.user", 
         "fields": {
             "username": "tutor", 
             "first_name": "Normal Tutor", 
@@ -47,12 +47,41 @@
             "is_active": true, 
             "is_superuser": false, 
             "is_staff": false, 
-            "last_login": "2011-06-03 09:54:25", 
+            "last_login": "2011-06-06 14:08:40", 
             "groups": [], 
             "user_permissions": [], 
-            "password": "sha1$b422a$edc4f7472663ca29a298bb7c3262ac04c404aaf9", 
+            "password": "sha1$afd09$c16d79dde6a4266143bfc9e6107e1aff8ca01e14", 
             "email": "tutor@example.com", 
-            "date_joined": "2011-06-03 09:54:25"
+            "date_joined": "2011-06-06 14:08:40"
+        }
+    },
+    {
+        "pk": 2, 
+        "model": "tutordb.tutor", 
+        "fields": {
+            "user_permissions": [], 
+            "phone": "07123 456 789", 
+            "groups": [
+                1
+            ]
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "tutordb.tutor", 
+        "fields": {
+            "user_permissions": [], 
+            "phone": "07123 456 789", 
+            "groups": []
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "tutordb.tutor", 
+        "fields": {
+            "user_permissions": [], 
+            "phone": "07123 456 789", 
+            "groups": []
         }
     },
     {
