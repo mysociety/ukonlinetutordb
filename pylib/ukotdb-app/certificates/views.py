@@ -1,7 +1,6 @@
 # import re
 # 
 # from tutordb.forms      import CreateTutorForm
-# from tutordb.models     import Centre, Tenure, UserProfile
 # 
 # from django.contrib.auth                import authenticate, login
 from django.contrib.auth.decorators     import login_required

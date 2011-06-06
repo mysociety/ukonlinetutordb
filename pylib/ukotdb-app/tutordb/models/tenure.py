@@ -1,14 +1,13 @@
-from django.contrib.auth.models     import User
 from django.contrib.gis.db          import models
 
-from tutordb.models import Centre
+from tutordb.models import Centre, Tutor
 
 import settings
 
 # possibly bad name but seems appropriate
 class Tenure(models.Model):
     centre = models.ForeignKey(Centre)
-    user   = models.ForeignKey(User)
+    tutor  = models.ForeignKey(Tutor)
     
     ROLE_CHOICES = (
         ('centre_pending', 'Pending Centre Confirmation'),
@@ -22,5 +21,5 @@ class Tenure(models.Model):
         return "%s - %s" % (self.user.email, self.centre.name)
 
     class Meta:
-        unique_together = ( "centre", "user" )
+        unique_together = ( "centre", "tutor" )
         app_label = 'tutordb'

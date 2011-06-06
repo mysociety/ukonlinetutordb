@@ -31,10 +31,10 @@ urlpatterns += patterns('tutordb.views.my',
     ( r'^my/edit_user_details$', 'edit_user_details' ),
 )
 
-urlpatterns += patterns('tutordb.views.tutor',
-    # ( r'^tutors/$',                   'tutor_list' ),
-    # ( r'^tutors/(?P<centre_id>\d+)$', 'tutor_list' ),
-)
+# urlpatterns += patterns('tutordb.views.tutor',
+#     # ( r'^tutors/$',                   'tutor_list' ),
+#     # ( r'^tutors/(?P<centre_id>\d+)$', 'tutor_list' ),
+# )
 
 urlpatterns += patterns('tutordb.views.centre',
     ( r'^centres/$',                          'centre_list'   ),

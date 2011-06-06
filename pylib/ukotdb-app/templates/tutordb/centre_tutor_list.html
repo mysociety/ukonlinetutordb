@@ -18,7 +18,7 @@
         <ul>
             <li class="tutor">{{ tutor.get_full_name }}</li>
             <li class="email"><a href="mailto:{{ tutor.email }}">{{ tutor.email }}</a></li>
-            <li class="telephone">{% firstof tutor.get_profile.phone '-' %}</li>
+            <li class="telephone">{% firstof tutor.phone '-' %}</li>
             
             {% for tenure in tutor.tenure_set.all %}
                 <li class="ukonline_centre"><small>{{ tenure.centre.name }}</small></li>

@@ -1,7 +1,6 @@
-from django.contrib.auth.models     import User
 from django.contrib.gis.db          import models
 
-from tutordb.models import Centre
+from tutordb.models import Centre, Tutor
 from certificates.certificate_pdf import CertificatePDF
 
 class CertificateTemplate( models.Model):
@@ -15,7 +14,7 @@ class CertificateTemplate( models.Model):
 
 
 class Certificate(models.Model):
-    tutor        = models.ForeignKey(User)
+    tutor        = models.ForeignKey(Tutor)
     tutor_name   = models.CharField(max_length=200)
     centre       = models.ForeignKey(Centre)
     template     = models.ForeignKey(CertificateTemplate, default='1')

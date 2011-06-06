@@ -1,4 +1,12 @@
+Installing:
 
+    cd pylib/ukotdb-app
+    createdb -T template_postgis ukonlinetutordb
+    ./manage.py syncdb      # and create admin user
+    ./manage.py migrate
+    psql -c "insert into tutordb_tutor (user_ptr_id, phone) values (1,'');" ukonlinetutordb
+
+The last command links the user to the tutors table so that they can log in
 
 
 Note: when developing and sending emails the code will try to connect to localhost port 25. If this is not an SMTP server for you use the provided script to run a fake SMTP server that outputs to the console:

@@ -144,10 +144,11 @@ AUTHENTICATION_BACKENDS = (
     # 'django.contrib.auth.backends.ModelBackend',    # login using username (default)
 )
 
-AUTH_PROFILE_MODULE = 'tutordb.UserProfile'
-
 # registration relateh settings
 LOGIN_REDIRECT_URL = '/my'
+
+# the custom user class to use
+CUSTOM_USER_MODEL = 'tutordb.Tutor'
 
 
 

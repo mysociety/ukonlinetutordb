@@ -1,8 +1,7 @@
 import re
 from django import forms
 
-from django.contrib.auth.models import User
-from tutordb.models import UserProfile
+from tutordb.models import Tutor
 
 
 class CreateTutorForm(forms.Form):
@@ -20,7 +19,7 @@ class CreateTutorForm(forms.Form):
         # lowercase the email
         email = email.lower()
     
-        if User.objects.all().filter(email=email).count():
+        if Tutor.objects.all().filter(email=email).count():
             raise forms.ValidationError("Email address already has an account - perhaps you should log in?")
     
         return email
@@ -37,7 +36,7 @@ class CreateTutorForm(forms.Form):
             # Always return the full collection of cleaned data.
             return cleaned_data
 
-class EditUserForm(forms.Form):
+class EditTutorForm(forms.Form):
     name      = forms.CharField( required=True )
     phone     = forms.CharField( required=True )
 
@@ -47,17 +46,9 @@ class EditUserForm(forms.Form):
         user = kwargs.pop('user')
 
         # create the form as normal
-        super( EditUserForm, self ).__init__(*args, **kwargs)
-
-        # get (or create) the user profile
-        try:
-            profile = user.get_profile()
-        except:
-            # user profile does not exist - ignore error
-            profile = UserProfile(user=user)
-            profile.save()
+        super( EditTutorForm, self ).__init__(*args, **kwargs)
 
         # set initial values
-        self.fields['name'].initial  = user.get_full_name
-        self.fields['phone'].initial = profile.phone
+        self.fields['name'].initial  = user.get_full_name()
+        self.fields['phone'].initial = user.phone
 

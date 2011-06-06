@@ -1,7 +1,7 @@
 from django.test                import TestCase
 from django.test.client         import Client
-from django.contrib.auth.models import User, Group
-from tutordb.models             import Centre
+from django.contrib.auth.models import Group
+from tutordb.models             import Centre, Tutor
 
 class AccessControls(TestCase):
 
@@ -14,9 +14,9 @@ class AccessControls(TestCase):
         self.head_office_group = Group.objects.get(name='Head Office')
 
         # check that the test users are loaded
-        self.tutor          = User.objects.get(username='tutor')
-        self.head_office    = User.objects.get(username='headoffice')
-        self.centre_manager = User.objects.get(username='centremanager')
+        self.tutor          = Tutor.objects.get(username='tutor')
+        self.head_office    = Tutor.objects.get(username='headoffice')
+        self.centre_manager = Tutor.objects.get(username='centremanager')
         
         # get the centres
         self.mayfair_library  = Centre.objects.get(name='Mayfair Library')

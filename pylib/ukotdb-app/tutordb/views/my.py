@@ -1,7 +1,7 @@
 import re
 
-from tutordb.forms      import CreateTutorForm, EditUserForm
-from tutordb.models     import Centre, Tenure, UserProfile
+from tutordb.forms      import CreateTutorForm, EditTutorForm
+from tutordb.models     import Centre, Tenure
 
 from django.contrib.auth                import authenticate, login
 from django.contrib.auth.decorators     import login_required
@@ -43,28 +43,25 @@ def edit_user_details(request):
 
     user = request.user
     
-    # we can't (easily) do this with generics as some details are in the user
-    # objects, and some in the profile.
+    # FIXME - change to using generics now as the Tutor inherits from the user
 
     if request.method == 'POST':
 
-        form = EditUserForm(request.POST, user=user);
+        form = EditTutorForm(request.POST, user=user);
         
         if form.is_valid():
             cleaned_data = form.cleaned_data
-            profile = user.get_profile()
 
             user.first_name = cleaned_data['name']
             user.last_name  = ''
-            profile.phone   = cleaned_data['phone']
+            user.phone      = cleaned_data['phone']
 
             user.save()
-            profile.save()
 
             return HttpResponseRedirect( reverse( my ) )
 
     else:
-        form = EditUserForm(user=user)
+        form = EditTutorForm(user=user)
 
     return render_to_response(
         'tutordb/edit_user_details.html',

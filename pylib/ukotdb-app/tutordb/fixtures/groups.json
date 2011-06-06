@@ -76,19 +76,19 @@
                     "tenure"
                 ], 
                 [
-                    "add_userprofile", 
+                    "add_tutor", 
                     "tutordb", 
-                    "userprofile"
+                    "tutor"
                 ], 
                 [
-                    "change_userprofile", 
+                    "change_tutor", 
                     "tutordb", 
-                    "userprofile"
+                    "tutor"
                 ], 
                 [
-                    "delete_userprofile", 
+                    "delete_tutor", 
                     "tutordb", 
-                    "userprofile"
+                    "tutor"
                 ]
             ]
         }
