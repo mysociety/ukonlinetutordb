@@ -1,4 +1,4 @@
-Installing:
+### Installing:
 
     cd pylib/ukotdb-app
     createdb -T template_postgis ukonlinetutordb
@@ -8,6 +8,23 @@ Installing:
 
 The last command links the user to the tutors table so that they can log in
 
+
+### Required admin actions:
+
+The following need to be done using the admin system to set up the site
+correctly:
+
+    * create the 'Head Office' group and grant most priviledges
+
+    * Change the site name and domain to the correct values
+
+
+### Adding /updating centres:
+
+    python utils/scrape_centres.py
+
+
+### Development notes:
 
 Note: when developing and sending emails the code will try to connect to localhost port 25. If this is not an SMTP server for you use the provided script to run a fake SMTP server that outputs to the console:
 
