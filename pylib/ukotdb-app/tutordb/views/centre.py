@@ -51,10 +51,9 @@ def centre_tutors(request, centre_id ):
     centre = get_object_or_404( Centre, pk=centre_id )
 
     tutor = request.user
-    ho_group = Group.objects.get(name="Head Office")
     
     # check that we are either in the HO group or that we are an admin for the centre
-    if ho_group in tutor.groups.all() or centre.is_tutor_admin( tutor ):
+    if tutor.is_head_office() or centre.is_tutor_admin( tutor ):
         centre_tutor_ids = [ i.tutor.id for i in centre.tenure_set.all() ]
         queryset = Tutor.objects.filter( id__in=centre_tutor_ids )
     else:

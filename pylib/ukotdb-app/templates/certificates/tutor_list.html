@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Certificates {{ tutor.get_full_name }}{% endblock %}
+
+
+{% block content %}
+
+<h1>Certificates {{ tutor.get_full_name }}</h1>
+
+<ul>
+    {% for certificate in certificates %}
+        <li class="certificate">
+            <a href="{% url certificates.views.display certificate_id=certificate.id %}">{{ certificate.student_name }} ({{ certificate.course_name}})</a>
+        </li>
+    {% empty %}
+        <li class="certificate">No certificates created yet</li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}

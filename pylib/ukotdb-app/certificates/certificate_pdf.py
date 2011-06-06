@@ -158,8 +158,6 @@ class CertificatePDF:
                 style.fontName  = config['font-family']
                 style.alignment = TA_CENTER
 
-                logging.debug("font_size: %s" % font_size)
-
                 while font_size > minimum_font_size:
                     style.fontSize = font_size
                     style.leading  = font_size

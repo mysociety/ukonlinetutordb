@@ -1,0 +1,30 @@
+[
+    {
+        "pk": 1, 
+        "model": "certificates.certificate", 
+        "fields": {
+            "course_name": "Course Name", 
+            "centre": 2291, 
+            "course_blurb": "Course Blurb", 
+            "tutor": 4, 
+            "date_awarded": "2011-06-03", 
+            "template": 1, 
+            "student_name": "Student 1", 
+            "tutor_name": "Tutor"
+        }
+    },
+    {
+        "pk": 2, 
+        "model": "certificates.certificate", 
+        "fields": {
+            "course_name": "Course Name 2", 
+            "centre": 3450664, 
+            "course_blurb": "Course Blurb 2", 
+            "tutor": 5, 
+            "date_awarded": "2011-06-03", 
+            "template": 1, 
+            "student_name": "Student 2", 
+            "tutor_name": "Tutor 2"
+        }
+    }
+]

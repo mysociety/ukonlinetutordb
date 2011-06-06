@@ -56,6 +56,24 @@
         }
     },
     {
+        "pk": 5, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "tutor2", 
+            "first_name": "Normal Tutor 2", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2011-06-03 09:54:25", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$afd09$c16d79dde6a4266143bfc9e6107e1aff8ca01e14", 
+            "email": "tutor2@example.com", 
+            "date_joined": "2011-06-03 09:54:25"
+        }
+    },
+    {
         "pk": 2, 
         "model": "tutordb.tutor", 
         "fields": {
@@ -77,6 +95,15 @@
     }, 
     {
         "pk": 4, 
+        "model": "tutordb.tutor", 
+        "fields": {
+            "user_permissions": [], 
+            "phone": "07123 456 789", 
+            "groups": []
+        }
+    },
+    {
+        "pk": 5, 
         "model": "tutordb.tutor", 
         "fields": {
             "user_permissions": [], 
@@ -149,5 +176,14 @@
             "tutor": 4, 
             "centre": 1986
         }
-    }
+    },
+    {
+        "pk": 5, 
+        "model": "tutordb.tenure", 
+        "fields": {
+            "role": "tutor", 
+            "tutor": 5, 
+            "centre": 3450664
+        }
+    }    
 ]

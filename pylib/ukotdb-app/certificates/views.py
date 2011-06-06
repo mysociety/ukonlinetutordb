@@ -1,19 +1,14 @@
-# import re
-# 
-# from tutordb.forms      import CreateTutorForm
-# 
-# from django.contrib.auth                import authenticate, login
 from django.contrib.auth.decorators     import login_required
-# from django.contrib.auth.models         import User, UserManager
 from django.core.urlresolvers           import reverse
-# from django.db                          import IntegrityError
 from django.http                        import HttpResponse, HttpResponseRedirect
 from django.shortcuts                   import render_to_response, get_object_or_404
 from django.template                    import RequestContext
 from django.views.generic.list_detail   import object_list, object_detail
 from django.views.generic.simple        import direct_to_template
+from django.http                        import Http404
 
-from certificates.models import Certificate
+
+from certificates.models import Certificate, Tutor
 from certificates.forms  import CertificateForm
 
 
@@ -31,15 +26,27 @@ def index(request):
     )
     
 
+# TODO - factor out common access control tests from the display, display_as_pdf
+# and tutor_list functions
+
 @login_required
 def display(request, certificate_id):
     """Display a certificate"""
     
-    # FIXME - add access controls
+    # load the certificate
+    certificate = get_object_or_404( Certificate, pk=certificate_id )
+    certificate_tutor = certificate.tutor
+    req_tutor = request.user
 
+    # 404 if we are not in charge of them in some way
+    if req_tutor == certificate_tutor or req_tutor.is_head_office() or req_tutor.is_manager_of(certificate_tutor):
+        pass
+    else:
+        raise Http404
+    
     return object_detail(
         request,
-        queryset  = request.user.certificate_set,
+        queryset  = certificate_tutor.certificate_set,
         object_id = certificate_id,
     )
     
@@ -48,9 +55,16 @@ def display(request, certificate_id):
 def display_as_pdf(request, certificate_id):
     """Create a PDF for certificate"""
 
-    # get the certificate
-    # FIXME - add access controls
+    # load the certificate
     certificate = get_object_or_404( Certificate, pk=certificate_id )
+    certificate_tutor = certificate.tutor
+    req_tutor = request.user
+
+    # 404 if we are not in charge of them in some way
+    if req_tutor == certificate_tutor or req_tutor.is_head_office() or req_tutor.is_manager_of(certificate_tutor):
+        pass
+    else:
+        raise Http404
     
     # create the pdf
     pdf = certificate.as_pdf()
@@ -101,4 +115,32 @@ def create(request):
         },
         context_instance=RequestContext(request)
     )
+
+@login_required
+def tutor_list(request, tutor_id):
+    """Show all certificates for a particular user"""
+
+    req_tutor = request.user
+
+    # 404 if user is not found
+    certificate_tutor = get_object_or_404( Tutor, pk=tutor_id )
     
+    # 404 if we are not in charge of them in some way
+    if req_tutor == certificate_tutor or req_tutor.is_head_office() or req_tutor.is_manager_of(certificate_tutor):
+        pass
+    else:
+        raise Http404
+    
+    # create the queryset
+    queryset = certificate_tutor.certificate_set.order_by('-id')
+
+    return object_list(
+        request,
+        template_name = 'certificates/tutor_list.html',
+        paginate_by   = 40,
+        allow_empty   = True,
+        queryset      = queryset,
+        extra_context = {
+            "tutor": certificate_tutor,        
+        },
+    )
