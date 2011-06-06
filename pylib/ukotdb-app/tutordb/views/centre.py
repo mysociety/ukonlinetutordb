@@ -4,6 +4,7 @@ from tutordb.forms      import CreateTutorForm, EditTutorForm
 from tutordb.models     import Centre, Tenure, Tutor
 
 from django.contrib.auth                import authenticate, login
+from django.contrib.auth.models         import Group
 from django.contrib.auth.decorators     import login_required
 from django.core.urlresolvers           import reverse
 from django.db                          import IntegrityError
@@ -49,12 +50,12 @@ def centre_tutors(request, centre_id ):
 
     centre = get_object_or_404( Centre, pk=centre_id )
 
-    user = request.user
+    tutor = request.user
     ho_group = Group.objects.get(name="Head Office")
     
     # check that we are either in the HO group or that we are an admin for the centre
-    if ho_group in user.groups.all() or centre.is_user_admin( user ):
-        centre_tutor_ids = [ i.user.id for i in centre.tenure_set.all() ]
+    if ho_group in tutor.groups.all() or centre.is_tutor_admin( tutor ):
+        centre_tutor_ids = [ i.tutor.id for i in centre.tenure_set.all() ]
         queryset = Tutor.objects.filter( id__in=centre_tutor_ids )
     else:
         queryset = Tutor.objects.none()
@@ -70,18 +71,18 @@ def centre_tutors(request, centre_id ):
         extra_context = { "centre": centre, },
     )
 
-    # if ho_group in user.groups.all():
+    # if ho_group in tutor.groups.all():
     #     queryset = Centre.objects.all()
     # else:
-    #     user_admin_centres = user.tenure_set.filter( role='admin' ).all()
-    #     admin_ids = [ i.centre.id for i in user_admin_centres ]
+    #     tutor_admin_centres = tutor.tenure_set.filter( role='admin' ).all()
+    #     admin_ids = [ i.centre.id for i in tutor_admin_centres ]
     #     queryset = Centre.objects.filter( id__in=admin_ids )
     # 
     # queryset = queryset.order_by('name')
     # 
     # return object_list(
     #     request,
-    #     template_name = 'tutordb/user_centre_list.html',
+    #     template_name = 'tutordb/tutor_centre_list.html',
     #     paginate_by   = 40,
     #     allow_empty   = True,
     #     queryset      = queryset,

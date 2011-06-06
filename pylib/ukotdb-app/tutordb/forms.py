@@ -41,14 +41,14 @@ class EditTutorForm(forms.Form):
     phone     = forms.CharField( required=True )
 
     def __init__(self, *args, **kwargs):
-        """Set the current user details"""
+        """Set the current tutor details"""
 
-        user = kwargs.pop('user')
+        tutor = kwargs.pop('tutor')
 
         # create the form as normal
         super( EditTutorForm, self ).__init__(*args, **kwargs)
 
         # set initial values
-        self.fields['name'].initial  = user.get_full_name()
-        self.fields['phone'].initial = user.phone
+        self.fields['name'].initial  = tutor.get_full_name()
+        self.fields['phone'].initial = tutor.phone
 

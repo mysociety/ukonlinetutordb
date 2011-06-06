@@ -39,12 +39,12 @@ class Centre(models.Model):
     def longitude(self):
         return self.location.x
     
-    def is_user_admin(self, user):
+    def is_tutor_admin(self, tutor):
         """
-        Return true if the user is an admin for this centre
+        Return true if the tutor is an admin for this centre
         """
         
-        if self.tenure_set.filter( user=user, role='admin' ).count():
+        if self.tenure_set.filter( tutor=tutor, role='admin' ).count():
             return True
         else:
             return False

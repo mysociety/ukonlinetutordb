@@ -5,7 +5,7 @@ from tutordb.models     import Centre, Tenure
 
 from django.contrib.auth                import authenticate, login
 from django.contrib.auth.decorators     import login_required
-from django.contrib.auth.models         import User, UserManager, Group
+from django.contrib.auth.models         import Group
 from django.core.urlresolvers           import reverse
 from django.db                          import IntegrityError
 from django.http                        import HttpResponse, HttpResponseRedirect
@@ -16,16 +16,16 @@ from django.views.generic.simple        import direct_to_template
 
 @login_required
 def my(request):
-    """Homepage for a user"""
+    """Homepage for a tutor"""
     
-    user = request.user
+    tutor = request.user
 
     # get all the centres
-    tenures = Tenure.objects.all().filter(user=user)
+    tenures = Tenure.objects.all().filter(tutor=tutor)
     centres = [ t.centre for t in tenures ]
 
     # get recent certificates
-    certificates = user.certificate_set.order_by('-id').all()[:10]
+    certificates = tutor.certificate_set.order_by('-id').all()[:10]
         
     return render_to_response(
         'tutordb/my.html',
@@ -38,33 +38,33 @@ def my(request):
 
 
 @login_required
-def edit_user_details(request):
-    """Allow user to edit their own details"""
+def edit_tutor_details(request):
+    """Allow tutor to edit their own details"""
 
-    user = request.user
+    tutor = request.user
     
     # FIXME - change to using generics now as the Tutor inherits from the user
 
     if request.method == 'POST':
 
-        form = EditTutorForm(request.POST, user=user);
+        form = EditTutorForm(request.POST, tutor=tutor);
         
         if form.is_valid():
             cleaned_data = form.cleaned_data
 
-            user.first_name = cleaned_data['name']
-            user.last_name  = ''
-            user.phone      = cleaned_data['phone']
+            tutor.first_name = cleaned_data['name']
+            tutor.last_name  = ''
+            tutor.phone      = cleaned_data['phone']
 
-            user.save()
+            tutor.save()
 
             return HttpResponseRedirect( reverse( my ) )
 
     else:
-        form = EditTutorForm(user=user)
+        form = EditTutorForm(tutor=tutor)
 
     return render_to_response(
-        'tutordb/edit_user_details.html',
+        'tutordb/edit_tutor_details.html',
         {
             'form': form,
         },
@@ -74,17 +74,17 @@ def edit_user_details(request):
     
 @login_required
 def add_centre(request):
-    """Allow a user to add a centre to themselves"""
+    """Allow a tutor to add a centre to themselves"""
     
     # declare in case it gets used
     error = None
     
-    # If we have a post then add centre to user and redirect back to '/my'
+    # If we have a post then add centre to tutor and redirect back to '/my'
     centre_id = request.POST.get('centre_id')
     if centre_id:
         try:
             centre = Centre.objects.get(id=centre_id)
-            centre.tenure_set.create(user=request.user, role='tutor')
+            centre.tenure_set.create(tutor=request.user, role='tutor')
         except Centre.DoesNotExist:
             error = "Could not find centre in db";
         except IntegrityError:

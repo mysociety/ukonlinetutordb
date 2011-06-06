@@ -1,7 +1,7 @@
 [
     {
         "pk": 2, 
-        "model": "auth.user", 
+        "model": "tutordb.tutor", 
         "fields": {
             "username": "headoffice", 
             "first_name": "Head Office", 
@@ -21,7 +21,7 @@
     }, 
     {
         "pk": 3, 
-        "model": "auth.user", 
+        "model": "tutordb.tutor", 
         "fields": {
             "username": "centremanager", 
             "first_name": "Centre Manager", 
@@ -39,7 +39,7 @@
     }, 
     {
         "pk": 4, 
-        "model": "auth.user", 
+        "model": "tutordb.tutor", 
         "fields": {
             "username": "tutor", 
             "first_name": "Normal Tutor", 
@@ -99,7 +99,7 @@
         "model": "tutordb.tenure", 
         "fields": {
             "role": "admin", 
-            "user": 3, 
+            "tutor": 3, 
             "centre": 2291
         }
     }, 
@@ -108,7 +108,7 @@
         "model": "tutordb.tenure", 
         "fields": {
             "role": "tutor", 
-            "user": 4, 
+            "tutor": 4, 
             "centre": 2291
         }
     }, 
@@ -117,7 +117,7 @@
         "model": "tutordb.tenure", 
         "fields": {
             "role": "tutor", 
-            "user": 4, 
+            "tutor": 4, 
             "centre": 1986
         }
     }

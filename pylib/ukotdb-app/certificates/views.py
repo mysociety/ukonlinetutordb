@@ -65,7 +65,7 @@ def display_as_pdf(request, certificate_id):
 @login_required
 def create(request):
     """create a new certificate"""
-    user = request.user
+    tutor = request.user
     
     # we can't (easily) do this with generics as we need to pre-populate the
     # form if we are cloning an existing certificate.
@@ -78,11 +78,11 @@ def create(request):
         base_certificate=None
     
     if request.method == 'POST':
-        form = CertificateForm(request.POST, user=user, base_certificate=base_certificate );
+        form = CertificateForm(request.POST, tutor=tutor, base_certificate=base_certificate );
         
         if form.is_valid():
             certificate = form.save(commit=False)
-            certificate.tutor = user
+            certificate.tutor = tutor
             certificate.save()
             return HttpResponseRedirect(
                 reverse(
@@ -92,7 +92,7 @@ def create(request):
             )            
 
     else:
-        form = CertificateForm(user=user, base_certificate=base_certificate )
+        form = CertificateForm(tutor=tutor, base_certificate=base_certificate )
 
     return render_to_response(
         'certificates/edit_certificate.html',
