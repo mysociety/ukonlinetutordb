@@ -20,7 +20,9 @@ def index(request):
     # if the user is logged in send them to 'my' straight away
     if request.user.is_authenticated():
         return HttpResponseRedirect( reverse( tutordb.views.my.my ) )
-    
+
+    # force the creation of a session so that the CSRF protection is enabled.
+    request.session['force_on'] = True    
     
     if request.method == 'POST':
         form = CreateTutorForm(request.POST)
