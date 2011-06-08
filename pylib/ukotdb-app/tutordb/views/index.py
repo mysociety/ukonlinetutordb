@@ -51,6 +51,10 @@ def index(request):
     
             # FIXME - email the tutor their password
     
+            # mark that the user is new - this is used later to show the user
+            # a welcome page after they have chosen a centre.
+            request.session['user_just_created'] = True
+    
             return HttpResponseRedirect( reverse( tutordb.views.my.add_centre ) )
     else:
         form = CreateTutorForm()

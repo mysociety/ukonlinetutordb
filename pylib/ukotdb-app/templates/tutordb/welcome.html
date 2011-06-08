@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Welcome{% endblock %}
+
+
+{% block content %}
+
+<h1>You're now registered as a UK Online Tutor - thank you!</h1>
+
+<p>
+    Thanks for creating an account. You can now go to
+    <a href="{% url tutordb.views.my.my %}">Your Page</a>
+    or jump straight to
+    <a href="{% url certificates.views.create %}">creating certificates</a>.
+</p>
+
+
+{% endblock %}

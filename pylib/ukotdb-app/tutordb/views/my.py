@@ -71,6 +71,19 @@ def edit_tutor_details(request):
         context_instance=RequestContext(request)
     )
 
+
+@login_required
+def welcome(request):
+    """Say hello to the user"""
+    
+    return render_to_response(
+        'tutordb/welcome.html',
+        {},
+        context_instance=RequestContext(request)
+    )
+    
+    
+
     
 @login_required
 def add_centre(request):
@@ -92,7 +105,13 @@ def add_centre(request):
             pass
             
         if not error:
-            return HttpResponseRedirect( reverse( my ) )
+
+            # is this a new user (use pop to remove value)?
+            is_new_user = request.session.pop('user_just_created', False)
+            if is_new_user:
+                return HttpResponseRedirect( reverse( welcome ) )            
+            else:
+                return HttpResponseRedirect( reverse( my ) )
 
     # TODO - search for name as well?
     postcode = request.GET.get('postcode')    
