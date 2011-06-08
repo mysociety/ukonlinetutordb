@@ -172,8 +172,11 @@ ul.ukonline_tutors {
     
     padding: 0;
 
-    li.ukonline_tutor {
+    li {
         list-style: none;
+    }
+
+    li.ukonline_tutor {
         margin: 0;
         padding: 0.2em;
         border: 1px solid rgba( 255,255,255, 0.7 );

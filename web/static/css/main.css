@@ -132,8 +132,9 @@ li.certificate_add {
 
 ul.ukonline_tutors {
   padding: 0; }
+  ul.ukonline_tutors li {
+    list-style: none; }
   ul.ukonline_tutors li.ukonline_tutor {
-    list-style: none;
     margin: 0;
     padding: 0.2em;
     border: 1px solid rgba(255, 255, 255, 0.7);
