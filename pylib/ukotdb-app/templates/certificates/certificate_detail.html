@@ -10,11 +10,11 @@
 <h1>{{ object }}</h1>
 
 <div class="action_button">
-    <a href="{% url certificates.views.display_as_pdf certificate_id=object.id %}">View as PDF</a>
+    <a href="{% url certificates.views.display_as_pdf certificate_id=object.id %}">View or print<br>this certifcate</a>
 </div>
 
 <div class="action_button">    
-    <a href="{% url certificates.views.create %}?base_on={{ object.id }}">Clone</a>
+    <a href="{% url certificates.views.create %}?base_on={{ object.id }}">Make another<br><small>(based on this one)</small></a>
 </div>
 
 <dl>

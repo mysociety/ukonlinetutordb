@@ -55,3 +55,6 @@ class CertificateForm(forms.ModelForm):
             'course_name',
             'course_blurb',
         )
+        widgets = {
+            'course_blurb': forms.Textarea(attrs={'cols': 40, 'rows': 5}),
+        }

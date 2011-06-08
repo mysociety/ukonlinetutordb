@@ -92,7 +92,8 @@ form.standard {
     display: inline-block;
     width: 8em;
     margin-right: 0.5em;
-    text-align: right; }
+    text-align: right;
+    vertical-align: top; }
 
 ul.errorlist {
   color: #f00;
@@ -246,10 +247,12 @@ div.action_button {
   background-color: rgba(255, 255, 255, 0.6);
   border: 3px solid #003d76;
   box-shadow: 3px 3px 10px rgba(0, 61, 118, 0.5);
-  border-radius: 10px; }
+  border-radius: 10px;
+  text-align: center; }
   div.action_button a {
     text-decoration: none;
     color: inherit; }
 
 div.action_button:hover {
-  cursor: pointer; }
+  cursor: pointer;
+  text-decoration: underline; }

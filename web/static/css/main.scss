@@ -117,6 +117,7 @@ form.standard {
         width: $label_width;
         margin-right: 0.5em;
         text-align: right;
+        vertical-align: top;
     }
 }
 
@@ -348,6 +349,7 @@ div.action_button {
     border: 3px solid $ukonline_blue;
     box-shadow: 3px 3px 10px rgba($ukonline_blue, 0.5);
     border-radius: 10px;
+    text-align: center;
 
     a {
         text-decoration: none;
@@ -357,4 +359,5 @@ div.action_button {
 
 div.action_button:hover {
     cursor: pointer;  
+    text-decoration: underline;
 }

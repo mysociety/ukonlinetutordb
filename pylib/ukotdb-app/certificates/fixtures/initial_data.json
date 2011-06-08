@@ -4,7 +4,7 @@
         "model": "certificates.certificatetemplate", 
         "fields": {
             "active": true, 
-            "name": "Green PCB", 
+            "name": "Green Certificate", 
             "filename": "pcb_green.jpg",
             "slug": "pcb_green"
         }
@@ -14,7 +14,7 @@
         "model": "certificates.certificatetemplate", 
         "fields": {
             "active": true, 
-            "name": "Red PCB", 
+            "name": "Red Certificate", 
             "filename": "pcb_red.jpg",
             "slug": "pcb_red"
         }
