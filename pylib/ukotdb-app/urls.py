@@ -1,5 +1,6 @@
-from django.conf.urls.defaults import *
-from django.contrib            import admin
+from django.conf.urls.defaults   import *
+from django.contrib              import admin
+from django.views.generic.simple import direct_to_template
 
 import settings
 
@@ -58,9 +59,8 @@ urlpatterns += patterns('',
     (r'^admin/',        include(admin.site.urls)     ),
 )
 
-# todo list - make it easier for all to see
-from django.views.generic.simple import direct_to_template
-
+# static docs that get templated
 urlpatterns += patterns('',
     (r'^todo$', direct_to_template, {'template': 'todo.html'}),
+    (r'^help$', direct_to_template, {'template': 'help.html'}),
 )

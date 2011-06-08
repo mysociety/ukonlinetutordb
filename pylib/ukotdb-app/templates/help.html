@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Help{% endblock %}
+
+{% block content %}
+
+<h1>Help</h1>
+
+
+<p>Hopefully this site is easy enough to use that you don't need a help section
+for the most frequent tasks. However there are some bits that are trickier and
+so documented here.</p>
+
+
+<h2>What are the different user levels?</h2>
+
+<p>There are three user levels - Tutors, Centre Managers and Head Office
+staff.</p>
+
+<h3>Tutors</h3>
+
+<p>Tutors are associated to one or more centres and are able to see and update
+their own information, and create certificates for their students.</p>
+
+<p>They cannot see the details of others users.</p>
+
+<h3>Centre Managers</h3>
+
+<p>A user can be marked as a 'Centre Manager' for specific centres. They have
+the same abilities as a Tutor. In addition to they are allowed to see the
+contact details and certificates of all other tutors for their centre.</p>
+
+<p>Centre Managers cannot change the contact details of other users.</p>
+
+<h3>Head Office staff</h3>
+
+<p>Head Office staff have full access to see and edit almost anything on the
+site. This allows them to promote Tutors to be Centre Managers. They are also
+able to update the contact details for a particular user.</p>
+
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>How do I change a Tutor to be a Centre Manager</h3>
+
+<p>Only the Head Office Staff can do this. Have the person create an account and
+add themselves to the centre as a tutor. Once this is done use the Full Admin to
+list all the 'Tenures'. Find the appropriate one and change the 'role' to
+'Centre Manager' and save the changes.</p>
+
+<h3>How do I make someone Head Office</h3>
+
+<p>Only Head Office staff can do this. Have them create an account. They do not
+need to belong to a centre. Find them under 'Tutors' in the admin and enable the
+'Staff status' checkbox (so that they can log in to the admin area) and also
+highlight the 'Head Office' group (so that they may make changes).</p>
+
+
+{% endblock %}

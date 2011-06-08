@@ -63,11 +63,15 @@
                         <li>
                             <a href="{% url tutordb.views.centre.centre_list %}">Centres</a>
                         </li>
-                        {% if user.is_superuser %} <!-- FIXME - should check to see if in HO group -->
+                        {% if user.is_staff %}
                         <li>
                             <a href="{% url admin:index %}">Full Admin</a>
                         </li>
                         {% endif %}
+
+                        <li>
+                            <a href="/help">Help</a>
+                        </li>
                     </ul>
                     
                     <br clear="both">
