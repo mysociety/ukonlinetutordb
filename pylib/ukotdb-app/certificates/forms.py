@@ -11,7 +11,8 @@ class CertificateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         """setup the tutor and the centre"""
 
-        tutor             = kwargs.pop('tutor')
+        tutor            = kwargs.pop('tutor')
+        centre           = kwargs.pop('centre')
         base_certificate = kwargs.pop('base_certificate')
 
         # create the form as normal
@@ -19,7 +20,8 @@ class CertificateForm(forms.ModelForm):
 
         # set the centre choices
         tenure_qs = tutor.tenure_set.all()
-        centre_ids = [ o.centre.id for o in tenure_qs ]
+        centre_ids = [ centre.id ]
+        centre_ids += [ o.centre.id for o in tenure_qs ]
         centre_qs = Centre.objects.filter( id__in=centre_ids)
         self.fields['centre'] = forms.ModelChoiceField(queryset=centre_qs, empty_label=None)
 

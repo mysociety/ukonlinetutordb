@@ -1,14 +1,15 @@
 from django.contrib.auth.decorators     import login_required
 from django.core.urlresolvers           import reverse
 from django.http                        import HttpResponse, HttpResponseRedirect
-from django.shortcuts                   import render_to_response, get_object_or_404
+from django.shortcuts                   import render_to_response, get_object_or_404, redirect
 from django.template                    import RequestContext
 from django.views.generic.list_detail   import object_list, object_detail
 from django.views.generic.simple        import direct_to_template
 from django.http                        import Http404
 
 
-from certificates.models import Certificate, Tutor
+from tutordb.models      import Tutor, Centre
+from certificates.models import Certificate
 from certificates.forms  import CertificateForm
 
 
@@ -77,9 +78,35 @@ def display_as_pdf(request, certificate_id):
 
 
 @login_required
+def select_centre(request):
+    """Select a centre to use for the certificate"""
+    tutor = request.user
+    # base_on  = request.GET.get('base_on')
+    postcode = request.GET.get('postcode')
+
+    # If we have a postcode load nearby centres.
+    if postcode:
+        centres_qs = Centre.objects.all().near_postcode(postcode)[:8]
+    else:
+        centres_qs = Centre.objects.none()
+
+    # Show the user the results
+    return render_to_response(
+        'certificates/select_centre.html',
+        {
+            'tutor':            tutor,
+            'tutor_centres_qs': tutor.centres.all(),
+            'postcode':         postcode, 
+            'centres_qs':       centres_qs,
+        },
+        context_instance=RequestContext(request)
+    )
+
+
+@login_required
 def create(request):
     """create a new certificate"""
-    tutor = request.user
+    tutor    = request.user
     
     # we can't (easily) do this with generics as we need to pre-populate the
     # form if we are cloning an existing certificate.
@@ -91,8 +118,24 @@ def create(request):
     else:
         base_certificate=None
     
+    # try to get the centre from parameters or the base certificate - if none
+    # found prompt the user for one.
+
+    centre_id = request.REQUEST.get( 'centre_id', None )
+    if centre_id:
+        centre = get_object_or_404( Centre, pk=centre_id )
+    elif base_certificate:
+        centre = base_certificate.centre
+    else:
+        return redirect( select_centre )
+
     if request.method == 'POST':
-        form = CertificateForm(request.POST, tutor=tutor, base_certificate=base_certificate );
+        form = CertificateForm(
+            request.POST,
+            tutor            = tutor,
+            base_certificate = base_certificate,
+            centre           = centre,
+        )
         
         if form.is_valid():
             certificate = form.save(commit=False)
@@ -106,7 +149,11 @@ def create(request):
             )            
 
     else:
-        form = CertificateForm(tutor=tutor, base_certificate=base_certificate )
+        form = CertificateForm(
+            tutor            = tutor,
+            base_certificate = base_certificate,
+            centre           = centre,
+        )
 
     return render_to_response(
         'certificates/edit_certificate.html',

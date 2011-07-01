@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load ukonline_extras %}
+
+{% block title %}Select a Centre{% endblock %}
+
+
+{% block content %}
+
+
+<h1>Select a Centre</h1>
+
+<p>Please select a UK online centre to use on the certificate.</p>
+
+
+{% if tutor_centres_qs %}
+
+    <h2>Your Centres</h2>
+
+    <ul class="select_centre">
+    
+    {% for centre in tutor_centres_qs %}
+    
+        <li>
+            <img class="small_centre_map" src="http://maps.google.com/maps/api/staticmap?zoom=13&amp;size=160x80&amp;maptype=roadmap&amp;markers={{ centre.latitude }},{{ centre.longitude }}&amp;sensor=false">
+            <strong><a href="{% url certificates.views.create %}?base_on={{ base_on }}&amp;centre_id={{ centre.id }}">{{ centre.name }}</a></strong><br >
+            <small>{{ centre.address }}</small><br>
+            <br clear="both">
+        </li>
+    
+    {% endfor %}
+
+    </ul>
+
+{% endif %}
+
+
+
+<h2>Search for Centre</h2>
+
+
+<form>
+    <label for="form_postcode">Postcode</label>
+    <input id="form_postcode" type="text" name="postcode" value="{% firstof postcode '' %}" />
+    <input type="submit" value="Search" />
+</form>
+
+{% if centres_qs %}
+
+    <ul class="select_centre">
+    
+    {% for centre in centres_qs %}
+    
+        <li>
+            <img class="small_centre_map" src="http://maps.google.com/maps/api/staticmap?zoom=13&amp;size=160x80&amp;maptype=roadmap&amp;markers={{ centre.latitude }},{{ centre.longitude }}&amp;sensor=false">
+            <strong><a href="{% url certificates.views.create %}?base_on={{ base_on }}&amp;centre_id={{ centre.id }}">{{ centre.name }}</a></strong><br >
+            <small>{{ centre.address }}</small><br>
+            <br clear="both">
+        </li>
+    
+    {% endfor %}
+
+    </ul>
+
+{% endif %}
+
+
+{% endblock %}
