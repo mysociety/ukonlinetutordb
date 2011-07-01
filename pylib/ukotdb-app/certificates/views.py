@@ -13,6 +13,16 @@ from certificates.models import Certificate
 from certificates.forms  import CertificateForm
 
 
+def check_user_may_see( request, certificate_tutor ):
+    """Check that the current user may see the requested details"""
+    req_tutor = request.user
+    if req_tutor == certificate_tutor or req_tutor.is_head_office() or req_tutor.is_manager_of(certificate_tutor):
+        pass
+    else:
+        raise Http404
+
+
+
 @login_required
 def index(request):
     """show the certificates nav page"""    
@@ -37,13 +47,8 @@ def display(request, certificate_id):
     # load the certificate
     certificate = get_object_or_404( Certificate, pk=certificate_id )
     certificate_tutor = certificate.tutor
-    req_tutor = request.user
 
-    # 404 if we are not in charge of them in some way
-    if req_tutor == certificate_tutor or req_tutor.is_head_office() or req_tutor.is_manager_of(certificate_tutor):
-        pass
-    else:
-        raise Http404
+    check_user_may_see( request, certificate_tutor )
     
     return object_detail(
         request,
@@ -59,13 +64,8 @@ def display_as_pdf(request, certificate_id):
     # load the certificate
     certificate = get_object_or_404( Certificate, pk=certificate_id )
     certificate_tutor = certificate.tutor
-    req_tutor = request.user
 
-    # 404 if we are not in charge of them in some way
-    if req_tutor == certificate_tutor or req_tutor.is_head_office() or req_tutor.is_manager_of(certificate_tutor):
-        pass
-    else:
-        raise Http404
+    check_user_may_see( request, certificate_tutor )
     
     # create the pdf
     pdf = certificate.as_pdf()
@@ -167,16 +167,10 @@ def create(request):
 def tutor_list(request, tutor_id):
     """Show all certificates for a particular user"""
 
-    req_tutor = request.user
-
     # 404 if user is not found
     certificate_tutor = get_object_or_404( Tutor, pk=tutor_id )
     
-    # 404 if we are not in charge of them in some way
-    if req_tutor == certificate_tutor or req_tutor.is_head_office() or req_tutor.is_manager_of(certificate_tutor):
-        pass
-    else:
-        raise Http404
+    check_user_may_see( request, certificate_tutor )
     
     # create the queryset
     queryset = certificate_tutor.certificate_set.order_by('-id')
