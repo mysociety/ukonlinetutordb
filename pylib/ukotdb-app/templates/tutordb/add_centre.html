@@ -7,7 +7,20 @@
 
 {% block content %}
 
-<h1>What Centre are you currently in?</h1>
+
+{% if request.session.user_just_created %}
+
+    <h1>Welcome!</h1>
+
+    <h2>Are you in a UK online centre?</h2>
+
+    <p>If yes please find it below. If no <a href="{% url tutordb.views.my.welcome %}">skip on to the next step</a>.</p>
+
+{% endif %}
+
+
+
+<h2>What Centre are you currently in?</h2>
 
 {% if error %}
     <div class="error">

@@ -76,6 +76,9 @@ def edit_tutor_details(request):
 def welcome(request):
     """Say hello to the user"""
     
+    # clear 'user_just_created' from the session
+    request.session.pop('user_just_created', False)
+    
     return render_to_response(
         'tutordb/welcome.html',
         {},
@@ -106,8 +109,8 @@ def add_centre(request):
             
         if not error:
 
-            # is this a new user (use pop to remove value)?
-            is_new_user = request.session.pop('user_just_created', False)
+            # is this a new user?
+            is_new_user = request.session.get('user_just_created', False)
             if is_new_user:
                 return HttpResponseRedirect( reverse( welcome ) )            
             else:
