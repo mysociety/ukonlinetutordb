@@ -5,11 +5,14 @@ import logging
 
 from cStringIO            import StringIO
                           
-from reportlab.pdfgen     import canvas
-from reportlab.lib.colors import Color
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus   import Paragraph, Frame
-from reportlab.lib.enums  import TA_CENTER, TA_JUSTIFY
+from reportlab.lib.colors      import Color
+from reportlab.lib.enums       import TA_CENTER, TA_JUSTIFY, TA_LEFT
+from reportlab.lib.styles      import getSampleStyleSheet, ParagraphStyle
+from reportlab.pdfbase         import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfgen          import canvas
+from reportlab.platypus        import Paragraph, Frame
+import reportlab.rl_config
 
 # location of the certificate related assets - like backgrounds etc
 assets_dir = path.join(path.dirname(__file__), 'assets')
@@ -18,6 +21,18 @@ assets_dir = path.join(path.dirname(__file__), 'assets')
 a4_height = 842
 a4_width  = 595
 minimum_font_size = 6
+
+# load the extra fonts we need 
+
+
+# if some glyphs are missing we can  suppress warnings
+# reportlab.rl_config.warnOnMissingFontGlyphs = 0
+
+# these fonts are installed by the 'ttf-mscorefonts-installer' debian package
+pdfmetrics.registerFont(TTFont('Verdana',             '/usr/share/fonts/truetype/msttcorefonts/Verdana.ttf'))
+pdfmetrics.registerFont(TTFont('Verdana_Bold',        '/usr/share/fonts/truetype/msttcorefonts/Verdana_Bold.ttf'))
+pdfmetrics.registerFont(TTFont('Verdana_Italic',      '/usr/share/fonts/truetype/msttcorefonts/Verdana_Italic.ttf'))
+pdfmetrics.registerFont(TTFont('Verdana_Bold_Italic', '/usr/share/fonts/truetype/msttcorefonts/Verdana_Bold_Italic.ttf'))
 
 # TODO - change the 'content' list to be a function?
 
@@ -73,6 +88,55 @@ configs = {
                 'x':         90,
                 'y':         70,
                 'h':         20,
+                'w':         a4_width - 90 * 2, 
+            },            
+        ]
+        
+    },
+    'dc_pito': {
+        'debug': True,
+        'background': {
+            'image': 'dc_pito.jpg',
+        },
+        'text_section_defaults': {
+            'text-align':  'centre',
+            'font-family': 'Verdana',
+            'overflow':    'shrink',
+        },
+        'text_sections': [
+            {
+                'content':   ['student_name'],
+                'font-size': 32,
+                'x':         70,
+                'y':         495,
+                'h':         50,
+                'w':         a4_width - 70 * 2,
+            },
+            {
+                'content':   ['tutor_name'],
+                'text-align': 'left',
+                'font-size': 24,
+                'x':         370,
+                'y':         441,
+                'h':         30,
+                'w':         210, 
+            },            
+            {
+                'content':   ['course_blurb'],
+                'font-family': 'Verdana_Italic',
+                'font-size': 24,
+                'overflow':  'wrap',
+                'x':         120,
+                'y':         270,
+                'h':         120,
+                'w':         a4_width - 120 * 2, 
+            },            
+            {
+                'content':   ['centre_name'],
+                'font-size': 20,
+                'x':         90,
+                'y':         170,
+                'h':         30,
                 'w':         a4_width - 90 * 2, 
             },            
         ]
@@ -149,47 +213,61 @@ class CertificatePDF:
         text_align = config['text-align']
 
         if text_align == 'centre':
-            if config['overflow'] == 'wrap':
-                frame = Frame( config['x'], config['y'], config['w'], config['h'], )
+            style_alignment = TA_CENTER
+        elif text_align == 'left':
+            style_alignment = TA_LEFT
+        else:
+            raise Exception( "Unhandled value for 'text-align': '%s'" % text_align )
 
-                # create a paragraph style
-                font_size = config['font-size']                
-                style = ParagraphStyle( name='test' )
-                style.fontName  = config['font-family']
-                style.alignment = TA_CENTER
-
-                while font_size > minimum_font_size:
-                    style.fontSize = font_size
-                    style.leading  = font_size
-
-                    para =  Paragraph( text, style )
-
-                    if frame.add( para, self.canvas ):
-                        break
-
-                    # Paragraph was too big - shrink the font size
-                    font_size -= 1
-                    
-
-            elif config['overflow'] == 'shrink':
+        if config['overflow'] == 'wrap':
+            frame = Frame( config['x'], config['y'], config['w'], config['h'], )
+        
+            # create a paragraph style
+            font_size = config['font-size']                
+            style = ParagraphStyle( name='test' )
+            style.fontName  = config['font-family']
+            style.alignment = style_alignment
+        
+            while font_size > minimum_font_size:
+                style.fontSize = font_size
+                style.leading  = font_size
+        
+                para =  Paragraph( text, style )
+        
+                if frame.add( para, self.canvas ):
+                    break
+        
+                # Paragraph was too big - shrink the font size
+                font_size -= 1
                 
-                font_size = config['font-size']                
-
-                while font_size > minimum_font_size:
-                    self.canvas.setFont( config['font-family'], font_size )
-                    if self.canvas.stringWidth(text) <= config['w']:
-                        break
-                    font_size -= 1
-                    
+        
+        elif config['overflow'] == 'shrink':
+            
+            font_size = config['font-size']                
+        
+            while font_size > minimum_font_size:
+                self.canvas.setFont( config['font-family'], font_size )
+                if self.canvas.stringWidth(text) <= config['w']:
+                    break
+                font_size -= 1
+            
+            if text_align == 'centre':
                 self.canvas.drawCentredString(
                     config['x'] + config['w'] / 2,
                     config['y'] + config['h'] - config['font-size'],
                     text
                 )
+            elif text_align == 'left':
+                self.canvas.drawString(
+                    config['x'],
+                    config['y'] + config['h'] - config['font-size'],
+                    text
+                )
             else:
-                raise Exception( "Unhandled value of 'overflow': '%s'" % config['overflow'])
+                raise Exception( "Unhandled value for 'text-align': '%s'" % text_align )
+                                
         else:
-            raise Exception( "Unhandled value for 'text-align': '%s'" % text_align )
+            raise Exception( "Unhandled value of 'overflow': '%s'" % config['overflow'])
 
 
     def extract_content(self, config):

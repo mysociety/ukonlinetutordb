@@ -8,3 +8,4 @@ libapache2-mod-wsgi
 python-django-south
 python-psycopg2
 python-reportlab
+ttf-mscorefonts-installer

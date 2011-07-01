@@ -18,5 +18,15 @@
             "filename": "pcb_red.jpg",
             "slug": "pcb_red"
         }
+    },
+    {
+        "pk": 3, 
+        "model": "certificates.certificatetemplate", 
+        "fields": {
+            "active": true, 
+            "name": "Digital Champion 1", 
+            "filename": "dc_pito.jpg",
+            "slug": "dc_pito"
+        }
     }
 ]

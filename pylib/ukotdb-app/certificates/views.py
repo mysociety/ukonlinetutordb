@@ -104,7 +104,7 @@ def email_pdf(request, certificate_id):
 
         # attach the PDF
         email.attach(
-            'filename=certificate_%s.pdf' % certificate_id,
+            'certificate_%s.pdf' % certificate_id,
             certificate.as_pdf(),
             'application/pdf',        
         )
