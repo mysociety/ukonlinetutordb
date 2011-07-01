@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Email Certificate{% endblock %}
+
+
+{% block content %}
+
+
+
+{% if email_sent %}
+
+    <h1>Email has been sent!</h1>
+
+    <p>It should arrive soon - if it does not please remember to check your spam folder.</p>
+    
+{% else %}
+
+    <h1>Send certificate by email.</h1>
+
+    <form class="standard" action="" method="post">
+        {{ form.as_p }}
+        <label for="form_submit">&nbsp;</label>
+        <input type="submit" id="form_submit" value="Send certificate by email" />
+    </form>
+{% endif %}
+
+
+{% endblock %}

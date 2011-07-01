@@ -6,11 +6,11 @@ from django.template                    import RequestContext
 from django.views.generic.list_detail   import object_list, object_detail
 from django.views.generic.simple        import direct_to_template
 from django.http                        import Http404
-
+from django.core.mail                   import EmailMessage
 
 from tutordb.models      import Tutor, Centre
 from certificates.models import Certificate
-from certificates.forms  import CertificateForm
+from certificates.forms  import CertificateForm, CertificateEmailForm
 
 
 def check_user_may_see( request, certificate_tutor ):
@@ -75,6 +75,56 @@ def display_as_pdf(request, certificate_id):
     response['Content-Disposition'] = 'filename=certificate_%s.pdf' % certificate_id
     response.write(pdf)
     return response
+
+
+
+@login_required
+def email_pdf(request, certificate_id):
+    """Email the certificate to the email given"""
+
+    # load the certificate
+    certificate = get_object_or_404( Certificate, pk=certificate_id )
+    certificate_tutor = certificate.tutor
+    check_user_may_see( request, certificate_tutor )
+
+    # set up the form
+    form = CertificateEmailForm( request.POST or None, certificate=certificate )
+    
+    # send the email if we can
+    if form.is_valid():
+        data = form.cleaned_data
+
+        # create the email
+        email = EmailMessage(
+            from_email = certificate_tutor.email,
+            to         = [ data['to'] ],
+            subject    = data['subject'],
+            body       = data['message'],
+        )
+
+        # attach the PDF
+        email.attach(
+            'filename=certificate_%s.pdf' % certificate_id,
+            certificate.as_pdf(),
+            'application/pdf',        
+        )
+
+        # send the email (complain if there is a problem)
+        email.send( fail_silently=False )
+
+        email_sent = True
+    else:
+        email_sent = False
+    
+    # Show the user the results
+    return render_to_response(
+        'certificates/email_pdf.html',
+        {
+            'form': form,
+            'email_sent': email_sent,
+        },
+        context_instance=RequestContext(request)
+    )
 
 
 @login_required

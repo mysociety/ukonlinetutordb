@@ -60,3 +60,23 @@ class CertificateForm(forms.ModelForm):
         widgets = {
             'course_blurb': forms.Textarea(attrs={'cols': 40, 'rows': 5}),
         }
+
+class CertificateEmailForm(forms.Form):
+
+    to        = forms.EmailField( required=True )
+    subject   = forms.CharField( required=True, initial="Your certificate" )
+    message   = forms.CharField( required=True, widget=forms.Textarea )
+
+    def __init__(self, *args, **kwargs):
+
+        certificate = kwargs.pop('certificate')
+
+        # create the form as normal
+        super( CertificateEmailForm, self ).__init__(*args)
+
+        self.fields['message'].initial = (
+            "Dear %s,\n\nAttached please find your certificate.\n\nYours,\n  %s\n"
+                % ( certificate.student_name, certificate.tutor.get_full_name() ) )
+
+
+

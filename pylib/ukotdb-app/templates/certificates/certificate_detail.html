@@ -10,7 +10,11 @@
 <h1>{{ object }}</h1>
 
 <div class="action_button">
-    <a href="{% url certificates.views.display_as_pdf certificate_id=object.id %}">View or print<br>this certifcate</a>
+    <a href="{% url certificates.views.display_as_pdf certificate_id=object.id %}">View or print<br>this certificate</a>
+</div>
+
+<div class="action_button">
+    <a href="{% url certificates.views.email_pdf certificate_id=object.id %}">Send by email</a>
 </div>
 
 <div class="action_button">    
