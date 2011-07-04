@@ -94,7 +94,7 @@ configs = {
         
     },
     'dc_pito': {
-        'debug': True,
+        'debug': False,
         'background': {
             'image': 'dc_pito.jpg',
         },
