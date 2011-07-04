@@ -1,10 +1,5 @@
 {% extends 'base.html' %}
 
-
-{% block extra_head_tags %}
-    <link href='http://fonts.googleapis.com/css?family=Goudy+Bookletter+1911' rel='stylesheet' type='text/css'>
-{% endblock %}
-
 {% block title %}Home{% endblock %}
 
 
@@ -13,16 +8,16 @@
 
 <div class="promo">
     <div class="inner">
-        Register here<br>
-        to become a<br>
-        UK&nbsp;Online Tutor!
+        <h1>Register here to become a UK&nbsp;Online Tutor!</h1>
+
+        <p>Generate certificates.</p>
     </div>
 </div>
 
 <div class="sign-up-form">
     <div class="inner">
         
-        <div class="heading">Create Account</div>
+        <h2>Create Account</h2>
 
         <form action="{% url tutordb.views.index.index %}" method="post">
 

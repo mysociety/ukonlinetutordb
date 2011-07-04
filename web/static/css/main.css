@@ -1,83 +1,31 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Palatino", "Palatino Linotype", serif;
-  background-color: #233e11; }
+* {
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif; }
 
-#bg {
-  position: fixed;
-  top: 0;
-  left: 0; }
-
-.bgwidth {
-  width: 100%; }
-
-.bgheight {
-  height: 100%; }
-
-/* places the content ontop of the background image */
-#outer_wrapper {
-  position: relative;
-  margin: 0 auto;
-  padding: 0;
-  z-index: 1; }
-
-#inner_wrapper {
-  background-color: rgba(255, 255, 255, 0.7);
-  margin: 60px auto;
-  min-width: 600px;
-  max-width: 800px;
-  border: 1px solid #fff;
-  padding: 20px 20px 0 20px; }
+a {
+  text-decoration: underline; }
 
 #dev-site-warning {
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 2px;
-  background: rgba(255, 128, 128, 0.7); }
-  #dev-site-warning p {
-    color: #000;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    font-size: 75%;
-    font-family: "Arial", sans-serif; }
-    #dev-site-warning p a {
-      color: inherit; }
+  padding: 4px;
+  background: rgba(255, 128, 128, 0.7);
+  color: #000;
+  text-align: center;
+  font-size: 75%; }
 
-#menu {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
-  #menu #ukonline_logo {
-    float: left; }
-  #menu ul {
-    margin: 0;
-    float: right;
-    clear: right; }
-    #menu ul li {
-      list-style: none; }
+#header ul {
+  margin: 0;
+  float: right;
+  clear: right; }
+  #header ul li {
+    list-style: none; }
 
 #content {
   padding: 1em 0; }
 
 #footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  font-family: "Arial", sans-serif;
-  font-size: 80%;
-  color: #444; }
-  #footer ul {
-    margin: 0;
-    padding: 0; }
-    #footer ul li {
-      display: block;
-      float: left;
-      list-style: none;
-      padding-right: 1em; }
-      #footer ul li a {
-        color: inherit; }
-      #footer ul li a:hover {
-        color: #00f; }
+  border-top: 1px solid #E0E0E0;
+  padding-top: 1em; }
+  #footer a {
+    text-decoration: none; }
 
 #mysociety_logo {
   float: right; }
@@ -170,23 +118,19 @@ div.promo {
   float: left;
   margin: 0;
   padding: 0;
-  width: 66%; }
-  div.promo div.inner {
-    font-family: "Goudy Bookletter 1911", Georgia, arial, serif;
-    font-size: 75px;
-    color: #003d76;
-    text-shadow: rgba(221, 26, 11, 0.6) 1px 1px 4px;
-    text-align: center; }
+  width: 33%; }
+  div.promo div.inner p {
+    font-size: 1.3em; }
 
 div.sign-up-form {
   float: left;
   margin: 0;
   padding: 0;
-  width: 34%; }
+  width: 66%;
+  background: url("/static/signuppage_image.png") right no-repeat; }
   div.sign-up-form div.inner {
     padding: 1em;
-    background-color: rgba(255, 255, 255, 0.6);
-    border: 1px solid white; }
+    width: 50%; }
     div.sign-up-form div.inner div.heading {
       font-size: 150%;
       text-align: center;

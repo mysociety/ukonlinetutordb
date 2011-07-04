@@ -4,7 +4,11 @@
         <title>{% block title %}{% endblock %} :: UK Online Centres</title>
 
         {% block extra_head_tags %}{% endblock %}
+
+        <link rel="icon" href="/static/favicon.ico" /> 
+
         
+        <link rel="stylesheet" href="/static/css/helppassiton.css" type="text/css" media="screen" charset="utf-8">
         <link rel="stylesheet" href="/static/css/main.css" type="text/css" media="screen" charset="utf-8">
         <!--[if IE 6]>
             <link rel="stylesheet" href="/static/css/ie6.css" type="text/css" media="screen" charset="utf-8">
@@ -15,68 +19,66 @@
         
     </head>
     <body>
-
-        <img src="/static/dandelion_head.jpg" id="bg" alt="">
         
         <div id="dev-site-warning">
-            <p>This is a beta site - there may be some small glitches and issues.</p>
-            <p>There are features yet to add - please see the <a href="https://github.com/mysociety/ukonlinetutordb/issues">issues list</a></p>
+            This is a beta site - there may be some small glitches and issues.
+            There are features yet to add - please see the <a href="https://github.com/mysociety/ukonlinetutordb/issues">issues list</a>.
         </div>
 
-        <div id="outer_wrapper">
-            <div id="inner_wrapper">
-        
-                <div id="menu">
-                    <a id="ukonline_logo" href="{% url tutordb.views.index.index %}">
-                        <img src="/static/ukoclogosmaller.png" alt="Home" />
+        <div id="container">
+            
+            <div id="header">
+                <div id="logo"> 
+                    <a href="{% url tutordb.views.index.index %}">
+                        <img src="/static/passiton-logo.png" width="393" height="109" alt="Pass IT on" />
                     </a>
-
-                    <ul>
-                        {% if user.is_authenticated %}
-                            <li>
-                                {{ user.email }}
-                                (<a href="{% url django.contrib.auth.views.logout %}">Logout</a>)
-                            </li>
-                        {% else %}
-                            <li>
-                                <a href="{% url django.contrib.auth.views.login %}">Login</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-
-                    <br clear="both" />
-                </div>
+                </div> 
+            
+                <ul>
+                    {% if user.is_authenticated %}
+                        <li>
+                            {{ user.email }}
+                            (<a href="{% url django.contrib.auth.views.logout %}">Logout</a>)
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url django.contrib.auth.views.login %}">Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            
+                <br clear="both" />
+            </div>
+            
+            <div id="content">
+                {% block content %}
+                    Replace this with proper content.
+                {% endblock %}    
+                <br clear="both" />
+            </div>
+            
+            <div id="footer">
+                <a id="mysociety_logo" href="http://www.mysociety.org" title="Built by mySociety">
+                    <img src="/static/mysociety_small.png" alt="mySociety" />
+                </a>
+            
+                <ul id="footerLinks">
+                    <li>
+                        <a href="{% url tutordb.views.centre.centre_list %}">Centres</a>
+                    </li>
+                    {% if user.is_staff %}
+                    <li>
+                        <a href="{% url admin:index %}">Full Admin</a>
+                    </li>
+                    {% endif %}
+            
+                    <li>
+                        <a href="/help">Help</a>
+                    </li>
+                </ul>
                 
-                <div id="content">
-                    {% block content %}
-                        Replace this with proper content.
-                    {% endblock %}    
-                    <br clear="both" />
-                </div>
-                
-                <div id="footer">
-                    <a id="mysociety_logo" href="http://www.mysociety.org" title="Built by mySociety">
-                        <img src="/static/mysociety_small.png" alt="mySociety" />
-                    </a>
-
-                    <ul>
-                        <li>
-                            <a href="{% url tutordb.views.centre.centre_list %}">Centres</a>
-                        </li>
-                        {% if user.is_staff %}
-                        <li>
-                            <a href="{% url admin:index %}">Full Admin</a>
-                        </li>
-                        {% endif %}
-
-                        <li>
-                            <a href="/help">Help</a>
-                        </li>
-                    </ul>
-                    
-                    <br clear="both">
-
-                </div>
+                <br clear="both">
+            
             </div>
         </div>
 
