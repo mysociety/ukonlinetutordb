@@ -29,15 +29,15 @@ for start in range( 1, 4000, base_query['numResults'] ):
     base_query['start'] = start
     url = base_url + '&' + urllib.urlencode( base_query )
     print "Looking at entries %s to %s: %s" % (start, start + base_query['numResults'], url)
-    
+
     response = urllib.urlopen( url )
     json     = response.read()
     entries  = simplejson.loads( json )
-    
+
     if type(entries) is types.DictType and entries.get('errorCode'):
         break
-    
-    for e in entries:                
+
+    for e in entries:
         print "Adding/updating %s (%s)" % (e['name'], e['id'])
 
         # Find or create
@@ -45,7 +45,7 @@ for start in range( 1, 4000, base_query['numResults'] ):
             obj = Centre.objects.get(centreid=e['id'])
         except Centre.DoesNotExist:
             obj = Centre(centreid=e['id'])
-        
+
         telephone = e['telephone'] or ''
 
         obj.name      = e['name']
@@ -59,6 +59,6 @@ for start in range( 1, 4000, base_query['numResults'] ):
         # tidy up the address a little
         obj.address   = obj.address.replace(', , ', ', ')
         obj.address   = string.capwords(obj.address)
-    
-        obj.save()    
-    
+
+        obj.save()
+
