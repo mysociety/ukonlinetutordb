@@ -6,6 +6,7 @@ import urllib
 import sys
 import os
 import types
+import string
 
 sys.path.append(sys.path[0] + '/..')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
@@ -38,7 +39,7 @@ for start in range( 1, 4000, base_query['numResults'] ):
     
     for e in entries:                
         print "Adding/updating %s (%s)" % (e['name'], e['id'])
-        
+
         # Find or create
         try:
             obj = Centre.objects.get(id=e['id'])
@@ -52,6 +53,10 @@ for start in range( 1, 4000, base_query['numResults'] ):
         obj.address   = ', '.join([ e['address1'], e['address2'], e['address3'], e['address4'],  ])
         obj.postcode  = e['postcode']
         obj.location  = lat_lng_to_point( e['latitude'], e['longitude'] )
+
+        # tidy up the address a little
+        obj.address   = obj.address.replace(', , ', ', ')
+        obj.address   = string.capwords(obj.address)
     
         obj.save()    
     
