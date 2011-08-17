@@ -42,15 +42,17 @@ for start in range( 1, 4000, base_query['numResults'] ):
 
         # Find or create
         try:
-            obj = Centre.objects.get(id=e['id'])
+            obj = Centre.objects.get(centreid=e['id'])
         except Centre.DoesNotExist:
-            obj = Centre(id=e['id'])
+            obj = Centre(centreid=e['id'])
         
+        telephone = e['telephone'] or ''
+
         obj.name      = e['name']
-        obj.telephone = e['telephone'][:20] # hack - should validate instead
+        obj.telephone = telephone[:20] # hack - should validate instead
         obj.email     = e['email']
-        obj.url       = e['url']
-        obj.address   = ', '.join([ e['address1'], e['address2'], e['address3'], e['address4'],  ])
+        obj.url       = e['url'] or ''
+        obj.address   = ', '.join(filter(None,[ e['address1'], e['address2'], e['address3'], e['address4'] ]))
         obj.postcode  = e['postcode']
         obj.location  = lat_lng_to_point( e['latitude'], e['longitude'] )
 
