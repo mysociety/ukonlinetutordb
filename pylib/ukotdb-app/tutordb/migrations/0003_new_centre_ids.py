@@ -9,14 +9,14 @@ class Migration(DataMigration):
     def forwards(self, orm):
         for centre in orm.Centre.objects.all():
             centre.centreid = centre.id
+            centre.save()
             db.execute( "UPDATE tutordb_centre SET id = nextval('tutordb_centre_id_seq') WHERE id = %s", [ centre.id ] )
             db.execute( "UPDATE tutordb_tenure set centre_id = lastval() where centre_id = %s", [ centre.id ] )
             db.execute( "UPDATE certificates_certificate set centre_id = lastval() where centre_id = %s", [ centre.id ] )
-            centre.save()
     
     
     def backwards(self, orm):
-        raise RunTimeError('Cannot reverse this migration')
+        raise RuntimeError("Cannot reverse this migration.")
     
     models = {
         'auth.group': {
