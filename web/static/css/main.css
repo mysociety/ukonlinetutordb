@@ -32,13 +32,24 @@ form.standard {
   margin: 1em 0;
   font-family: "Arial", sans-serif; }
   form.standard p {
-    margin: 0.5em 0; }
+    margin: 1.2em 0; }
   form.standard label {
     display: inline-block;
     width: 8em;
     margin-right: 0.5em;
     text-align: right;
-    vertical-align: top; }
+    vertical-align: top;
+    color: #666; }
+  form.standard input[type=submit] {
+    color: white;
+    background-color: #ff3ca8;
+    border-radius: 5px;
+    border: 1px solid #ff3ca8;
+    width: auto;
+    padding: 0.2em 1em;
+    font-size: 0.8em;
+    font-weight: bold;
+    box-shadow: none; }
 
 ul.errorlist {
   color: #f00;
@@ -116,8 +127,12 @@ div.promo {
   margin: 0;
   padding: 0;
   width: 33%; }
-  div.promo div.inner p {
-    font-size: 1.3em; }
+  div.promo div.inner {
+    background-color: #F9F9F9;
+    color: #666;
+    font-weight: bold; }
+    div.promo div.inner p {
+      font-size: 1.3em; }
 
 div.sign-up-form {
   float: left;
@@ -125,6 +140,8 @@ div.sign-up-form {
   padding: 0;
   width: 66%;
   background: url("/static/signuppage_image.png") right no-repeat; }
+  div.sign-up-form h2 {
+    color: #0099DF; }
   div.sign-up-form div.inner {
     padding: 1em;
     width: 50%; }
@@ -135,11 +152,12 @@ div.sign-up-form {
     div.sign-up-form div.inner form {
       font-family: "Arial", sans-serif; }
       div.sign-up-form div.inner form p {
-        margin: 0 0 0.5em 0;
+        margin: 1.2em 0;
         padding: 0; }
       div.sign-up-form div.inner form label {
         display: block;
-        font-size: 80%; }
+        font-size: 80%;
+        color: #666; }
       div.sign-up-form div.inner form input {
         display: block;
         font: inherit;
@@ -153,6 +171,16 @@ div.sign-up-form {
           list-style: none;
           font-size: 80%;
           color: #c00; }
+      div.sign-up-form div.inner form input[type=submit] {
+        color: white;
+        background-color: #ff3ca8;
+        border-radius: 5px;
+        border: 1px solid #ff3ca8;
+        width: auto;
+        padding: 0.2em 1em;
+        font-size: 0.8em;
+        font-weight: bold;
+        box-shadow: none; }
 
 ul.select_centre {
   padding: 0; }

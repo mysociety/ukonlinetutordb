@@ -52,7 +52,7 @@ $label_width: 8em;
 form.standard {
     margin: 1em 0;
     p {
-        margin: 0.5em 0;
+        margin: 1.2em 0;
     }
     
     font-family: $sans;
@@ -63,6 +63,19 @@ form.standard {
         margin-right: 0.5em;
         text-align: right;
         vertical-align: top;
+        color: #666;
+    }
+
+    input[type=submit] {
+        color: white;
+        background-color: rgb(255,60,168 );
+        border-radius: 5px;
+        border: 1px solid rgb(255,60,168 );
+        width: auto;
+        padding: 0.2em 1em;
+        font-size: 0.8em;
+        font-weight: bold;
+        box-shadow: none;
     }
 }
 
@@ -179,6 +192,10 @@ div.promo {
     width: 33%;
 
     div.inner {
+        background-color: #F9F9F9;
+        color: #666;
+        font-weight: bold;
+
         p {
             font-size: 1.3em;
         }
@@ -192,6 +209,10 @@ div.sign-up-form {
     width: 66%;
 
     background: url("/static/signuppage_image.png") right no-repeat;
+
+    h2 {
+        color: #0099DF;
+    }
 
     div.inner {
         padding: 1em;
@@ -207,13 +228,14 @@ div.sign-up-form {
             font-family: $sans;
 
             p {
-                margin: 0 0 0.5em 0;
+                margin: 1.2em 0;
                 padding: 0;
             }
 
             label {
                 display: block;
                 font-size: 80%;
+                color: #666;
             }
             
             input {
@@ -233,6 +255,18 @@ div.sign-up-form {
                     font-size: 80%;
                     color: #c00;
                 }
+            }
+            
+            input[type=submit] {
+                color: white;
+                background-color: rgb(255,60,168 );
+                border-radius: 5px;
+                border: 1px solid rgb(255,60,168 );
+                width: auto;
+                padding: 0.2em 1em;
+                font-size: 0.8em;
+                font-weight: bold;
+                box-shadow: none;
             }
         }
     }    
