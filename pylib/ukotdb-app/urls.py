@@ -57,6 +57,7 @@ if settings.SERVE_STATIC_FILES:
 # include other apps
 urlpatterns += patterns('',
     (r'^certificates/', include('certificates.urls') ),
+    (r'^admin/certificates/summarise', 'certificates.views.summarise' ),
     (r'^admin/',        include(admin.site.urls)     ),
 )
 

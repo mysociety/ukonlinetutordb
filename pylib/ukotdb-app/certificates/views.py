@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators     import login_required
+from django.contrib.auth.decorators     import login_required, staff_member_required
 from django.core.urlresolvers           import reverse
 from django.http                        import HttpResponse, HttpResponseRedirect
 from django.shortcuts                   import render_to_response, get_object_or_404, redirect
@@ -7,6 +7,7 @@ from django.views.generic.list_detail   import object_list, object_detail
 from django.views.generic.simple        import direct_to_template
 from django.http                        import Http404
 from django.core.mail                   import EmailMessage
+from django.db.models                   import Count
 
 from tutordb.models      import Tutor, Centre
 from certificates.models import Certificate
@@ -234,4 +235,16 @@ def tutor_list(request, tutor_id):
         extra_context = {
             "tutor": certificate_tutor,        
         },
+    )
+
+@staff_member_required
+def summarise(request):
+
+    return render_to_response(
+        'admin/certificates/summarise.html',
+        {
+            'certificates': Certificate.objects.values('course_name').annotate(num_title=Count('id')).order_by(),
+            'foo': 'bar',
+        },
+        context_instance=RequestContext(request)
     )
