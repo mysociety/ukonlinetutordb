@@ -7,7 +7,8 @@ from django.db import models
 class Migration(DataMigration):
     
     def forwards(self, orm):
-        for centre in orm.Centre.objects.all():
+        db.execute( "ALTER SEQUENCE tutordb_centre_id_seq RESTART WITH 1" )
+        for centre in orm.Centre.objects.all().order_by('id'):
             centre.centreid = centre.id
             centre.save()
             db.execute( "UPDATE tutordb_centre SET id = nextval('tutordb_centre_id_seq') WHERE id = %s", [ centre.id ] )
