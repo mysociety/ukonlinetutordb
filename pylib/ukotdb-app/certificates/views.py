@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators     import login_required, staff_member_required
+from django.contrib.auth.decorators     import login_required
 from django.core.urlresolvers           import reverse
 from django.http                        import HttpResponse, HttpResponseRedirect
 from django.shortcuts                   import render_to_response, get_object_or_404, redirect
@@ -237,7 +237,7 @@ def tutor_list(request, tutor_id):
         },
     )
 
-@staff_member_required
+@login_required
 def summarise(request):
 
     return render_to_response(
