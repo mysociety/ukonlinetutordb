@@ -244,7 +244,8 @@ def summarise(request):
     return render_to_response(
         'admin/certificates/summarise.html',
         {
-            'certificates': Certificate.objects.values('course_name').annotate(num_title=Count('id')).order_by(),
+            'certificates':
+            Certificate.objects.values('course_name').annotate(num_title=Count('id')).order_by('num_title').reverse(),
             'foo': 'bar',
         },
         context_instance=RequestContext(request)
