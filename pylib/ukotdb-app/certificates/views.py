@@ -246,7 +246,7 @@ def summarise(request):
         {
             'certificates':
             Certificate.objects.values('course_name').annotate(num_title=Count('id')).order_by('num_title').reverse(),
-            'foo': 'bar',
+            'title': 'Summarise course titles',
         },
         context_instance=RequestContext(request)
     )
