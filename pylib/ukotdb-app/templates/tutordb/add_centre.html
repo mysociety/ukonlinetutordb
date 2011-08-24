@@ -49,7 +49,7 @@
         <form style="display: inline;" action="{% url tutordb.views.my.add_centre %}" method="post">
             <input type="hidden" name="postcode"  value="{{ postcode }}"  />
             <input type="hidden" name="centre_id" value="{{ centre.id }}" />
-            <input type="submit" value="I'm at “{{ centre.name }}”">
+            <input class="small_centre_submit" type="submit" value="I'm at “{{ centre.name }}”">
         </form>
         <br clear="both">
     </li>
