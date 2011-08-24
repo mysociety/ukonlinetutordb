@@ -1,13 +1,14 @@
-from django.contrib.auth.decorators     import login_required
-from django.core.urlresolvers           import reverse
-from django.http                        import HttpResponse, HttpResponseRedirect
-from django.shortcuts                   import render_to_response, get_object_or_404, redirect
-from django.template                    import RequestContext
-from django.views.generic.list_detail   import object_list, object_detail
-from django.views.generic.simple        import direct_to_template
-from django.http                        import Http404
-from django.core.mail                   import EmailMessage
-from django.db.models                   import Count
+from django.contrib.auth.decorators         import login_required
+from django.contrib.admin.views.decorators  import staff_member_required
+from django.core.urlresolvers               import reverse
+from django.http                            import HttpResponse, HttpResponseRedirect
+from django.shortcuts                       import render_to_response, get_object_or_404, redirect
+from django.template                        import RequestContext
+from django.views.generic.list_detail       import object_list, object_detail
+from django.views.generic.simple            import direct_to_template
+from django.http                            import Http404
+from django.core.mail                       import EmailMessage
+from django.db.models                       import Count
 
 from tutordb.models      import Tutor, Centre
 from certificates.models import Certificate
@@ -237,7 +238,7 @@ def tutor_list(request, tutor_id):
         },
     )
 
-@login_required
+@staff_member_required
 def summarise(request):
 
     return render_to_response(
