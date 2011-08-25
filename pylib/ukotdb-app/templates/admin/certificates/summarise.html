@@ -1,6 +1,22 @@
 {% extends 'admin/base_site.html' %}
 {% load i18n %}
 
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <div class="breadcrumbs">
+      <a href="../../">
+        {% trans "Home" %}
+      </a>
+       &rsaquo;
+       <a href="../">
+           Certificates
+      </a>
+      &rsaquo;
+      {% trans "Summarise course titles" %}
+    </div>
+  {% endblock %}
+{% endif %}
+
 {% block content %}
 <div id="content-main">
 
