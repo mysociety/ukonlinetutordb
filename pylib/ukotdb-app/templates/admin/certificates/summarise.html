@@ -3,22 +3,23 @@
 
 {% block content %}
 <div id="content-main">
-<h1>
-    Summarise course titles
-</h1>
 
 {% if certificates %}
-<table>
+<table class="module">
+    <thead>
     <tr>
-        <td>Course Title</td>
-        <td>Certificates issued</td>
+        <th>Course Title</th>
+        <th>Certificates issued</th>
     </tr>
+    </thead>
+    <tbody>
 {% for cert in certificates %}
-    <tr>
+<tr class="{% cycle 'row1' 'row2' %}">
         <td> {{ cert.course_name }}</td>
         <td>{{ cert.num_title }}</td>
     </tr>
 {% endfor %}
+</tbody>
 </table>
 {% else %}
 <p>
