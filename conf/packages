@@ -1,6 +1,6 @@
 python-django
 postgis
-libgdal1-1.5.0
+libgdal1-1.6.0 | libgdal1-1.5.0
 python-httplib2
 python-dateutil
 python-simplejson
